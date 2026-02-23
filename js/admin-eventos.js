@@ -1,4 +1,4 @@
-import { db, auth } from "./galeria-firebase.js";
+import { db } from "./galeria-firebase.js";
 import {
   collection, addDoc, onSnapshot, query, orderBy,
   deleteDoc, doc, serverTimestamp
@@ -117,4 +117,5 @@ function listenEvents(){
 document.addEventListener("DOMContentLoaded", ()=>{
   $("evAddBtn")?.addEventListener("click", addEvent);
   listenEvents();
+
 });
