@@ -36,7 +36,7 @@ const uploadStatus = document.getElementById("uploadStatus");
 const logoutBtn = document.getElementById("logoutBtn");
 
 let currentUser = null;
-let canDelete = true;   // admin/lider
+let canDelete = false;   // admin/lider
 let canUpload = false;  // activo
 
 /* 🚪 LOGOUT */
@@ -211,4 +211,5 @@ onAuthStateChanged(auth, async (user) => {
   } catch (e) {
     console.error("Error leyendo doc usuarios:", e);
   }
+
 });
