@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Acceso Administrativo | Iglesia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="css/login.css" />
+  <link rel="shortcut icon" href="/img/ICEA.png" type="image/x-icon">
+</head>
+
+<body>
+
+  <!-- Fondo decorativo -->
+  <div class="bg">
+    <div class="blob blob--1"></div>
+    <div class="blob blob--2"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- Card -->
+  <section class="auth">
+
+    <!-- Lado imagen (solo desktop) -->
+    <aside class="auth__media">
+      <div class="media__overlay"></div>
+      <div class="media__content">
+        <h2>Bienvenido</h2>
+        <p>Acceso seguro para líderes y administradores de la Iglesia.</p>
+
+        <div class="media__stats">
+          <div class="stat">
+            <span class="stat__num">●</span>
+            <span class="stat__text">Galería en tiempo real</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">●</span>
+            <span class="stat__text">Control de roles y activación</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">●</span>
+            <span class="stat__text">Acceso con Google / Email</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Form -->
+    <div class="auth__card">
+      <div class="brand">
+        <div class="brand__logo">✦</div>
+        <div class="brand__text">
+          <strong>Panel Iglesia</strong>
+          <span>Acceso administrativo</span>
+        </div>
+      </div>
+
+      <h1>Iniciar sesión</h1>
+      <p class="subtitle">Ingresa con tu correo o con Google</p>
+
+      <!-- EMAIL -->
+      <label class="field">
+        <span class="field__icon">✉️</span>
+        <input type="email" id="email" placeholder="Correo electrónico" />
+      </label>
+
+      <!-- PASS -->
+      <label class="field">
+        <span class="field__icon">🔒</span>
+        <input type="password" id="password" placeholder="Contraseña" />
+      </label>
+
+      <button id="loginBtn" class="btn btn--primary">Ingresar</button>
+      <a href="#" id="forgotPassword" class="forgot-link">
+       ¿Olvidaste tu contraseña?
+      </a>
+      <button id="registerBtn" class="btn btn--dark">Registrarme</button>
+
+      <div class="divider"><span>o</span></div>
+
+      <button id="googleBtn" class="btn btn--google">
+        <img class="glogo" alt="Google" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
+        Continuar con Google
+      </button>
+
+      <!-- reCAPTCHA -->
+      <div id="recaptcha-container"></div>
+
+      <span id="error"></span>
+      <span id="ok"></span>
+
+      <div class="footer">
+        <small>© <span id="year"></span> ICEA • Seguridad y Control</small>
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>

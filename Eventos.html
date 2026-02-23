@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Eventos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --brand:#1abc9c;
+      --brand2:#2c3e50;
+      --shadow: 0 12px 35px rgba(0,0,0,.10);
+      --radius:16px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header{
+      background: linear-gradient(120deg, var(--brand2), #1f2f3f);
+      color:#fff;
+      padding: 34px 16px;
+      text-align:center;
+    }
+    header h1{
+      margin:0 0 8px 0;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      letter-spacing:.2px;
+    }
+    header p{
+      margin:0;
+      opacity:.9;
+      max-width: 900px;
+      margin-inline:auto;
+      line-height: 1.5;
+    }
+
+    nav{
+      background:#223140;
+      padding: 10px 16px;
+      text-align:center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 6px 18px rgba(0,0,0,.12);
+    }
+    nav a{
+      color:#fff;
+      text-decoration:none;
+      margin: 0 12px;
+      font-weight:700;
+      opacity:.95;
+    }
+    nav a:hover{ color: var(--brand); }
+
+    .wrap{
+      width: min(1100px, 92%);
+      margin: 28px auto 60px;
+      display:grid;
+      gap: 22px;
+    }
+
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      margin-top: 6px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 1.25rem;
+    }
+    .section-title small{
+      color: var(--muted);
+    }
+
+    /* === Layout principal: Calendario + Lista === */
+    .grid{
+      display:grid;
+      grid-template-columns: 380px 1fr;
+      gap: 22px;
+      align-items:start;
+    }
+    @media (max-width: 920px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    /* === Tarjetas generales === */
+    .card{
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card-pad{ padding: 18px; }
+
+    /* === Calendario === */
+    .cal-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 10px;
+      padding: 16px 16px 10px;
+      border-bottom: 1px solid rgba(0,0,0,.07);
+    }
+    .cal-title{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .cal-title strong{
+      font-size: 1.05rem;
+    }
+    .cal-title span{
+      font-size:.92rem;
+      color: var(--muted);
+    }
+
+    .cal-actions{
+      display:flex;
+      gap:8px;
+    }
+    .icon-btn{
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.10);
+      background:#fff;
+      cursor:pointer;
+      font-weight: 900;
+    }
+    .icon-btn:hover{
+      border-color: rgba(26,188,156,.55);
+      box-shadow: 0 10px 20px rgba(26,188,156,.16);
+    }
+
+    .dow{
+      display:grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      padding: 10px 16px 0;
+      color: var(--muted);
+      font-weight: 700;
+      font-size:.85rem;
+    }
+    .days{
+      display:grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      padding: 12px 16px 16px;
+    }
+    .day{
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.08);
+      background: #fff;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      position:relative;
+      font-weight:700;
+      color: var(--text);
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      user-select:none;
+    }
+    .day:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 12px 22px rgba(0,0,0,.08);
+      border-color: rgba(0,0,0,.14);
+    }
+    .day.muted{
+      opacity:.35;
+      cursor: default;
+    }
+    .day.today{
+      border-color: rgba(26,188,156,.75);
+      box-shadow: 0 12px 26px rgba(26,188,156,.18);
+    }
+    .day.has-event::after{
+      content:"";
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: var(--brand);
+      position:absolute;
+      bottom: 7px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .day.selected{
+      background: rgba(26,188,156,.10);
+      border-color: rgba(26,188,156,.75);
+    }
+
+    /* === Evento destacado (debajo del calendario) === */
+    .focus{
+      border-top: 1px solid rgba(0,0,0,.07);
+      padding: 14px 16px 16px;
+    }
+    .focus h3{
+      margin:0 0 6px;
+      font-size: 1rem;
+    }
+    .focus p{
+      margin:0 0 10px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(44,62,80,.06);
+      color: var(--brand2);
+      font-weight: 800;
+      font-size:.88rem;
+      margin-right: 8px;
+      margin-top: 8px;
+    }
+
+    /* === Cards de eventos === */
+    .events{
+      padding: 6px 0 0;
+    }
+    .events-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .event{
+      background:#fff;
+      border:1px solid rgba(0,0,0,.08);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 12px 25px rgba(0,0,0,.06);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .event:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 18px 30px rgba(0,0,0,.10);
+    }
+
+    .event h3{
+      margin:0 0 6px;
+      color: var(--brand2);
+      font-size: 1.05rem;
+    }
+    .event .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      color: var(--muted);
+      font-weight:700;
+      font-size:.9rem;
+      margin-bottom: 10px;
+    }
+    .event p{
+      margin: 0 0 12px;
+      color: #3b4556;
+      line-height: 1.5;
+    }
+    .btn{
+      display:inline-block;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--brand);
+      color:#fff;
+      text-decoration:none;
+      font-weight: 900;
+      border: none;
+      cursor:pointer;
+    }
+    .btn:hover{ opacity:.92; }
+
+    footer{
+      background: #1e2b38;
+      color: #fff;
+      text-align:center;
+      padding: 18px 12px;
+    }
+    footer p{ margin:0; opacity:.9; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Próximos Eventos</h1>
+    <p>Consulta el calendario, revisa los detalles y regístrate para participar en nuestros encuentros.</p>
+  </header>
+
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#">Eventos</a>
+    <a href="#">Contacto</a>
+  </nav>
+
+  <div class="wrap">
+    <div class="section-title">
+      <h2>Agenda y Eventos</h2>
+      <small>Tip: haz clic en un día con punto verde para ver el evento.</small>
+    </div>
+
+    <div class="grid">
+
+      <!-- ===== Calendario ===== -->
+      <aside class="card">
+        <div class="cal-head">
+          <div class="cal-title">
+            <strong id="calMonth">Mes</strong>
+            <span id="calHint">Selecciona una fecha</span>
+          </div>
+
+          <div class="cal-actions">
+            <button class="icon-btn" id="prevBtn" aria-label="Mes anterior">‹</button>
+            <button class="icon-btn" id="nextBtn" aria-label="Mes siguiente">›</button>
+          </div>
+        </div>
+
+        <div class="dow">
+          <div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div><div>Dom</div>
+        </div>
+
+        <div class="days" id="days"></div>
+
+        <div class="focus" id="focus">
+          <h3>Selecciona un evento</h3>
+          <p>Cuando elijas un día con evento, aquí aparecerá la información importante.</p>
+        </div>
+      </aside>
+
+      <!-- ===== Lista de eventos ===== -->
+      <section class="card card-pad">
+        <div class="section-title" style="margin-top:0">
+          <h2>Eventos destacados</h2>
+          <small>Actualizado para 2026</small>
+        </div>
+
+        <div class="events">
+          <div class="events-grid" id="eventsGrid">
+            <!-- Se llenan desde JS para mantenerlo sincronizado con el calendario -->
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Eventos | Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    // ====== CONFIG: eventos (edita aquí tus eventos) ======
+    // Formato de fecha: "YYYY-MM-DD"
+    const EVENTS = [
+      {
+        date: "2026-03-15",
+        title: "Conferencia de Tecnología",
+        time: "6:30 PM",
+        place: "Auditorio Principal",
+        desc: "Tendencias en desarrollo web e inteligencia artificial.",
+        link: "#"
+      },
+      {
+        date: "2026-04-22",
+        title: "Festival Cultural",
+        time: "4:00 PM",
+        place: "Parque Central",
+        desc: "Música en vivo, comida tradicional y actividades culturales.",
+        link: "#"
+      },
+      {
+        date: "2026-05-10",
+        title: "Taller de Emprendimiento",
+        time: "9:00 AM",
+        place: "Salón 2",
+        desc: "Aprende a iniciar tu proyecto con guía de expertos.",
+        link: "#"
+      },
+    ];
+
+    // Index para encontrar rápido eventos por fecha
+    const eventByDate = new Map(EVENTS.map(e => [e.date, e]));
+
+    // ====== Calendario ======
+    const monthNames = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
+    // Si quieres, cambia esta fecha inicial (por defecto: hoy)
+    let view = new Date();
+    view.setHours(0,0,0,0);
+
+    const daysEl = document.getElementById("days");
+    const calMonthEl = document.getElementById("calMonth");
+    const calHintEl = document.getElementById("calHint");
+    const focusEl = document.getElementById("focus");
+
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    // Para "hoy"
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    // Llenar lista de eventos (cards) desde JS
+    const eventsGrid = document.getElementById("eventsGrid");
+    function renderEventCards(){
+      eventsGrid.innerHTML = "";
+      EVENTS.forEach(e => {
+        const art = document.createElement("article");
+        art.className = "event";
+        art.innerHTML = `
+          <h3>${e.title}</h3>
+          <div class="meta">
+            <span>📅 ${formatPretty(e.date)}</span>
+            <span>⏰ ${e.time}</span>
+            <span>📍 ${e.place}</span>
+          </div>
+          <p>${e.desc}</p>
+          <a class="btn" href="${e.link}">Registrarse</a>
+        `;
+        eventsGrid.appendChild(art);
+      });
+    }
+
+    function formatPretty(iso){
+      const [y,m,d] = iso.split("-").map(n => parseInt(n,10));
+      return `${d} ${monthNames[m-1]} ${y}`;
+    }
+
+    function isoFromDate(dt){
+      const y = dt.getFullYear();
+      const m = String(dt.getMonth()+1).padStart(2,"0");
+      const d = String(dt.getDate()).padStart(2,"0");
+      return `${y}-${m}-${d}`;
+    }
+
+    function renderCalendar(){
+      // Mes a mostrar
+      const y = view.getFullYear();
+      const m = view.getMonth();
+      calMonthEl.textContent = `${monthNames[m]} ${y}`;
+
+      // Primer día del mes
+      const first = new Date(y, m, 1);
+      // Queremos calendario empezando lunes => JS: 0 Domingo...6 Sábado
+      // Convertir: lunes=0 ... domingo=6
+      const firstDayIndex = (first.getDay() + 6) % 7;
+
+      // Días del mes
+      const last = new Date(y, m+1, 0);
+      const daysInMonth = last.getDate();
+
+      daysEl.innerHTML = "";
+
+      // Relleno previo (celdas vacías)
+      for(let i=0;i<firstDayIndex;i++){
+        const div = document.createElement("div");
+        div.className = "day muted";
+        div.textContent = "";
+        daysEl.appendChild(div);
+      }
+
+      // Días
+      for(let d=1; d<=daysInMonth; d++){
+        const dt = new Date(y, m, d);
+        const iso = isoFromDate(dt);
+
+        const div = document.createElement("div");
+        div.className = "day";
+        div.textContent = d;
+
+        // Marcar hoy (solo si coincide mes/año visible)
+        if(dt.getTime() === today.getTime()){
+          div.classList.add("today");
+        }
+
+        // Marcar si hay evento
+        if(eventByDate.has(iso)){
+          div.classList.add("has-event");
+        }
+
+        // Click
+        div.addEventListener("click", () => {
+          // No seleccionar días vacíos
+          document.querySelectorAll(".day.selected").forEach(x => x.classList.remove("selected"));
+          div.classList.add("selected");
+
+          if(eventByDate.has(iso)){
+            const ev = eventByDate.get(iso);
+            calHintEl.textContent = "Evento seleccionado";
+            focusEl.innerHTML = `
+              <h3>${ev.title}</h3>
+              <p>${ev.desc}</p>
+              <div>
+                <span class="pill">📅 ${formatPretty(ev.date)}</span>
+                <span class="pill">⏰ ${ev.time}</span>
+                <span class="pill">📍 ${ev.place}</span>
+              </div>
+              <div style="margin-top:14px;">
+                <a class="btn" href="${ev.link}">Registrarme</a>
+              </div>
+            `;
+          } else {
+            calHintEl.textContent = "No hay evento en esta fecha";
+            focusEl.innerHTML = `
+              <h3>Sin evento</h3>
+              <p>En esta fecha no hay eventos programados. Revisa otros días marcados con el punto verde.</p>
+            `;
+          }
+        });
+
+        daysEl.appendChild(div);
+      }
+    }
+
+    prevBtn.addEventListener("click", () => {
+      view = new Date(view.getFullYear(), view.getMonth()-1, 1);
+      renderCalendar();
+    });
+
+    nextBtn.addEventListener("click", () => {
+      view = new Date(view.getFullYear(), view.getMonth()+1, 1);
+      renderCalendar();
+    });
+
+    // Inicial
+    renderEventCards();
+    renderCalendar();
+  </script>
+</body>
+</html>
+Cómo lo editas rápido
+En el JS (abajo) cambia o agrega eventos aquí:
+
+const EVENTS = [
+  { date:"2026-03-15", title:"...", time:"...", place:"...", desc:"...", link:"#"}
+];

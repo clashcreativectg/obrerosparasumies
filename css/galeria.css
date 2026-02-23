@@ -1,0 +1,608 @@
+/* ================= RESET ================= */
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { height:100%; }
+
+:root{
+  --bg: #0b1220;
+  --text: #0f172a;
+  --muted: #64748b;
+
+  --primary: #0a2239;
+  --primary-2: #123a5c;
+
+  --gold: #d4af37;
+  --card: rgba(255,255,255,.92);
+
+  --shadow: 0 18px 45px rgba(2, 8, 23, .15);
+  --shadow-soft: 0 10px 25px rgba(2, 8, 23, .12);
+
+  --radius: 18px;
+}
+
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Poppins", Arial;
+  background:
+    radial-gradient(900px 450px at 10% 10%, rgba(212,175,55,.12), transparent 60%),
+    radial-gradient(800px 500px at 90% 15%, rgba(59,130,246,.14), transparent 60%),
+    linear-gradient(180deg, #f7f8fb, #f1f5f9);
+  color: var(--text);
+}
+
+/* ================= CONTAINER ================= */
+.container{
+  width: min(92%, 1200px);
+  margin: 0 auto;
+}
+
+/* ================= HEADER / NAV ================= */
+.header{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(14px);
+  background: rgba(10,34,57,.72);
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 10px 30px rgba(2,8,23,.18);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 14px 0;
+}
+
+.logo{
+  color:#fff;
+  text-decoration:none;
+  font-weight: 900;
+  letter-spacing:.6px;
+  font-size: 1.35rem;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo::before{
+  content:"✦";
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, var(--gold), #c9a14a);
+  color:#111;
+  font-weight:900;
+  box-shadow: 0 10px 18px rgba(212,175,55,.22);
+}
+
+.nav__menu{
+  list-style:none;
+  display:flex;
+  gap: 10px;
+  align-items:center;
+}
+
+.nav__menu a{
+  color: rgba(255,255,255,.88);
+  text-decoration:none;
+  font-weight:700;
+  font-size:.95rem;
+  padding: 10px 14px;
+  border-radius: 12px;
+  transition: .2s ease;
+}
+
+.nav__menu a:hover{
+  color:#fff;
+  background: rgba(255,255,255,.10);
+  transform: translateY(-1px);
+}
+
+.nav__menu a.active{
+  color:#111;
+  background: linear-gradient(180deg, var(--gold), #c9a14a);
+}
+
+.nav__toggle{
+  display:none;
+  background: transparent;
+  border:0;
+  cursor:pointer;
+  padding: 10px;
+  border-radius: 12px;
+  transition:.2s;
+}
+.nav__toggle:hover{ background: rgba(255,255,255,.10); }
+
+.nav__toggle span{
+  display:block;
+  width: 26px;
+  height: 3px;
+  background: #fff;
+  border-radius: 5px;
+  margin: 4px 0;
+}
+
+/* ================= HERO ================= */
+.hero-galeria{
+  position: relative;
+  overflow:hidden;
+  padding: 110px 0 90px;
+  background:
+    linear-gradient(120deg, rgba(0,0,0,.60), rgba(0,0,0,.42)),
+    url("../img/header-bg.jpg") center/cover no-repeat;
+  color:#fff;
+}
+
+.hero-galeria::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background: radial-gradient(600px 260px at 30% 15%, rgba(212,175,55,.20), transparent 60%);
+  pointer-events:none;
+}
+
+.hero-content{
+  position:relative;
+  text-align:center;
+}
+
+.hero-content h1{
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 950;
+  letter-spacing:.3px;
+  animation: heroIn .65s ease both;
+}
+
+.hero-content p{
+  margin-top: 12px;
+  font-size: clamp(1rem, 1.7vw, 1.25rem);
+  opacity: .92;
+  animation: heroIn .65s ease .12s both;
+}
+
+/* “shine” sutil */
+.hero-galeria .hero-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(900px 260px at 50% 0%, rgba(255,255,255,.10), transparent 60%),
+    linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
+  transform: skewY(-6deg) translateY(-40px);
+  opacity:.50;
+  pointer-events:none;
+}
+
+/* ================= SECTION ================= */
+.galeria{
+  padding: 70px 0 80px;
+}
+
+.section-title{
+  text-align:center;
+  font-size: clamp(1.7rem, 2.5vw, 2.2rem);
+  font-weight: 950;
+  color: #0a2239;
+  margin-bottom: 26px;
+}
+
+.section-title::after{
+  content:"";
+  display:block;
+  width: 86px;
+  height: 4px;
+  margin: 12px auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* ================= GRID ================= */
+.galeria-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+/* ================= LOADING (SKELETON) ================= */
+.galeria-loading{
+  grid-column: 1 / -1;
+  color: var(--muted);
+  text-align:center;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+/* si quieres skeleton sin tocar JS:
+   agrega class="skeleton" a los items mientras carga (opcional)
+*/
+.skeleton{
+  height: 240px;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,.55) 0%,
+      rgba(255,255,255,.85) 50%,
+      rgba(255,255,255,.55) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite linear;
+  box-shadow: var(--shadow-soft);
+}
+
+/* ================= CARD / ITEM ================= */
+.galeria-item{
+  position:relative;
+  overflow:hidden;
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(15,23,42,.08);
+  cursor:pointer;
+
+  transform: translateY(16px);
+  opacity: 0;
+  animation: fadeUp .55s ease forwards;
+}
+
+/* animación escalonada sin JS: usa CSS variables en JS si quieres.
+   Si no, igual se ve bien. */
+.galeria-item::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(420px 220px at 30% 20%, rgba(212,175,55,.20), transparent 60%);
+  opacity:0;
+  transition:.35s ease;
+  pointer-events:none;
+}
+
+.galeria-item img{
+  width:100%;
+  height: 240px;
+  object-fit: cover;
+  display:block;
+  transform: scale(1.02);
+  transition: transform .45s ease, filter .45s ease;
+}
+
+.galeria-item:hover{
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+}
+
+.galeria-item:hover::before{ opacity: 1; }
+
+.galeria-item:hover img{
+  transform: scale(1.08);
+  filter: brightness(1.06) saturate(1.06);
+}
+
+/* badge sutil */
+.galeria-item::after{
+  content:"Ver";
+  position:absolute;
+  top: 14px;
+  right: 14px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: .8rem;
+  color: #111;
+  background: linear-gradient(180deg, rgba(212,175,55,.95), rgba(201,161,74,.95));
+  box-shadow: 0 10px 18px rgba(212,175,55,.20);
+  opacity:0;
+  transform: translateY(-6px);
+  transition: .25s ease;
+}
+
+.galeria-item:hover::after{
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* ================= LIGHTBOX ================= */
+.lightbox{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(2,6,23,.82);
+  backdrop-filter: blur(10px);
+  visibility:hidden;
+  opacity:0;
+  transition: opacity .22s ease, visibility .22s ease;
+  z-index: 2000;
+  padding: 18px;
+}
+
+.lightbox.show{
+  visibility:visible;
+  opacity:1;
+}
+
+.lightbox img{
+  max-width: min(980px, 95vw);
+  max-height: 88vh;
+  border-radius: 16px;
+  box-shadow: 0 25px 80px rgba(0,0,0,.45);
+  animation: zoomIn .22s ease both;
+}
+
+.lightbox .close{
+  position:absolute;
+  top: 18px;
+  right: 22px;
+  font-size: 2.4rem;
+  color:#fff;
+  cursor:pointer;
+  user-select:none;
+  opacity:.9;
+  transition: .2s;
+}
+.lightbox .close:hover{ opacity:1; transform: scale(1.05); }
+
+/* ================= ANIMACIONES ================= */
+@keyframes fadeUp{
+  from{ opacity:0; transform: translateY(22px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+@keyframes zoomIn{
+  from{ opacity:0; transform: scale(.94); }
+  to{ opacity:1; transform: scale(1); }
+}
+@keyframes heroIn{
+  from{ opacity:0; transform: translateY(10px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+@keyframes shimmer{
+  0%{ background-position: 0% 0; }
+  100%{ background-position: 200% 0; }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 860px){
+  .nav__toggle{ display:flex; }
+
+  .nav__menu{
+    position:absolute;
+    top: 64px;
+    right: 14px;
+    background: rgba(10,34,57,.95);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius: 16px;
+    padding: 10px;
+    width: 210px;
+    display:none;
+    flex-direction:column;
+    gap: 6px;
+    box-shadow: 0 18px 45px rgba(0,0,0,.25);
+  }
+  .nav__menu.active{ display:flex; }
+
+  .nav__menu a{
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+
+  .hero-galeria{ padding: 90px 0 70px; }
+  .galeria{ padding: 55px 0 70px; }
+  .galeria-item img{ height: 210px; }
+}
+
+/* ===== VIDEO/IFRAME THUMB ===== */
+.media-frame{
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #0b1220;
+  border-radius: 14px;
+  overflow: hidden;
+  display: block;
+}
+
+.media-frame iframe,
+.media-frame video{
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
+
+/* overlay “play” para youtube */
+.play-badge{
+  position: absolute;
+  inset: 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+}
+
+.play-badge span{
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  background: rgba(17,24,39,.75);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  backdrop-filter: blur(8px);
+  transform: scale(.96);
+  transition: transform .25s ease;
+}
+
+.galeria-item:hover .play-badge span{
+  transform: scale(1.05);
+}
+
+.play-badge i{
+  width: 0;
+  height: 0;
+  border-left: 18px solid white;
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  margin-left: 4px;
+}
+
+/* ===== LIGHTBOX content ===== */
+.lightbox__content{
+  max-width: min(960px, 94vw);
+  width: 100%;
+  max-height: 88vh;
+}
+
+.lightbox__content img{
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  display:block;
+}
+
+.lightbox__content .media-frame{
+  border-radius: 14px;
+  max-height: 88vh;
+}
+/* =============================
+   AJUSTES GALERIA (PATCH)
+   Pegar al final del CSS
+============================= */
+
+/* 1) Header un poco más premium + evita que tape el hero */
+.header{
+  background: rgba(10,34,57,.62);
+  border-bottom: 1px solid rgba(255,255,255,.10);
+}
+.hero-galeria{
+  /* el header es sticky, así que damos aire arriba */
+  padding-top: 130px;
+}
+
+/* 2) Container: un poquito más “ancho” y con padding lateral suave */
+.container{
+  width: min(94%, 1240px);
+}
+
+/* 3) Título de sección con mejor contraste y espaciado */
+.section-title{
+  margin-bottom: 30px;
+  letter-spacing: .2px;
+}
+
+/* 4) Grid: gap más consistente y mejor distribución */
+.galeria-grid{
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* 5) Card: animación sin “brinco” y hover más fluido */
+.galeria-item{
+  transform: translateY(12px);
+  will-change: transform, box-shadow;
+}
+
+/* si quieres escalonado real sin JS:
+   agrega style="--d: .1s" a cada item */
+.galeria-item{
+  animation-delay: var(--d, 0s);
+}
+
+.galeria-item:hover{
+  transform: translateY(-8px);
+}
+
+/* 6) Imagen: alto responsive más elegante */
+.galeria-item img{
+  height: clamp(200px, 22vw, 260px);
+}
+
+/* 7) Badge “Ver” más sutil y moderno */
+.galeria-item::after{
+  content:"Ver";
+  letter-spacing:.2px;
+  padding: 8px 12px;
+  opacity: 0;
+}
+
+/* 8) Mejoras Lightbox (img / video / iframe) */
+.lightbox{
+  padding: 22px;
+}
+
+.lightbox__content{
+  max-width: min(1000px, 96vw);
+  width: 100%;
+  max-height: 88vh;
+  display: grid;
+  gap: 12px;
+  place-items: center;
+}
+
+.lightbox__content img{
+  max-height: 88vh;
+  object-fit: contain;
+}
+
+.lightbox__content .media-frame{
+  width: 100%;
+  max-height: 88vh;
+  aspect-ratio: 16/9;
+  border-radius: 16px;
+  box-shadow: 0 25px 80px rgba(0,0,0,.45);
+  overflow: hidden;
+}
+
+/* 9) Accesibilidad: reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .galeria-item,
+  .galeria-item img,
+  .lightbox,
+  .lightbox img{
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* 10) Responsive: menú más estable + evita que se corte */
+@media (max-width: 860px){
+  .nav{
+    position: relative;
+  }
+
+  .nav__menu{
+    top: 70px;
+    right: 0;
+    width: min(260px, 92vw);
+    padding: 12px;
+  }
+
+  .hero-galeria{
+    padding-top: 110px;
+    padding-bottom: 70px;
+  }
+}
+/* Overlay móvil opcional */
+.nav-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(2,6,23,.55);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: .2s ease;
+  z-index: 900;
+}
+.nav-overlay.active{
+  opacity: 1;
+  visibility: visible;
+}
+@media (max-width: 860px){
+  .header{ z-index: 1000; }
+  .nav__menu{ z-index: 1100; }
+}
+
+.galeria-item video{
+  width:100%;
+  height:230px;
+  object-fit: cover;
+  display:block;
+}

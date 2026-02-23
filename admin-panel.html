@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel Administrador | ICEA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/admin-panel.css" />
+</head>
+
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand">
+        <span class="brand__dot"></span>
+        <div>
+          <div class="brand__title">Panel Administrador</div>
+          <div class="brand__sub">Galería + Multimedia (tiempo real)</div>
+        </div>
+      </div>
+
+      <div class="topbar__right">
+        <span class="chip" id="userChip">Cargando usuario…</span>
+        <button id="logoutBtn" class="btn btn--ghost">Salir</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Tabs -->
+    <section class="tabs">
+      <button class="tab tab--active" data-tab="galeria">🖼️ Galería</button>
+      <button class="tab" data-tab="multimedia">📺 Multimedia</button>
+    </section>
+
+    <!-- ===== GALERIA ===== -->
+    <section class="panel" data-pane="galeria">
+      <div class="panel__head">
+        <h2>Subir imágenes</h2>
+        <p>Cualquier usuario activo puede subir. Solo admin/líder puede eliminar.</p>
+      </div>
+
+      <div class="upload">
+        <label class="dropzone" for="imageInput">
+          <input type="file" id="imageInput" multiple accept="image/*" />
+          <div class="dropzone__icon">⬆️</div>
+          <div class="dropzone__text"><strong>Haz clic</strong> o arrastra imágenes aquí</div>
+          <div class="dropzone__hint">PNG, JPG, WEBP • recomendado: 5MB</div>
+        </label>
+
+        <div class="upload__actions">
+          <button id="uploadImagesBtn" class="btn btn--primary">Subir imágenes</button>
+          <div id="imageStatus" class="status"></div>
+        </div>
+      </div>
+
+      <div class="panel__head panel__head--row">
+        <div>
+          <h2>Imágenes actuales</h2>
+          <p>Vista en vivo (Firestore realtime).</p>
+        </div>
+        <div class="chips">
+          <span class="chip" id="imagesCount">0 imágenes</span>
+          <span class="chip chip--live">● En vivo</span>
+        </div>
+      </div>
+
+      <div id="imagesGrid" class="grid">
+        <div class="empty">
+          <div class="empty__icon">🖼️</div>
+          <div class="empty__title">No hay imágenes todavía</div>
+          <div class="empty__text">Sube tu primera foto para verla aquí.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MULTIMEDIA ===== -->
+    <section class="panel" data-pane="multimedia" hidden>
+      <div class="panel__head">
+        <h2>Subir videos</h2>
+        <p>Agrega videos con link de YouTube o sube un archivo local (tiempo real).</p>
+      </div>
+
+      <div class="split">
+        <!-- YouTube -->
+        <div class="cardbox">
+          <div class="cardbox__title">Link de YouTube</div>
+          <div class="row">
+            <input id="youtubeUrl" class="input" placeholder="Pega aquí cualquier enlace de YouTube" />
+            <button id="addYoutubeBtn" class="btn btn--primary">Agregar</button>
+          </div>
+          <div class="hint">Se guardará como embed (youtubeId).</div>
+        </div>
+
+        <!-- Local video -->
+        <div class="cardbox">
+          <div class="cardbox__title">Video local (Cloudinary)</div>
+          <label class="dropzone dropzone--small" for="videoInput">
+            <input type="file" id="videoInput" accept="video/*" />
+            <div class="dropzone__icon">🎬</div>
+            <div class="dropzone__text"><strong>Haz clic</strong> o arrastra un video aquí</div>
+            <div class="dropzone__hint">MP4 / WEBM recomendado</div>
+          </label>
+          <div class="upload__actions">
+            <button id="uploadVideoBtn" class="btn btn--primary">Subir video</button>
+            <div id="videoStatus" class="status"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel__head panel__head--row">
+        <div>
+          <h2>Videos actuales</h2>
+          <p>Administra contenido publicado.</p>
+        </div>
+        <div class="chips">
+          <span class="chip" id="videosCount">0 videos</span>
+          <span class="chip chip--live">● En vivo</span>
+        </div>
+      </div>
+
+      <div id="videosGrid" class="grid">
+        <div class="empty">
+          <div class="empty__icon">📺</div>
+          <div class="empty__title">No hay videos todavía</div>
+          <div class="empty__text">Agrega uno de YouTube o sube un archivo.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" aria-hidden="true"></div>
+
+  <script>
+    // Tabs UI (solo front)
+    document.querySelectorAll(".tab").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(b => b.classList.remove("tab--active"));
+        btn.classList.add("tab--active");
+
+        const tab = btn.dataset.tab;
+        document.querySelectorAll("[data-pane]").forEach(p => {
+          p.hidden = p.dataset.pane !== tab;
+        });
+      });
+    });
+
+    // Toast
+    window.showToast = function (msg, type = "ok") {
+      const t = document.getElementById("toast");
+      if (!t) return;
+      t.className = "toast toast--" + type + " toast--show";
+      t.textContent = msg;
+      t.setAttribute("aria-hidden", "false");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        t.className = "toast";
+        t.setAttribute("aria-hidden", "true");
+      }, 2400);
+    };
+  </script>
+
+  <script type="module" src="js/admin-panel.js"></script>
+</body>
+</html>

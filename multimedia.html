@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multimedia | ICEA Obreros</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/dklj-hero.ico" type="image/x-icon">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/multimedia.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+
+    <!-- NAV -->
+    <header class="hero internal">
+        <nav class="nav container">
+            <div class="nav_logo">
+                <img src="img/logo.png" alt="Logo ICEA" class="nav_icon">
+                <h2 class="nav_title">ICEA Obreros</h2>
+            </div>
+
+            <ul class="nav_link nav_link--menu" id="nav-menu">
+                <li class="nav_items"><a href="index.html" class="nav_links active">Inicio</a></li>
+                <li class="nav_items"><a href="nosotros.html" class="nav_links">Nosotros</a></li>
+                <li class="nav_items"><a href="galeria.html" class="nav_links">Galería</a></li>
+                <li class="nav_items"><a href="multimedia.html" class="nav_links">Multimedia</a></li>
+                <li class="nav_items"><a href="contacto.html" class="nav_links">Contacto</a></li>
+                <img src="img/close.svg" class="nav_close" id="nav-close">
+            </ul>
+
+            <div class="nav_menu" id="nav-toggle">
+                <img src="img/menu.svg" class="nav_img">
+            </div>
+        </nav>
+
+        <div class="internal_header_text">
+            <h1 class="fade-in">Multimedia</h1>
+            <p class="fade-in-delay">Predicaciones – Alabanzas – Mensajes que edifican tu vida.</p>
+        </div>
+    </header>
+
+    <!-- CONTENIDO MULTIMEDIA -->
+    <section class="container section">
+
+        <!-- Predicaciones -->
+        <h2 class="section-title">Predicaciones</h2>
+
+        <div class="media-grid">
+
+            <div class="media-card shadow fade-up">
+                <div class="media-thumb">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID"
+                            frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="media-text">
+                    <h3 class="media-title">Título de la Predicación</h3>
+                    <p class="media-desc">Una enseñanza edificante basada en la Palabra de Dios.</p>
+                </div>
+            </div>
+
+            <div class="media-card shadow fade-up">
+                <div class="media-thumb">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID"
+                            frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="media-text">
+                    <h3 class="media-title">Título de la Predicación 2</h3>
+                    <p class="media-desc">Un mensaje para fortalecer tu fe y caminar espiritual.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Alabanzas -->
+        <h2 class="section-title mt-4">Alabanzas</h2>
+
+        <div class="audio-grid">
+
+            <div class="audio-card shadow fade-up">
+                <i class="fa-solid fa-music audio-icon"></i>
+                <h3>Alabanza 1</h3>
+                <audio controls>
+                    <source src="audio/alabanza1.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="audio-card shadow fade-up">
+                <i class="fa-solid fa-music audio-icon"></i>
+                <h3>Alabanza 2</h3>
+                <audio controls>
+                    <source src="audio/alabanza2.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="js/menu.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Administrador | ICEA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tus estilos (puedes dejar los dos; si hay choques, el segundo manda) -->
+  <link rel="stylesheet" href="css/admin-galeria.css" />
+  <link rel="stylesheet" href="css/admin-multimedia.css" />
+</head>
+
+<body>
+
+  <!-- Topbar ÚNICA -->
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand">
+        <span class="brand__dot"></span>
+        <div>
+          <div class="brand__title">Panel Administrador</div>
+          <div class="brand__sub">Galería + Multimedia ICEA</div>
+        </div>
+      </div>
+
+      <button id="logoutBtn" class="btn btn--ghost">Salir</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- =========================
+         PANEL 1: GALERÍA (img + video local)
+    ========================== -->
+    <section class="panel">
+      <div class="panel__head">
+        <h2>Subir a galería</h2>
+        <p>Publica fotos y videos locales (tiempo real).</p>
+      </div>
+
+      <div class="upload">
+        <label class="dropzone" for="fileInput">
+          <input type="file" id="fileInput" multiple accept="image/*,video/*" />
+          <div class="dropzone__icon">⬆️</div>
+          <div class="dropzone__text">
+            <strong>Haz clic para seleccionar</strong> o arrastra archivos aquí
+          </div>
+          <div class="dropzone__hint">PNG, JPG, WEBP, MP4 • Máx recomendado: 500MB</div>
+        </label>
+
+        <div class="upload__actions">
+          <button id="uploadBtn" class="btn btn--primary">Subir a galería</button>
+          <div id="uploadStatus" class="status"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel--flat">
+      <div class="panel__head panel__head--row">
+        <div>
+          <h2>Contenido actual (Galería)</h2>
+          <p>Administra lo publicado.</p>
+        </div>
+
+        <div class="chips">
+          <span class="chip" id="countChip">0 items</span>
+          <span class="chip chip--live">● En vivo</span>
+        </div>
+      </div>
+
+      <div id="admin-grid" class="grid">
+        <div class="empty">
+          <div class="empty__icon">🖼️</div>
+          <div class="empty__title">No hay contenido todavía</div>
+          <div class="empty__text">Sube tu primer archivo para verlo aquí.</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================
+         PANEL 2: MULTIMEDIA (YouTube + video local separado)
+         *IDs únicos para no chocar con el panel 1*
+    ========================== -->
+    <section class="panel">
+      <div class="panel__head">
+        <h2>Subir videos (Multimedia)</h2>
+        <p>Agrega videos desde YouTube o sube un archivo local (tiempo real).</p>
+      </div>
+
+      <div class="upload">
+
+        <!-- YouTube -->
+        <div class="formrow">
+          <label class="label">Link de YouTube</label>
+          <div class="inline">
+            <input id="youtubeUrl_mm" class="input"
+              placeholder="https://www.youtube.com/watch?v=XXXX o https://youtu.be/XXXX" />
+            <button id="addYoutubeBtn_mm" class="btn btn--primary">Agregar</button>
+          </div>
+          <div class="hint">Se guardará el video como embed.</div>
+        </div>
+
+        <div class="divider"><span>o</span></div>
+
+        <!-- Archivo local -->
+        <label class="dropzone" for="videoInput_mm">
+          <input type="file" id="videoInput_mm" accept="video/*" />
+          <div class="dropzone__icon">🎬</div>
+          <div class="dropzone__text">
+            <strong>Haz clic para seleccionar</strong> o arrastra un video aquí
+          </div>
+          <div class="dropzone__hint">MP4 / WEBM recomendado • Máx depende de Cloudinary</div>
+        </label>
+
+        <div class="upload__actions">
+          <button id="uploadVideoBtn_mm" class="btn btn--primary">Subir video</button>
+          <div id="uploadStatus_mm" class="status"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel--flat">
+      <div class="panel__head panel__head--row">
+        <div>
+          <h2>Videos actuales (Multimedia)</h2>
+          <p>Administra el contenido publicado.</p>
+        </div>
+
+        <div class="chips">
+          <span class="chip" id="countChip_mm">0 videos</span>
+          <span class="chip chip--live">● En vivo</span>
+        </div>
+      </div>
+
+      <div id="media-grid_mm" class="grid">
+        <div class="empty">
+          <div class="empty__icon">📺</div>
+          <div class="empty__title">No hay videos todavía</div>
+          <div class="empty__text">Agrega uno de YouTube o sube un archivo.</div>
+        </div>
+      </div>
+    </section>
+
+    PANEL 3: EVENTOS (Calendario)
+========================== -->
+<section class="panel">
+  <div class="panel__head">
+    <h2>Administrar eventos</h2>
+    <p>Crea eventos que se verán en la página <b>eventos.html</b> con calendario.</p>
+  </div>
+
+  <div class="upload">
+    <div class="formrow">
+      <label class="label">Título</label>
+      <input id="evTitle" class="input" placeholder="Ej: Vigilia, Taller, Congreso..." />
+    </div>
+
+    <div class="formrow">
+      <label class="label">Fecha</label>
+      <input id="evDate" class="input" type="date" />
+    </div>
+
+    <div class="formrow">
+      <label class="label">Hora</label>
+      <input id="evTime" class="input" placeholder="Ej: 6:30 PM" />
+    </div>
+
+    <div class="formrow">
+      <label class="label">Lugar</label>
+      <input id="evPlace" class="input" placeholder="Ej: Auditorio, Parque, Salón 2..." />
+    </div>
+
+    <div class="formrow">
+      <label class="label">Descripción</label>
+      <textarea id="evDesc" class="input" rows="3" placeholder="Detalles del evento..."></textarea>
+    </div>
+
+    <div class="formrow">
+      <label class="label">Link de registro (opcional)</label>
+      <input id="evLink" class="input" placeholder="Ej: https://wa.me/57... o Google Forms" />
+      <div class="hint">Si lo dejas vacío, se usará “#”.</div>
+    </div>
+
+    <div class="upload__actions">
+      <button id="evAddBtn" class="btn btn--primary">Guardar evento</button>
+      <button id="evClearBtn" class="btn btn--ghost">Borrar todo</button>
+      <div id="evStatus" class="status"></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel panel--flat">
+  <div class="panel__head panel__head--row">
+    <div>
+      <h2>Eventos actuales</h2>
+      <p>Esto alimenta el calendario de <b>eventos.html</b>.</p>
+    </div>
+
+    <div class="chips">
+      <span class="chip" id="evCountChip">0 eventos</span>
+      <span class="chip chip--live">● En vivo</span>
+    </div>
+  </div>
+
+  <div id="events-grid_admin" class="grid">
+    <div class="empty">
+      <div class="empty__icon">📅</div>
+      <div class="empty__title">No hay eventos todavía</div>
+      <div class="empty__text">Crea tu primer evento para verlo aquí.</div>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <!-- Toast ÚNICO -->
+  <div class="toast" id="toast" aria-hidden="true"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="js/admin-galeria.js"></script>
+  <!-- ⚠️ Este lo vamos a ajustar para usar los IDs *_mm -->
+  <script type="module" src="js/admin-multimedia.js"></script>
+  <script type="module" src="js/admin-eventos.js"></script>
+
+  <!-- Toast helper -->
+  <script>
+    window.showToast = function (msg, type = "ok") {
+      const t = document.getElementById("toast");
+      if (!t) return;
+      t.className = "toast toast--" + type + " toast--show";
+      t.textContent = msg;
+      t.setAttribute("aria-hidden", "false");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        t.className = "toast";
+        t.setAttribute("aria-hidden", "true");
+      }, 2400);
+    }
+  </script>
+</body>
+</html>

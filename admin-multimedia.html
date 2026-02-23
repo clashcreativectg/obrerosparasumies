@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Administrador | Multimedia ICEA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="css/admin-multimedia.css" />
+</head>
+
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand">
+        <span class="brand__dot"></span>
+        <div>
+          <div class="brand__title">Panel Administrador</div>
+          <div class="brand__sub">Multimedia ICEA</div>
+        </div>
+      </div>
+
+      <button id="logoutBtn" class="btn btn--ghost">Salir</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Upload Panel -->
+    <section class="panel">
+      <div class="panel__head">
+        <h2>Subir videos</h2>
+        <p>Agrega videos desde YouTube o sube un archivo local (tiempo real).</p>
+      </div>
+
+      <div class="upload">
+        <!-- YouTube -->
+        <div class="formrow">
+          <label class="label">Link de YouTube</label>
+          <div class="inline">
+            <input id="youtubeUrl" class="input" placeholder="https://www.youtube.com/watch?v=XXXX o https://youtu.be/XXXX" />
+            <button id="addYoutubeBtn" class="btn btn--primary">Agregar</button>
+          </div>
+          <div class="hint">Se guardará el video como embed.</div>
+        </div>
+
+        <div class="divider"><span>o</span></div>
+
+        <!-- Archivo local -->
+        <label class="dropzone" for="videoInput">
+          <input type="file" id="videoInput" accept="video/*" />
+          <div class="dropzone__icon">🎬</div>
+          <div class="dropzone__text">
+            <strong>Haz clic para seleccionar</strong> o arrastra un video aquí
+          </div>
+          <div class="dropzone__hint">MP4 / WEBM recomendado • Máx depende de Cloudinary</div>
+        </label>
+
+        <div class="upload__actions">
+          <button id="uploadVideoBtn" class="btn btn--primary">Subir video</button>
+          <div id="uploadStatus" class="status"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- List -->
+    <section class="panel panel--flat">
+      <div class="panel__head panel__head--row">
+        <div>
+          <h2>Videos actuales</h2>
+          <p>Administra el contenido publicado.</p>
+        </div>
+
+        <div class="chips">
+          <span class="chip" id="countChip">0 videos</span>
+          <span class="chip chip--live">● En vivo</span>
+        </div>
+      </div>
+
+      <div id="media-grid" class="grid">
+        <div class="empty">
+          <div class="empty__icon">📺</div>
+          <div class="empty__title">No hay videos todavía</div>
+          <div class="empty__text">Agrega uno de YouTube o sube un archivo.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" aria-hidden="true"></div>
+
+  <script type="module" src="js/admin-multimedia.js"></script>
+
+  <script>
+    window.showToast = function (msg, type = "ok") {
+      const t = document.getElementById("toast");
+      if (!t) return;
+      t.className = "toast toast--" + type + " toast--show";
+      t.textContent = msg;
+      t.setAttribute("aria-hidden", "false");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        t.className = "toast";
+        t.setAttribute("aria-hidden", "true");
+      }, 2400);
+    }
+  </script>
+</body>
+</html>

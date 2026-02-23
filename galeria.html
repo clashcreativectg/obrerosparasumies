@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería | ICEA Obreros</title>
+
+  <meta name="description" content="Galería de eventos y actividades de la Iglesia ICEA Obreros">
+
+  <link rel="stylesheet" href="css/galeria.css">
+  <link rel="shortcut icon" href="/img/ICEA.png" type="image/x-icon">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+  <nav class="nav container">
+    <a href="index.html" class="logo">ICEA OBREROS</a>
+
+    <button class="nav__toggle" id="nav-toggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav__menu" id="nav-menu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="galeria.html" class="active">Galería</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero-galeria">
+  <div class="hero-overlay"></div>
+  <div class="hero-content container">
+    <h1>Galería ICEA Obreros</h1>
+    <p>Momentos que reflejan nuestra fe, unidad y crecimiento</p>
+  </div>
+</section>
+
+<!-- ================= GALERÍA ================= -->
+<section class="galeria container">
+  <h2 class="section-title">Nuestra Galería</h2>
+
+  <!-- CARGA DINÁMICA -->
+  <div class="galeria-grid" id="galeria-grid">
+    <p class="galeria-loading">Cargando galería...</p>
+  </div>
+</section>
+
+<!-- ================= LIGHTBOX ================= -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="close" id="lightbox-close" aria-label="Cerrar">&times;</button>
+  <div class="lightbox__content" id="lightbox-content"></div>
+</div>
+
+
+<!-- ================= SCRIPTS ================= -->
+<script type="module" src="js/galeria-firebase.js"></script>
+
+<script>
+  /* ===== NAV MOBILE ===== */
+  const toggle = document.getElementById("nav-toggle");
+  const menu = document.getElementById("nav-menu");
+
+  toggle?.addEventListener("click", () => {
+    menu.classList.toggle("active");
+  });
+
+  /* ===== LIGHTBOX ===== */
+  const lightbox = document.getElementById("lightbox");
+  const closeBtn = document.getElementById("lightbox-close");
+  const content = document.getElementById("lightbox-content");
+
+  function closeLightbox() {
+    lightbox.classList.remove("show");
+    lightbox.setAttribute("aria-hidden", "true");
+    content.innerHTML = ""; // importante: para parar videos/iframe
+  }
+
+  closeBtn.onclick = closeLightbox;
+
+  lightbox.onclick = (e) => {
+    if (e.target === lightbox) closeLightbox();
+  };
+
+  // Exponer helpers para el JS
+  window.__openLightbox = (html) => {
+    content.innerHTML = html;
+    lightbox.classList.add("show");
+    lightbox.setAttribute("aria-hidden", "false");
+  };
+  window.__closeLightbox = closeLightbox;
+</script>
+
+</body>
+</html>
