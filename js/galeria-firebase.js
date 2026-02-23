@@ -17,6 +17,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+
 /* DOM */
 const grid = document.getElementById("galeria-grid");
 
@@ -177,4 +180,5 @@ onSnapshot(qYoutube, (snap) => {
   render();
 }, (err) => {
   console.error("Error leyendo multimedia (youtube):", err);
+
 });
