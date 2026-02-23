@@ -15,8 +15,8 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
+// ✅ EXPORTS CORRECTOS (solo una vez)
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
@@ -182,3 +182,4 @@ onSnapshot(qYoutube, (snap) => {
   console.error("Error leyendo multimedia (youtube):", err);
 
 });
+
