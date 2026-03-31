@@ -1,105 +1,461 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multimedia | ICEA Obreros</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multimedia | ICEA - Obreros para Su Mies</title>
+  <meta name="description" content="Predicaciones, alabanzas y mensajes multimedia de ICEA - Obreros para Su Mies." />
+  <meta name="theme-color" content="#f04a00" />
+  <link rel="shortcut icon" href="img/ICEA.png" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="img/dklj-hero.ico" type="image/x-icon">
+  <style>
+    :root {
+      --primary: #f04a00;
+      --primary-dark: #c73b00;
+      --secondary: #2f4fa8;
+      --secondary-dark: #1f3475;
+      --bg-light: #f6f8fc;
+      --text: #1f1f1f;
+      --muted: #5f6470;
+      --white: #ffffff;
+      --border: #e6eaf2;
+      --shadow: 0 14px 35px rgba(25, 40, 79, 0.12);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --container: 1120px;
+    }
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/multimedia.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Open Sans", sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
 
+    a { text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(92%, var(--container));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(47,79,168,0.08);
+    }
+
+    .nav {
+      min-height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--secondary-dark);
+    }
+
+    .brand__logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(240,74,0,0.15);
+      background: var(--white);
+    }
+
+    .brand__title {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .brand__subtitle {
+      display: block;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .nav__links a {
+      color: var(--secondary-dark);
+      font-weight: 700;
+      font-size: 0.96rem;
+    }
+
+    .nav__links a.active {
+      color: var(--primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-weight: 700;
+      transition: transform .2s ease, box-shadow .2s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn--primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      box-shadow: 0 12px 24px rgba(240, 74, 0, 0.22);
+    }
+
+    .hero {
+      padding: 90px 0;
+      background:
+        linear-gradient(rgba(20, 34, 78, 0.78), rgba(20, 34, 78, 0.78)),
+        radial-gradient(circle at top left, rgba(240,74,0,0.18), transparent 25%),
+        linear-gradient(135deg, #1f3475 0%, #2f4fa8 55%, #3f66cc 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.95);
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      margin: 0 0 14px;
+      line-height: 1.08;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: rgba(255,255,255,0.88);
+      font-size: 1.05rem;
+    }
+
+    .media-section {
+      padding: 90px 0;
+      background: var(--bg-light);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .section-title {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(1.9rem, 4vw, 2.7rem);
+      line-height: 1.15;
+      margin: 0 0 14px;
+      color: var(--secondary-dark);
+    }
+
+    .section-text {
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 1.02rem;
+    }
+
+    .content-block + .content-block {
+      margin-top: 54px;
+    }
+
+    .content-block h2 {
+      margin: 0 0 20px;
+      color: var(--secondary-dark);
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(1.45rem, 3vw, 2rem);
+    }
+
+    .firebase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .media-card,
+    .audio-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .media-card iframe,
+    .media-card video,
+    .media-card img {
+      width: 100%;
+      height: 250px;
+      display: block;
+      border: none;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .media-card__body,
+    .audio-card__body {
+      padding: 22px;
+    }
+
+    .media-card__body h3,
+    .audio-card__body h3 {
+      margin: 0 0 10px;
+      color: var(--secondary-dark);
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.15rem;
+    }
+
+    .media-card__body p,
+    .audio-card__body p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .audio-card__icon {
+      width: 64px;
+      height: 64px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(240,74,0,0.12), rgba(47,79,168,0.14));
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+
+    .audio-card audio {
+      width: 100%;
+      margin-top: 16px;
+    }
+
+    .firebase-loading,
+    .firebase-empty,
+    .firebase-error {
+      grid-column: 1 / -1;
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      text-align: center;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .footer {
+      background: #101b3e;
+      color: rgba(255,255,255,0.86);
+      padding: 52px 0 24px;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap: 28px;
+      margin-bottom: 26px;
+    }
+
+    .footer h3,
+    .footer h4 {
+      color: var(--white);
+      margin-top: 0;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .footer p,
+    .footer a {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .footer a:hover { color: #fff; }
+
+    .footer__links,
+    .footer__contact {
+      display: grid;
+      gap: 10px;
+    }
+
+    .footer__copy {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 18px;
+      text-align: center;
+      font-size: 0.94rem;
+    }
+
+    @media (max-width: 960px) {
+      .nav,
+      .footer__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        justify-content: center;
+        padding: 16px 0;
+      }
+
+      .nav__links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 72px 0; }
+      .media-section { padding: 72px 0; }
+      .btn { width: 100%; }
+      .media-card iframe,
+      .media-card video,
+      .media-card img { height: 220px; }
+    }
+  </style>
 </head>
 <body>
-
-    <!-- NAV -->
-    <header class="hero internal">
-        <nav class="nav container">
-            <div class="nav_logo">
-                <img src="img/logo.png" alt="Logo ICEA" class="nav_icon">
-                <h2 class="nav_title">ICEA Obreros</h2>
-            </div>
-
-            <ul class="nav_link nav_link--menu" id="nav-menu">
-                <li class="nav_items"><a href="index.html" class="nav_links active">Inicio</a></li>
-                <li class="nav_items"><a href="nosotros.html" class="nav_links">Nosotros</a></li>
-                <li class="nav_items"><a href="galeria.html" class="nav_links">Galería</a></li>
-                <li class="nav_items"><a href="multimedia.html" class="nav_links">Multimedia</a></li>
-                <li class="nav_items"><a href="contacto.html" class="nav_links">Contacto</a></li>
-                <img src="img/close.svg" class="nav_close" id="nav-close">
-            </ul>
-
-            <div class="nav_menu" id="nav-toggle">
-                <img src="img/menu.svg" class="nav_img">
-            </div>
-        </nav>
-
-        <div class="internal_header_text">
-            <h1 class="fade-in">Multimedia</h1>
-            <p class="fade-in-delay">Predicaciones – Alabanzas – Mensajes que edifican tu vida.</p>
+  <header class="topbar">
+    <nav class="nav container">
+      <a href="index.html" class="brand">
+        <img src="img/ICEA.png" alt="Logo de ICEA" class="brand__logo" />
+        <div>
+          <p class="brand__title">ICEA - Obreros para Su Mies</p>
+          <span class="brand__subtitle">Formación bíblica y ministerial</span>
         </div>
-    </header>
+      </a>
 
-    <!-- CONTENIDO MULTIMEDIA -->
-    <section class="container section">
+      <div class="nav__links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="galeria.html">Galería</a>
+        <a href="multimedia.html" class="active">Multimedia</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="contacto.html" class="btn btn--primary">Solicitar información</a>
+      </div>
+    </nav>
+  </header>
 
-        <!-- Predicaciones -->
-        <h2 class="section-title">Predicaciones</h2>
-
-        <div class="media-grid">
-
-            <div class="media-card shadow fade-up">
-                <div class="media-thumb">
-                    <iframe src="https://www.youtube.com/embed/VIDEO_ID"
-                            frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="media-text">
-                    <h3 class="media-title">Título de la Predicación</h3>
-                    <p class="media-desc">Una enseñanza edificante basada en la Palabra de Dios.</p>
-                </div>
-            </div>
-
-            <div class="media-card shadow fade-up">
-                <div class="media-thumb">
-                    <iframe src="https://www.youtube.com/embed/VIDEO_ID"
-                            frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="media-text">
-                    <h3 class="media-title">Título de la Predicación 2</h3>
-                    <p class="media-desc">Un mensaje para fortalecer tu fe y caminar espiritual.</p>
-                </div>
-            </div>
-
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero__eyebrow">
+          <i class="fa-solid fa-photo-film"></i>
+          Contenido que edifica y fortalece la fe
         </div>
-
-        <!-- Alabanzas -->
-        <h2 class="section-title mt-4">Alabanzas</h2>
-
-        <div class="audio-grid">
-
-            <div class="audio-card shadow fade-up">
-                <i class="fa-solid fa-music audio-icon"></i>
-                <h3>Alabanza 1</h3>
-                <audio controls>
-                    <source src="audio/alabanza1.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
-            <div class="audio-card shadow fade-up">
-                <i class="fa-solid fa-music audio-icon"></i>
-                <h3>Alabanza 2</h3>
-                <audio controls>
-                    <source src="audio/alabanza2.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
-        </div>
+        <h1>Multimedia</h1>
+        <p>
+          Predicaciones, alabanzas y mensajes que puedes actualizar desde Firebase para mantener el contenido del ministerio siempre vigente.
+        </p>
+      </div>
     </section>
 
-    <script src="js/menu.js"></script>
+    <section class="media-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Contenido multimedia</h2>
+          <p class="section-text">
+            Esta página conserva la carga dinámica desde Firebase, para que puedas administrar videos, audios y materiales sin editar el HTML cada vez.
+          </p>
+        </div>
 
+        <div class="content-block">
+          <h2>Predicaciones</h2>
+          <div class="firebase-grid" id="predicaciones-grid">
+            <div class="firebase-loading">
+              <i class="fa-solid fa-spinner fa-spin"></i>
+              Cargando predicaciones...
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <h2>Alabanzas</h2>
+          <div class="firebase-grid" id="alabanzas-grid">
+            <div class="firebase-loading">
+              <i class="fa-solid fa-spinner fa-spin"></i>
+              Cargando alabanzas...
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <h3>ICEA - Obreros para Su Mies</h3>
+          <p>
+            Formando discípulos y obreros comprometidos con la Palabra de Dios,
+            el servicio cristiano y la expansión del Reino.
+          </p>
+        </div>
+
+        <div>
+          <h4>Enlaces</h4>
+          <div class="footer__links">
+            <a href="index.html">Inicio</a>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="galeria.html">Galería</a>
+            <a href="multimedia.html">Multimedia</a>
+            <a href="contacto.html">Contacto</a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Contacto</h4>
+          <div class="footer__contact">
+            <a href="contacto.html">Solicitar información</a>
+            <a href="mailto:iceaobreros@gmail.com">iceaobreros@gmail.com</a>
+            <span>Atención y orientación ministerial</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__copy">
+        <p>&copy; 2025 ICEA - Obreros para Su Mies. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/multimedia-firebase.js"></script>
 </body>
 </html>
