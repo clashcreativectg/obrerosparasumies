@@ -1,176 +1,600 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nosotros | ICEA Obreros</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nosotros | ICEA - Obreros para Su Mies</title>
+  <meta name="description" content="Conoce la misión, visión, valores e historia de ICEA - Obreros para Su Mies, un ministerio comprometido con la formación bíblica y el servicio cristiano." />
+  <meta name="theme-color" content="#f04a00" />
+  <link rel="shortcut icon" href="img/ICEA.png" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #f04a00;
+      --primary-dark: #c73b00;
+      --secondary: #2f4fa8;
+      --secondary-dark: #1f3475;
+      --bg-light: #f6f8fc;
+      --text: #1f1f1f;
+      --muted: #5f6470;
+      --white: #ffffff;
+      --border: #e6eaf2;
+      --shadow: 0 14px 35px rgba(25, 40, 79, 0.12);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --container: 1120px;
+    }
 
-    <link rel="shortcut icon" href="img/ICEA.png" type="image/x-icon">
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Open Sans", sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    a { text-decoration: none; }
+    img { max-width: 100%; display: block; }
 
-    <link rel="stylesheet" href="css/nosotros.css" />
+    .container {
+      width: min(92%, var(--container));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(47,79,168,0.08);
+    }
+
+    .nav {
+      min-height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--secondary-dark);
+    }
+
+    .brand__logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(240,74,0,0.15);
+      background: var(--white);
+    }
+
+    .brand__title {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .brand__subtitle {
+      display: block;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .nav__links a {
+      color: var(--secondary-dark);
+      font-weight: 700;
+      font-size: 0.96rem;
+      position: relative;
+    }
+
+    .nav__links a.active {
+      color: var(--primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-weight: 700;
+      transition: transform .2s ease, box-shadow .2s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn--primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      box-shadow: 0 12px 24px rgba(240, 74, 0, 0.22);
+    }
+
+    .hero {
+      padding: 90px 0;
+      background:
+        linear-gradient(rgba(20, 34, 78, 0.78), rgba(20, 34, 78, 0.78)),
+        radial-gradient(circle at top left, rgba(240,74,0,0.18), transparent 25%),
+        linear-gradient(135deg, #1f3475 0%, #2f4fa8 55%, #3f66cc 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.95);
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      margin: 0 0 14px;
+      line-height: 1.08;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: rgba(255,255,255,0.88);
+      font-size: 1.05rem;
+    }
+
+    .section {
+      padding: 90px 0;
+    }
+
+    .section-title {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(1.9rem, 4vw, 2.7rem);
+      line-height: 1.15;
+      margin: 0 0 16px;
+      color: var(--secondary-dark);
+    }
+
+    .section-text {
+      color: var(--muted);
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.02rem;
+    }
+
+    .intro {
+      text-align: center;
+      background: var(--white);
+    }
+
+    .intro__card {
+      max-width: 920px;
+      margin: 34px auto 0;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 34px;
+    }
+
+    .split {
+      background: var(--bg-light);
+    }
+
+    .split__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .info-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      height: 100%;
+    }
+
+    .info-box__icon {
+      width: 64px;
+      height: 64px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(240,74,0,0.12), rgba(47,79,168,0.14));
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 18px;
+    }
+
+    .info-box h3 {
+      margin: 0 0 12px;
+      font-family: "Montserrat", sans-serif;
+      color: var(--secondary-dark);
+      font-size: 1.5rem;
+    }
+
+    .info-box p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .ministry {
+      background: var(--white);
+      text-align: center;
+    }
+
+    .ministry__image {
+      margin: 36px auto 0;
+      max-width: 860px;
+      background: linear-gradient(180deg, rgba(47,79,168,0.12), rgba(240,74,0,0.12));
+      padding: 18px;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .ministry__image img {
+      width: 100%;
+      min-height: 420px;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .values {
+      background: var(--bg-light);
+      text-align: center;
+    }
+
+    .values__grid {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .value-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      text-align: left;
+    }
+
+    .value-card h3 {
+      margin: 0 0 10px;
+      font-family: "Montserrat", sans-serif;
+      color: var(--secondary-dark);
+    }
+
+    .value-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .history {
+      background: var(--white);
+      text-align: center;
+    }
+
+    .history__card {
+      max-width: 920px;
+      margin: 36px auto 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,1), rgba(246,248,252,1));
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-band {
+      padding: 90px 0;
+      background: linear-gradient(135deg, var(--secondary-dark), var(--secondary));
+      color: var(--white);
+      text-align: center;
+    }
+
+    .cta-band h2 {
+      color: var(--white);
+      margin-bottom: 16px;
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+    }
+
+    .cta-band p {
+      max-width: 740px;
+      margin: 0 auto 26px;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .footer {
+      background: #101b3e;
+      color: rgba(255,255,255,0.86);
+      padding: 52px 0 24px;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap: 28px;
+      margin-bottom: 26px;
+    }
+
+    .footer h3,
+    .footer h4 {
+      color: var(--white);
+      margin-top: 0;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .footer p,
+    .footer a {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .footer a:hover { color: #fff; }
+
+    .footer__links,
+    .footer__contact {
+      display: grid;
+      gap: 10px;
+    }
+
+    .footer__copy {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 18px;
+      text-align: center;
+      font-size: 0.94rem;
+    }
+
+    @media (max-width: 960px) {
+      .nav,
+      .footer__grid,
+      .split__grid,
+      .values__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        justify-content: center;
+        padding: 16px 0;
+      }
+
+      .nav__links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section { padding: 72px 0; }
+      .hero { padding: 72px 0; }
+      .btn { width: 100%; }
+      .info-box,
+      .intro__card,
+      .history__card { padding: 24px; }
+    }
+  </style>
 </head>
-
 <body>
-
-    <!-- ====================== NAVBAR ====================== -->
-    <header class="header">
-        <nav class="nav container">
-            <a href="index.html" class="logo">ICEA OBREROS</a>
-
-            <button class="nav__toggle" id="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-
-            <ul class="nav__link" id="nav-menu">
-                <li><a href="index.html" class="nav__links">Inicio</a></li>
-                <li><a href="Nosotros.html" class="nav__links active">Nosotros</a></li>
-                <li><a href="galeria.html" class="nav__links">Galería</a></li>
-                <li><a href="contacto.html" class="nav__links">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- ====================== HERO ====================== -->
-    <section class="hero__nosotros">
-        <div class="overlay"></div>
-        <div class="container hero__text">
-            <h1>Sobre Nosotros</h1>
-            <p>Una comunidad enfocada en formación, servicio y crecimiento integral.</p>
+  <header class="topbar">
+    <nav class="nav container">
+      <a href="index.html" class="brand">
+        <img src="img/ICEA.png" alt="Logo de ICEA" class="brand__logo" />
+        <div>
+          <p class="brand__title">ICEA - Obreros para Su Mies</p>
+          <span class="brand__subtitle">Formación bíblica y ministerial</span>
         </div>
-    </section>
+      </a>
 
-    <!-- ====================== QUIÉNES SOMOS ====================== -->
-    <section class="quienes-somos container scrollFade">
-        <h2>¿Quiénes somos?</h2>
+      <div class="nav__links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html" class="active">Nosotros</a>
+        <a href="galeria.html">Galería</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="contacto.html" class="btn btn--primary">Solicitar información</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero__eyebrow">
+          <i class="fa-solid fa-church"></i>
+          Conoce más sobre nuestro ministerio
+        </div>
+        <h1>Sobre Nosotros</h1>
         <p>
-            ICEA Obreros es un ministerio que trabaja en el desarrollo espiritual, social y formativo de cada persona.
-            Nuestro compromiso es acompañar, guiar y fortalecer a quienes buscan crecimiento personal y espiritual,
-            promoviendo principios sólidos y un ambiente de apoyo y unidad.
+          Somos un ministerio enfocado en la formación bíblica, el servicio cristiano y el crecimiento espiritual
+          de personas llamadas a impactar su entorno con el evangelio de Jesucristo.
         </p>
+      </div>
     </section>
 
-    <!-- ====================== EQUIPO ====================== -->
-    <section class="equipo container scrollFade">
-        <h2>Nuestro Ministerio</h2>
-        <p class="equipo__intro">
-            Un equipo humano preparado para servir con responsabilidad, dedicación y excelencia.
+    <section class="section intro">
+      <div class="container">
+        <h2 class="section-title">¿Quiénes somos?</h2>
+        <p class="section-text">
+          ICEA - Obreros para Su Mies es un espacio de formación cristiana que acompaña a creyentes en su crecimiento
+          espiritual, ministerial y humano, con un enfoque centrado en la Palabra de Dios y el servicio a la obra del Señor.
         </p>
+
+        <div class="intro__card">
+          Trabajamos para levantar discípulos con convicciones firmes, carácter cristiano y disposición para servir,
+          promoviendo un ambiente de unidad, amor, obediencia y compromiso con la misión que Dios nos ha confiado.
+        </div>
+      </div>
+    </section>
+
+    <section class="section ministry">
+      <div class="container">
+        <h2 class="section-title">Nuestro ministerio</h2>
+        <p class="section-text">
+          Un equipo dispuesto a servir con responsabilidad, dedicación y excelencia, guiando a otros en el camino de la fe.
         </p>
-        <div class="equipo__img-container">
-            <img src="img/equipo.jpg" alt="Equipo ICEA Obreros" class="equipo__img" />
+
+        <div class="ministry__image">
+          <img src="img/equipo.jpg" alt="Equipo del ministerio ICEA" />
         </div>
+      </div>
     </section>
 
-    <!-- ====================== MISIÓN - VISIÓN ====================== -->
-    <section class="mision-vision container scrollFade">
-        <div class="mision box">
-            <h2>Misión</h2>
-            <p>
-                Somos una Iglesia Biblica comprometidos con el Evangelismo y las Misiones, Proclamando a Cristo en todas
-                las naciones salvando al mayor número
-            </p>
-        </div>
+    <section class="section split">
+      <div class="container split__grid">
+        <article class="info-box">
+          <div class="info-box__icon"><i class="fa-solid fa-bullseye"></i></div>
+          <h3>Misión</h3>
+          <p>
+            Somos un ministerio bíblico comprometido con el evangelismo, la formación de discípulos y las misiones,
+            proclamando a Cristo y preparando obreros que sirvan con fidelidad, amor y convicción.
+          </p>
+        </article>
 
-        <div class="vision box">
-            <h2>Visión</h2>
-            <p>
-                Consolidarnos como un ministerio referente por su compromiso, organización y capacidad de formar líderes
-                íntegros que generen impacto en sus comunidades a nivel local y nacional.
-            </p>
-        </div>
+        <article class="info-box">
+          <div class="info-box__icon"><i class="fa-solid fa-eye"></i></div>
+          <h3>Visión</h3>
+          <p>
+            Consolidarnos como un ministerio referente por su fundamento en la Palabra, su compromiso con la obra de Dios
+            y su capacidad para formar líderes íntegros que impacten sus comunidades a nivel local, nacional e internacional.
+          </p>
+        </article>
+      </div>
     </section>
 
-    <!-- ====================== VALORES ====================== -->
-    <section class="valores container scrollFade">
-        <h2>Valores del Ministerio</h2>
-        <div class="valores__grid">
+    <section class="section values">
+      <div class="container">
+        <h2 class="section-title">Valores del ministerio</h2>
+        <p class="section-text">
+          Nuestros valores orientan cada proceso de formación, servicio y acompañamiento espiritual.
+        </p>
 
-            <div class="valor">
-                <h3>Respeto</h3>
-                <p>Promovemos ambientes donde cada persona es valorada y escuchada..</p>
-            </div>
+        <div class="values__grid">
+          <article class="value-card">
+            <h3>Respeto</h3>
+            <p>Valoramos a cada persona como creación de Dios y fomentamos relaciones sanas y edificantes.</p>
+          </article>
 
-            <div class="valor">
-                <h3>Servicio</h3>
-                <p>Servimos con humildad y entrega a la obra del Señor.</p>
-            </div>
+          <article class="value-card">
+            <h3>Servicio</h3>
+            <p>Servimos con humildad, amor y disposición, entendiendo que el ministerio es una expresión de obediencia.</p>
+          </article>
 
-            <div class="valor">
-                <h3>Integridad</h3>
-                <p>Vivimos conforme a los principios bíblicos.</p>
-            </div>
+          <article class="value-card">
+            <h3>Integridad</h3>
+            <p>Vivimos conforme a principios bíblicos, buscando coherencia entre lo que creemos, enseñamos y practicamos.</p>
+          </article>
 
-            <div class="valor">
-                <h3>Unidad</h3>
-                <p>Somos un cuerpo trabajando en armonía y comunión.</p>
-            </div>
+          <article class="value-card">
+            <h3>Unidad</h3>
+            <p>Trabajamos como un solo cuerpo, fortaleciendo la comunión, el apoyo mutuo y el propósito compartido.</p>
+          </article>
 
-            <div class="valor">
-                <h3>Fe</h3>
-                <p>Confiamos en las promesas de Dios como guía para avanzar.</p>
-            </div>
+          <article class="value-card">
+            <h3>Fe</h3>
+            <p>Avanzamos confiando en las promesas de Dios, seguros de que Él guía cada paso de la obra.</p>
+          </article>
 
-            <div class="valor">
-                <h3>Compromiso</h3>
-                <p>Asumimos con responsabilidad la obra encomendada.</p>
-            </div>
-
+          <article class="value-card">
+            <h3>Compromiso</h3>
+            <p>Asumimos con responsabilidad el llamado de formar, servir y edificar vidas para la gloria de Dios.</p>
+          </article>
         </div>
+      </div>
     </section>
 
-    <!-- ====================== HISTORIA ====================== -->
-    <section class="historia container scrollFade">
-        <h2>Nuestra Historia</h2>
+    <section class="section history">
+      <div class="container">
+        <h2 class="section-title">Nuestra historia</h2>
+        <p class="section-text">
+          ICEA nace con el propósito de fortalecer la formación espiritual y ministerial de hombres y mujeres llamados a servir.
+        </p>
+
+        <div class="history__card">
+          A lo largo del tiempo hemos trabajado para consolidar una visión clara, una estructura sólida y un acompañamiento cercano,
+          permitiendo que cada etapa represente crecimiento, madurez y expansión. Seguimos avanzando con la meta de impactar nuevas
+          generaciones por medio del evangelio, la enseñanza bíblica y el servicio cristiano.
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container">
+        <h2>Queremos caminar contigo en este proceso</h2>
         <p>
-            ICEA Obreros surge como una iniciativa orientada a fortalecer la formación espiritual y humana de las
-            personas.
-            A lo largo de los años, hemos desarrollado una estructura sólida y un equipo comprometido,
-            permitiendo consolidarnos como un ministerio con proyección, disciplina y vocación de servicio.
-            Cada etapa ha representado un avance significativo, y seguimos trabajando para impactar nuevas generaciones.
+          Si deseas conocer más sobre ICEA, nuestros programas o el proceso de formación, contáctanos y con gusto te orientaremos.
         </p>
+        <a href="contacto.html" class="btn btn--primary">Hablar con nosotros</a>
+      </div>
     </section>
+  </main>
 
-    <!-- ====================== FOOTER ====================== -->
-    <footer class="footer">
-        <div class="footer__container">
-
-            <div class="footer__info">
-                <h3>ICEA OBREROS</h3>
-                <p>Comprometidos con la formación, el desarrollo y el servicio.</p>
-            </div>
-
-            <div class="footer__links">
-                <a href="politica.html">Política de privacidad</a>
-                <a href="terminos.html">Términos y condiciones</a>
-                <a href="contacto.html">Contáctanos</a>
-            </div>
-
-            <div class="footer__social">
-                <a href="#" class="footer__icons"><img src="img/facebook.svg" alt=""></a>
-                <a href="#" class="footer__icons"><img src="img/youtube.svg" alt=""></a>
-                <a href="#" class="footer__icons"><img src="img/instagram.svg" alt=""></a>
-            </div>
-
-            <div class="footer__copy">
-                <p>&copy; 2025 ICEA Obreros - Todos los derechos reservados</p>
-            </div>
-
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <h3>ICEA - Obreros para Su Mies</h3>
+          <p>
+            Formando discípulos y obreros comprometidos con la Palabra de Dios,
+            el servicio cristiano y la expansión del Reino.
+          </p>
         </div>
-    </footer>
 
-    <script>
-        const toggleBtn = document.getElementById("nav-toggle");
-        const navMenu = document.getElementById("nav-menu");
-        toggleBtn.addEventListener("click", () => navMenu.classList.toggle("active"));
-    </script>
+        <div>
+          <h4>Enlaces</h4>
+          <div class="footer__links">
+            <a href="index.html">Inicio</a>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="galeria.html">Galería</a>
+            <a href="contacto.html">Contacto</a>
+          </div>
+        </div>
 
+        <div>
+          <h4>Contacto</h4>
+          <div class="footer__contact">
+            <a href="contacto.html">Solicitar información</a>
+            <a href="mailto:info@icea.org">info@icea.org</a>
+            <span>Atención y orientación ministerial</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__copy">
+        <p>&copy; 2025 ICEA - Obreros para Su Mies. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
 </body>
-
 </html>
