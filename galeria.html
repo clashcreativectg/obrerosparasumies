@@ -1,100 +1,486 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galería | ICEA Obreros</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galería | ICEA - Obreros para Su Mies</title>
+  <meta name="description" content="Galería de eventos, actividades y momentos especiales de ICEA - Obreros para Su Mies." />
+  <meta name="theme-color" content="#f04a00" />
+  <link rel="shortcut icon" href="img/ICEA.png" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <meta name="description" content="Galería de eventos y actividades de la Iglesia ICEA Obreros">
+  <style>
+    :root {
+      --primary: #f04a00;
+      --primary-dark: #c73b00;
+      --secondary: #2f4fa8;
+      --secondary-dark: #1f3475;
+      --bg-light: #f6f8fc;
+      --text: #1f1f1f;
+      --muted: #5f6470;
+      --white: #ffffff;
+      --border: #e6eaf2;
+      --shadow: 0 14px 35px rgba(25, 40, 79, 0.12);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --container: 1120px;
+    }
 
-  <link rel="stylesheet" href="css/galeria.css">
-  <link rel="shortcut icon" href="./img/ICEA.png" type="image/x-icon">
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Open Sans", sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(92%, var(--container));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(47,79,168,0.08);
+    }
+
+    .nav {
+      min-height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--secondary-dark);
+    }
+
+    .brand__logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(240,74,0,0.15);
+      background: var(--white);
+    }
+
+    .brand__title {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .brand__subtitle {
+      display: block;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .nav__links a {
+      color: var(--secondary-dark);
+      font-weight: 700;
+      font-size: 0.96rem;
+    }
+
+    .nav__links a.active {
+      color: var(--primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-weight: 700;
+      transition: transform .2s ease, box-shadow .2s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn--primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      box-shadow: 0 12px 24px rgba(240, 74, 0, 0.22);
+    }
+
+    .hero {
+      padding: 90px 0;
+      background:
+        linear-gradient(rgba(20, 34, 78, 0.78), rgba(20, 34, 78, 0.78)),
+        radial-gradient(circle at top left, rgba(240,74,0,0.18), transparent 25%),
+        linear-gradient(135deg, #1f3475 0%, #2f4fa8 55%, #3f66cc 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.95);
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      margin: 0 0 14px;
+      line-height: 1.08;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: rgba(255,255,255,0.88);
+      font-size: 1.05rem;
+    }
+
+    .gallery-section {
+      padding: 90px 0;
+      background: var(--bg-light);
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(1.9rem, 4vw, 2.7rem);
+      line-height: 1.15;
+      margin: 0 0 14px;
+      color: var(--secondary-dark);
+    }
+
+    .section-text {
+      text-align: center;
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 auto 38px;
+      font-size: 1.02rem;
+    }
+
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .galeria-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      min-height: 280px;
+    }
+
+    .galeria-item img,
+    .galeria-item video,
+    .galeria-item iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .galeria-item__overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 18px;
+      background: linear-gradient(180deg, transparent, rgba(16,27,62,0.82));
+      color: var(--white);
+      font-weight: 700;
+      display: flex;
+      align-items: end;
+      min-height: 110px;
+    }
+
+    .galeria-loading,
+    .galeria-empty,
+    .galeria-error {
+      grid-column: 1 / -1;
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      text-align: center;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 12, 28, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 2000;
+    }
+
+    .lightbox.show {
+      display: flex;
+    }
+
+    .lightbox__content {
+      max-width: min(1100px, 96vw);
+      max-height: 88vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox__content img,
+    .lightbox__content video,
+    .lightbox__content iframe {
+      max-width: 100%;
+      max-height: 88vh;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      background: #000;
+    }
+
+    .lightbox__close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 52px;
+      height: 52px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      color: var(--white);
+      font-size: 1.7rem;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+    }
+
+    .footer {
+      background: #101b3e;
+      color: rgba(255,255,255,0.86);
+      padding: 52px 0 24px;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap: 28px;
+      margin-bottom: 26px;
+    }
+
+    .footer h3,
+    .footer h4 {
+      color: var(--white);
+      margin-top: 0;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .footer p,
+    .footer a {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .footer a:hover { color: #fff; }
+
+    .footer__links,
+    .footer__contact {
+      display: grid;
+      gap: 10px;
+    }
+
+    .footer__copy {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 18px;
+      text-align: center;
+      font-size: 0.94rem;
+    }
+
+    @media (max-width: 960px) {
+      .nav,
+      .footer__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        justify-content: center;
+        padding: 16px 0;
+      }
+
+      .nav__links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 72px 0; }
+      .gallery-section { padding: 72px 0; }
+      .btn { width: 100%; }
+      .lightbox { padding: 16px; }
+    }
+  </style>
 </head>
-
 <body>
+  <header class="topbar">
+    <nav class="nav container">
+      <a href="index.html" class="brand">
+        <img src="img/ICEA.png" alt="Logo de ICEA" class="brand__logo" />
+        <div>
+          <p class="brand__title">ICEA - Obreros para Su Mies</p>
+          <span class="brand__subtitle">Formación bíblica y ministerial</span>
+        </div>
+      </a>
 
-<!-- ================= HEADER ================= -->
-<header class="header">
-  <nav class="nav container">
-    <a href="index.html" class="logo">ICEA OBREROS</a>
+      <div class="nav__links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="galeria.html" class="active">Galería</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="contacto.html" class="btn btn--primary">Solicitar información</a>
+      </div>
+    </nav>
+  </header>
 
-    <button class="nav__toggle" id="nav-toggle" aria-label="Menú">
-      <span></span><span></span><span></span>
-    </button>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero__eyebrow">
+          <i class="fa-solid fa-images"></i>
+          Momentos de fe, unidad y servicio
+        </div>
+        <h1>Galería ICEA</h1>
+        <p>
+          Aquí compartimos imágenes y contenidos de actividades, encuentros y momentos especiales que reflejan
+          el crecimiento y la vida del ministerio.
+        </p>
+      </div>
+    </section>
 
-    <ul class="nav__menu" id="nav-menu">
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="nosotros.html">Nosotros</a></li>
-      <li><a href="galeria.html" class="active">Galería</a></li>
-      <li><a href="contacto.html">Contacto</a></li>
-    </ul>
-  </nav>
-</header>
+    <section class="gallery-section">
+      <div class="container">
+        <h2 class="section-title">Nuestra galería</h2>
+        <p class="section-text">
+          Las imágenes se cargan dinámicamente desde Firebase, para que puedas actualizar la galería sin editar esta página.
+        </p>
 
-<!-- ================= HERO ================= -->
-<section class="hero-galeria">
-  <div class="hero-overlay"></div>
-  <div class="hero-content container">
-    <h1>Galería ICEA Obreros</h1>
-    <p>Momentos que reflejan nuestra fe, unidad y crecimiento</p>
+        <div class="galeria-grid" id="galeria-grid">
+          <div class="galeria-loading">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            Cargando galería...
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" id="lightbox-close" aria-label="Cerrar">&times;</button>
+    <div class="lightbox__content" id="lightbox-content"></div>
   </div>
-</section>
 
-<!-- ================= GALERÍA ================= -->
-<section class="galeria container">
-  <h2 class="section-title">Nuestra Galería</h2>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <h3>ICEA - Obreros para Su Mies</h3>
+          <p>
+            Formando discípulos y obreros comprometidos con la Palabra de Dios,
+            el servicio cristiano y la expansión del Reino.
+          </p>
+        </div>
 
-  <!-- CARGA DINÁMICA -->
-  <div class="galeria-grid" id="galeria-grid">
-    <p class="galeria-loading">Cargando galería...</p>
-  </div>
-</section>
+        <div>
+          <h4>Enlaces</h4>
+          <div class="footer__links">
+            <a href="index.html">Inicio</a>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="galeria.html">Galería</a>
+            <a href="contacto.html">Contacto</a>
+          </div>
+        </div>
 
-<!-- ================= LIGHTBOX ================= -->
-<div class="lightbox" id="lightbox" aria-hidden="true">
-  <button class="close" id="lightbox-close" aria-label="Cerrar">&times;</button>
-  <div class="lightbox__content" id="lightbox-content"></div>
-</div>
+        <div>
+          <h4>Contacto</h4>
+          <div class="footer__contact">
+            <a href="contacto.html">Solicitar información</a>
+            <a href="mailto:iceaobreros@gmail.com">iceaobreros@gmail.com</a>
+            <span>Atención y orientación ministerial</span>
+          </div>
+        </div>
+      </div>
 
+      <div class="footer__copy">
+        <p>&copy; 2025 ICEA - Obreros para Su Mies. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
 
-<!-- ================= SCRIPTS ================= -->
-<script type="module" src="js/galeria-firebase.js"></script>
+  <script>
+    const lightbox = document.getElementById("lightbox");
+    const closeBtn = document.getElementById("lightbox-close");
+    const content = document.getElementById("lightbox-content");
 
-<script>
-  /* ===== NAV MOBILE ===== */
-  const toggle = document.getElementById("nav-toggle");
-  const menu = document.getElementById("nav-menu");
+    function closeLightbox() {
+      lightbox.classList.remove("show");
+      lightbox.setAttribute("aria-hidden", "true");
+      content.innerHTML = "";
+    }
 
-  toggle?.addEventListener("click", () => {
-    menu.classList.toggle("active");
-  });
+    closeBtn?.addEventListener("click", closeLightbox);
 
-  /* ===== LIGHTBOX ===== */
-  const lightbox = document.getElementById("lightbox");
-  const closeBtn = document.getElementById("lightbox-close");
-  const content = document.getElementById("lightbox-content");
+    lightbox?.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
 
-  function closeLightbox() {
-    lightbox.classList.remove("show");
-    lightbox.setAttribute("aria-hidden", "true");
-    content.innerHTML = ""; // importante: para parar videos/iframe
-  }
+    window.__openLightbox = (html) => {
+      content.innerHTML = html;
+      lightbox.classList.add("show");
+      lightbox.setAttribute("aria-hidden", "false");
+    };
 
-  closeBtn.onclick = closeLightbox;
+    window.__closeLightbox = closeLightbox;
+  </script>
 
-  lightbox.onclick = (e) => {
-    if (e.target === lightbox) closeLightbox();
-  };
-
-  // Exponer helpers para el JS
-  window.__openLightbox = (html) => {
-    content.innerHTML = html;
-    lightbox.classList.add("show");
-    lightbox.setAttribute("aria-hidden", "false");
-  };
-  window.__closeLightbox = closeLightbox;
-</script>
-
+  <script type="module" src="js/galeria-firebase.js"></script>
 </body>
 </html>
-
