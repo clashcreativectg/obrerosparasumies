@@ -2,51 +2,598 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Administrador | ICEA</title>
+  <title>Administrador | ICEA - Obreros para Su Mies</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f04a00" />
+  <meta name="description" content="Panel administrativo de ICEA para gestionar galería, multimedia y eventos en tiempo real." />
+  <link rel="shortcut icon" href="./img/ICEA.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Tus estilos (puedes dejar los dos; si hay choques, el segundo manda) -->
-  <link rel="stylesheet" href="css/admin-galeria.css" />
-  <link rel="stylesheet" href="css/admin-multimedia.css" />
-   <link rel="shortcut icon" href="./img/ICEA.png" type="image/x-icon">
+  <style>
+    :root {
+      --primary: #f04a00;
+      --primary-dark: #c73b00;
+      --secondary: #2f4fa8;
+      --secondary-dark: #1f3475;
+      --bg-light: #f6f8fc;
+      --text: #1f1f1f;
+      --muted: #5f6470;
+      --white: #ffffff;
+      --border: #e6eaf2;
+      --success: #15803d;
+      --danger: #c62828;
+      --shadow: 0 16px 38px rgba(25, 40, 79, 0.12);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --container: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Open Sans", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(240,74,0,0.10), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(47,79,168,0.12), transparent 28%),
+        linear-gradient(180deg, #f8faff 0%, #eef3ff 100%);
+    }
+
+    button, input, textarea { font: inherit; }
+    a { text-decoration: none; }
+
+    .container {
+      width: min(94%, var(--container));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(47,79,168,0.08);
+    }
+
+    .topbar__inner {
+      min-height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      width: min(94%, var(--container));
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand__dot {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      font-weight: 800;
+      box-shadow: 0 12px 24px rgba(240,74,0,0.22);
+    }
+
+    .brand__dot::before {
+      content: "✦";
+      font-size: 1.15rem;
+    }
+
+    .brand__title {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--secondary-dark);
+    }
+
+    .brand__sub {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 2px;
+    }
+
+    .topbar__right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .wrap {
+      width: min(94%, var(--container));
+      margin: 28px auto 44px;
+    }
+
+    .hero-admin {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+
+    .hero-card,
+    .summary-card,
+    .panel {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 28px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(47,79,168,0.08);
+      color: var(--secondary-dark);
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    .hero-card h1 {
+      margin: 0 0 12px;
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(2rem, 4vw, 2.9rem);
+      line-height: 1.08;
+      color: var(--secondary-dark);
+    }
+
+    .hero-card p {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .summary-card {
+      padding: 24px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .summary-card h3 {
+      margin: 0 0 4px;
+      font-family: "Montserrat", sans-serif;
+      color: var(--secondary-dark);
+      font-size: 1.15rem;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .summary-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(240,74,0,0.08), rgba(47,79,168,0.08));
+      color: var(--secondary-dark);
+      font-weight: 700;
+    }
+
+    .summary-item span:first-child {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(240,74,0,0.14);
+    }
+
+    .panel {
+      padding: 26px;
+      margin-bottom: 24px;
+    }
+
+    .panel__head {
+      margin-bottom: 20px;
+    }
+
+    .panel__head h2 {
+      margin: 0 0 8px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.55rem;
+      color: var(--secondary-dark);
+    }
+
+    .panel__head p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .panel__head--row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(240,74,0,0.08);
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 0.86rem;
+      margin-bottom: 12px;
+    }
+
+    .upload,
+    .form-grid,
+    .split {
+      display: grid;
+      gap: 18px;
+    }
+
+    .split {
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 24px;
+    }
+
+    .dropzone,
+    .cardbox,
+    .form-card {
+      background: linear-gradient(180deg, rgba(255,255,255,1), rgba(246,248,252,1));
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .dropzone {
+      position: relative;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      min-height: 210px;
+      border: 2px dashed rgba(47,79,168,0.18);
+      padding: 26px;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .dropzone:hover {
+      border-color: rgba(240,74,0,0.28);
+      transform: translateY(-1px);
+    }
+
+    .dropzone input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .dropzone__icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .dropzone__text {
+      color: var(--secondary-dark);
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .dropzone__hint,
+    .hint {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .cardbox,
+    .form-card {
+      padding: 22px;
+    }
+
+    .cardbox__title {
+      margin-bottom: 14px;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      color: var(--secondary-dark);
+      font-size: 1.02rem;
+    }
+
+    .inline,
+    .upload__actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .input {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 12px 16px;
+      background: #fff;
+      outline: none;
+      color: var(--text);
+      transition: .2s ease;
+      resize: vertical;
+    }
+
+    .input:focus {
+      border-color: rgba(47,79,168,0.32);
+      box-shadow: 0 0 0 4px rgba(47,79,168,0.08);
+    }
+
+    .label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--secondary-dark);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .form-grid {
+      grid-template-columns: repeat(2, 1fr);
+      margin-bottom: 18px;
+    }
+
+    .formrow--full {
+      grid-column: 1 / -1;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .chips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(47,79,168,0.08);
+      color: var(--secondary-dark);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: 1px solid rgba(47,79,168,0.08);
+    }
+
+    .chip--live {
+      background: rgba(21,128,61,0.10);
+      color: var(--success);
+      border-color: rgba(21,128,61,0.12);
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn--primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(240,74,0,0.20);
+    }
+
+    .btn--ghost {
+      background: #fff;
+      color: var(--secondary-dark);
+      border: 1px solid var(--border);
+    }
+
+    .status {
+      min-height: 22px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      background: linear-gradient(180deg, rgba(255,255,255,1), rgba(246,248,252,1));
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .empty__icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .empty__title {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      color: var(--secondary-dark);
+      margin-bottom: 6px;
+    }
+
+    .divider {
+      position: relative;
+      text-align: center;
+      margin: 2px 0;
+    }
+
+    .divider::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      border-top: 1px solid var(--border);
+    }
+
+    .divider span {
+      position: relative;
+      background: #fff;
+      padding: 0 12px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      min-width: 260px;
+      max-width: 360px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: .2s ease;
+      z-index: 2000;
+    }
+
+    .toast--show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast--ok { background: linear-gradient(135deg, #15803d, #166534); }
+    .toast--error { background: linear-gradient(135deg, #c62828, #8e1d1d); }
+
+    @media (max-width: 980px) {
+      .hero-admin,
+      .split,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar__inner {
+        padding: 14px 0;
+        min-height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .topbar__right {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .panel,
+      .hero-card,
+      .summary-card,
+      .cardbox,
+      .form-card {
+        padding: 20px;
+      }
+
+      .upload__actions,
+      .inline {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn,
+      .input {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-  <!-- Topbar ÚNICA -->
   <header class="topbar">
     <div class="topbar__inner">
       <div class="brand">
         <span class="brand__dot"></span>
         <div>
-          <div class="brand__title">Panel Administrador</div>
-          <div class="brand__sub">Galería + Multimedia ICEA</div>
+          <div class="brand__title">Administrador ICEA</div>
+          <div class="brand__sub">Galería, multimedia y eventos en tiempo real</div>
         </div>
       </div>
 
-      <button id="logoutBtn" class="btn btn--ghost">Salir</button>
+      <div class="topbar__right">
+        <a href="index.html" class="chip">← Volver al sitio</a>
+        <button id="logoutBtn" class="btn btn--ghost">Salir</button>
+      </div>
     </div>
   </header>
 
   <main class="wrap">
+    <section class="hero-admin">
+      <article class="hero-card">
+        <div class="hero-badge">🔐 Panel administrativo profesional</div>
+        <h1>Gestiona el contenido de ICEA desde un solo lugar</h1>
+        <p>
+          Desde este panel puedes administrar imágenes, videos y eventos con una interfaz más clara, profesional y alineada con la identidad visual del ministerio.
+        </p>
+      </article>
 
-    <!-- =========================
-         PANEL 1: GALERÍA (img + video local)
-    ========================== -->
+      <aside class="summary-card">
+        <h3>Áreas de control</h3>
+        <div class="summary-list">
+          <div class="summary-item"><span>🖼️</span><span>Galería en vivo</span></div>
+          <div class="summary-item"><span>🎬</span><span>Multimedia actualizada</span></div>
+          <div class="summary-item"><span>📅</span><span>Eventos y calendario</span></div>
+        </div>
+      </aside>
+    </section>
+
     <section class="panel">
+      <div class="section-badge">🖼️ Gestión de galería</div>
       <div class="panel__head">
         <h2>Subir a galería</h2>
-        <p>Publica fotos y videos locales (tiempo real).</p>
+        <p>Publica fotos y videos locales que aparecerán en la galería del sitio en tiempo real.</p>
       </div>
 
       <div class="upload">
         <label class="dropzone" for="fileInput">
           <input type="file" id="fileInput" multiple accept="image/*,video/*" />
-          <div class="dropzone__icon">⬆️</div>
-          <div class="dropzone__text">
-            <strong>Haz clic para seleccionar</strong> o arrastra archivos aquí
+          <div>
+            <div class="dropzone__icon">⬆️</div>
+            <div class="dropzone__text"><strong>Haz clic para seleccionar</strong> o arrastra archivos aquí</div>
+            <div class="dropzone__hint">PNG, JPG, WEBP, MP4 • Máximo recomendado: 500MB</div>
           </div>
-          <div class="dropzone__hint">PNG, JPG, WEBP, MP4 • Máx recomendado: 500MB</div>
         </label>
 
         <div class="upload__actions">
@@ -56,11 +603,11 @@
       </div>
     </section>
 
-    <section class="panel panel--flat">
+    <section class="panel">
       <div class="panel__head panel__head--row">
         <div>
-          <h2>Contenido actual (Galería)</h2>
-          <p>Administra lo publicado.</p>
+          <h2>Contenido actual de galería</h2>
+          <p>Administra lo publicado y revisa el contenido cargado en vivo.</p>
         </div>
 
         <div class="chips">
@@ -78,54 +625,47 @@
       </div>
     </section>
 
-
-    <!-- =========================
-         PANEL 2: MULTIMEDIA (YouTube + video local separado)
-         *IDs únicos para no chocar con el panel 1*
-    ========================== -->
     <section class="panel">
+      <div class="section-badge">🎬 Gestión multimedia</div>
       <div class="panel__head">
-        <h2>Subir videos (Multimedia)</h2>
-        <p>Agrega videos desde YouTube o sube un archivo local (tiempo real).</p>
+        <h2>Subir videos</h2>
+        <p>Agrega contenido desde YouTube o sube videos locales para la sección multimedia.</p>
       </div>
 
-      <div class="upload">
-
-        <!-- YouTube -->
-        <div class="formrow">
-          <label class="label">Link de YouTube</label>
+      <div class="split">
+        <div class="cardbox">
+          <div class="cardbox__title">Link de YouTube</div>
           <div class="inline">
-            <input id="youtubeUrl_mm" class="input"
-              placeholder="https://www.youtube.com/watch?v=XXXX o https://youtu.be/XXXX" />
+            <input id="youtubeUrl_mm" class="input" placeholder="https://www.youtube.com/watch?v=XXXX o https://youtu.be/XXXX" />
             <button id="addYoutubeBtn_mm" class="btn btn--primary">Agregar</button>
           </div>
-          <div class="hint">Se guardará el video como embed.</div>
+          <div class="hint">Se guardará el video como contenido embebido.</div>
         </div>
 
-        <div class="divider"><span>o</span></div>
-
-        <!-- Archivo local -->
-        <label class="dropzone" for="videoInput_mm">
-          <input type="file" id="videoInput_mm" accept="video/*" />
-          <div class="dropzone__icon">🎬</div>
-          <div class="dropzone__text">
-            <strong>Haz clic para seleccionar</strong> o arrastra un video aquí
-          </div>
-          <div class="dropzone__hint">MP4 / WEBM recomendado • Máx depende de Cloudinary</div>
-        </label>
-
-        <div class="upload__actions">
-          <button id="uploadVideoBtn_mm" class="btn btn--primary">Subir video</button>
-          <div id="uploadStatus_mm" class="status"></div>
+        <div class="cardbox">
+          <div class="cardbox__title">Video local</div>
+          <label class="dropzone" for="videoInput_mm">
+            <input type="file" id="videoInput_mm" accept="video/*" />
+            <div>
+              <div class="dropzone__icon">🎬</div>
+              <div class="dropzone__text"><strong>Haz clic para seleccionar</strong> o arrastra un video aquí</div>
+              <div class="dropzone__hint">MP4 / WEBM recomendado • Máximo según Cloudinary</div>
+            </div>
+          </label>
         </div>
+      </div>
+
+      <div class="upload__actions">
+        <button id="uploadVideoBtn_mm" class="btn btn--primary">Subir video</button>
+        <div id="uploadStatus_mm" class="status"></div>
       </div>
     </section>
 
-    <section class="panel panel--flat">
+    <section class="panel">
       <div class="panel__head panel__head--row">
         <div>
-          <h2>Videos actuales (Multimedia)</h2>
-          <p>Administra el contenido publicado.</p>
+          <h2>Videos actuales</h2>
+          <p>Administra el contenido publicado en la sección multimedia.</p>
         </div>
 
         <div class="chips">
@@ -143,88 +683,84 @@
       </div>
     </section>
 
-    PANEL 3: EVENTOS (Calendario)
-========================== -->
-<section class="panel">
-  <div class="panel__head">
-    <h2>Administrar eventos</h2>
-    <p>Crea eventos que se verán en la página <b>eventos.html</b> con calendario.</p>
-  </div>
+    <section class="panel">
+      <div class="section-badge">📅 Gestión de eventos</div>
+      <div class="panel__head">
+        <h2>Administrar eventos</h2>
+        <p>Crea eventos que se mostrarán en <b>eventos.html</b> y alimentarán el calendario del sitio.</p>
+      </div>
 
-  <div class="upload">
-    <div class="formrow">
-      <label class="label">Título</label>
-      <input id="evTitle" class="input" placeholder="Ej: Vigilia, Taller, Congreso..." />
-    </div>
+      <div class="form-card">
+        <div class="form-grid">
+          <div class="formrow">
+            <label class="label">Título</label>
+            <input id="evTitle" class="input" placeholder="Ej: Vigilia, Taller, Congreso..." />
+          </div>
 
-    <div class="formrow">
-      <label class="label">Fecha</label>
-      <input id="evDate" class="input" type="date" />
-    </div>
+          <div class="formrow">
+            <label class="label">Fecha</label>
+            <input id="evDate" class="input" type="date" />
+          </div>
 
-    <div class="formrow">
-      <label class="label">Hora</label>
-      <input id="evTime" class="input" placeholder="Ej: 6:30 PM" />
-    </div>
+          <div class="formrow">
+            <label class="label">Hora</label>
+            <input id="evTime" class="input" placeholder="Ej: 6:30 PM" />
+          </div>
 
-    <div class="formrow">
-      <label class="label">Lugar</label>
-      <input id="evPlace" class="input" placeholder="Ej: Auditorio, Parque, Salón 2..." />
-    </div>
+          <div class="formrow">
+            <label class="label">Lugar</label>
+            <input id="evPlace" class="input" placeholder="Ej: Auditorio, Parque, Salón 2..." />
+          </div>
 
-    <div class="formrow">
-      <label class="label">Descripción</label>
-      <textarea id="evDesc" class="input" rows="3" placeholder="Detalles del evento..."></textarea>
-    </div>
+          <div class="formrow formrow--full">
+            <label class="label">Descripción</label>
+            <textarea id="evDesc" class="input" rows="4" placeholder="Detalles del evento..."></textarea>
+          </div>
 
-    <div class="formrow">
-      <label class="label">Link de registro (opcional)</label>
-      <input id="evLink" class="input" placeholder="Ej: https://wa.me/57... o Google Forms" />
-      <div class="hint">Si lo dejas vacío, se usará “#”.</div>
-    </div>
+          <div class="formrow formrow--full">
+            <label class="label">Link de registro (opcional)</label>
+            <input id="evLink" class="input" placeholder="Ej: https://wa.me/57... o Google Forms" />
+            <div class="hint">Si lo dejas vacío, se usará “#”.</div>
+          </div>
+        </div>
 
-    <div class="upload__actions">
-      <button id="evAddBtn" class="btn btn--primary">Guardar evento</button>
-      <button id="evClearBtn" class="btn btn--ghost">Borrar todo</button>
-      <div id="evStatus" class="status"></div>
-    </div>
-  </div>
-</section>
+        <div class="upload__actions">
+          <button id="evAddBtn" class="btn btn--primary">Guardar evento</button>
+          <button id="evClearBtn" class="btn btn--ghost">Borrar todo</button>
+          <div id="evStatus" class="status"></div>
+        </div>
+      </div>
+    </section>
 
-<section class="panel panel--flat">
-  <div class="panel__head panel__head--row">
-    <div>
-      <h2>Eventos actuales</h2>
-      <p>Esto alimenta el calendario de <b>eventos.html</b>.</p>
-    </div>
+    <section class="panel">
+      <div class="panel__head panel__head--row">
+        <div>
+          <h2>Eventos actuales</h2>
+          <p>Esto alimenta el calendario de <b>eventos.html</b>.</p>
+        </div>
 
-    <div class="chips">
-      <span class="chip" id="evCountChip">0 eventos</span>
-      <span class="chip chip--live">● En vivo</span>
-    </div>
-  </div>
+        <div class="chips">
+          <span class="chip" id="evCountChip">0 eventos</span>
+          <span class="chip chip--live">● En vivo</span>
+        </div>
+      </div>
 
-  <div id="events-grid_admin" class="grid">
-    <div class="empty">
-      <div class="empty__icon">📅</div>
-      <div class="empty__title">No hay eventos todavía</div>
-      <div class="empty__text">Crea tu primer evento para verlo aquí.</div>
-    </div>
-  </div>
-</section>
-
+      <div id="events-grid_admin" class="grid">
+        <div class="empty">
+          <div class="empty__icon">📅</div>
+          <div class="empty__title">No hay eventos todavía</div>
+          <div class="empty__text">Crea tu primer evento para verlo aquí.</div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- Toast ÚNICO -->
   <div class="toast" id="toast" aria-hidden="true"></div>
 
-  <!-- Scripts -->
   <script type="module" src="js/admin-galeria.js"></script>
-  <!-- ⚠️ Este lo vamos a ajustar para usar los IDs *_mm -->
   <script type="module" src="js/admin-multimedia.js"></script>
   <script type="module" src="js/admin-eventos.js"></script>
 
-  <!-- Toast helper -->
   <script>
     window.showToast = function (msg, type = "ok") {
       const t = document.getElementById("toast");
@@ -240,5 +776,4 @@
     }
   </script>
 </body>
-
 </html>
