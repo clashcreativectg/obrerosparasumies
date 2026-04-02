@@ -2,24 +2,526 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Panel Administrador | ICEA</title>
+  <title>Panel Administrador | ICEA - Obreros para Su Mies</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/admin-panel.css" />
-</head>
+  <meta name="theme-color" content="#f04a00" />
+  <meta name="description" content="Panel administrativo de ICEA para gestionar galería y multimedia en tiempo real." />
+  <link rel="shortcut icon" href="img/ICEA.png" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #f04a00;
+      --primary-dark: #c73b00;
+      --secondary: #2f4fa8;
+      --secondary-dark: #1f3475;
+      --bg-light: #f6f8fc;
+      --text: #1f1f1f;
+      --muted: #5f6470;
+      --white: #ffffff;
+      --border: #e6eaf2;
+      --success: #15803d;
+      --danger: #c62828;
+      --shadow: 0 16px 38px rgba(25, 40, 79, 0.12);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --container: 1180px;
+    }
 
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Open Sans", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(240,74,0,0.10), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(47,79,168,0.12), transparent 28%),
+        linear-gradient(180deg, #f8faff 0%, #eef3ff 100%);
+    }
+
+    button, input { font: inherit; }
+    a { text-decoration: none; }
+
+    .container {
+      width: min(94%, var(--container));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(47,79,168,0.08);
+    }
+
+    .topbar__inner {
+      min-height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      width: min(94%, var(--container));
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand__dot {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      font-weight: 800;
+      box-shadow: 0 12px 24px rgba(240,74,0,0.22);
+    }
+
+    .brand__dot::before {
+      content: "✦";
+      font-size: 1.15rem;
+    }
+
+    .brand__title {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--secondary-dark);
+    }
+
+    .brand__sub {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 2px;
+    }
+
+    .topbar__right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .wrap {
+      width: min(94%, var(--container));
+      margin: 28px auto 44px;
+    }
+
+    .hero-admin {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+
+    .hero-card,
+    .summary-card,
+    .panel,
+    .cardbox {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 28px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(47,79,168,0.08);
+      color: var(--secondary-dark);
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    .hero-card h1 {
+      margin: 0 0 12px;
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(2rem, 4vw, 2.9rem);
+      line-height: 1.08;
+      color: var(--secondary-dark);
+    }
+
+    .hero-card p {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .summary-card {
+      padding: 24px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .summary-card h3 {
+      margin: 0 0 4px;
+      font-family: "Montserrat", sans-serif;
+      color: var(--secondary-dark);
+      font-size: 1.15rem;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .summary-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(240,74,0,0.08), rgba(47,79,168,0.08));
+      color: var(--secondary-dark);
+      font-weight: 700;
+    }
+
+    .summary-item span:first-child {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(240,74,0,0.14);
+    }
+
+    .tabs {
+      display: inline-flex;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 700;
+      background: transparent;
+      color: var(--secondary-dark);
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .tab--active {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(240,74,0,0.18);
+    }
+
+    .panel {
+      padding: 26px;
+      margin-bottom: 24px;
+    }
+
+    .panel__head {
+      margin-bottom: 20px;
+    }
+
+    .panel__head h2 {
+      margin: 0 0 8px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.55rem;
+      color: var(--secondary-dark);
+    }
+
+    .panel__head p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .panel__head--row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .upload,
+    .split {
+      display: grid;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .split {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .dropzone {
+      position: relative;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      min-height: 210px;
+      border: 2px dashed rgba(47,79,168,0.18);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,1), rgba(246,248,252,1));
+      padding: 26px;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .dropzone:hover {
+      border-color: rgba(240,74,0,0.28);
+      transform: translateY(-1px);
+    }
+
+    .dropzone input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .dropzone__icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .dropzone__text {
+      color: var(--secondary-dark);
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .dropzone__hint,
+    .hint {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .dropzone--small {
+      min-height: 170px;
+    }
+
+    .upload__actions,
+    .row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .input {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 0 16px;
+      background: #fff;
+      outline: none;
+      color: var(--text);
+      transition: .2s ease;
+    }
+
+    .input:focus {
+      border-color: rgba(47,79,168,0.32);
+      box-shadow: 0 0 0 4px rgba(47,79,168,0.08);
+    }
+
+    .cardbox {
+      padding: 22px;
+    }
+
+    .cardbox__title {
+      margin-bottom: 14px;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      color: var(--secondary-dark);
+      font-size: 1.02rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .chips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(47,79,168,0.08);
+      color: var(--secondary-dark);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: 1px solid rgba(47,79,168,0.08);
+    }
+
+    .chip--live {
+      background: rgba(21,128,61,0.10);
+      color: var(--success);
+      border-color: rgba(21,128,61,0.12);
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn--primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(240,74,0,0.20);
+    }
+
+    .btn--ghost {
+      background: #fff;
+      color: var(--secondary-dark);
+      border: 1px solid var(--border);
+    }
+
+    .status {
+      min-height: 22px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      background: linear-gradient(180deg, rgba(255,255,255,1), rgba(246,248,252,1));
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .empty__icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .empty__title {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      color: var(--secondary-dark);
+      margin-bottom: 6px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      min-width: 260px;
+      max-width: 360px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: .2s ease;
+      z-index: 2000;
+    }
+
+    .toast--show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast--ok { background: linear-gradient(135deg, #15803d, #166534); }
+    .toast--error { background: linear-gradient(135deg, #c62828, #8e1d1d); }
+
+    @media (max-width: 980px) {
+      .hero-admin,
+      .split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar__inner {
+        padding: 14px 0;
+        min-height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .topbar__right {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .panel,
+      .hero-card,
+      .summary-card,
+      .cardbox {
+        padding: 20px;
+      }
+
+      .upload__actions,
+      .row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn,
+      .input {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
 <body>
-  <!-- Topbar -->
   <header class="topbar">
     <div class="topbar__inner">
       <div class="brand">
         <span class="brand__dot"></span>
         <div>
-          <div class="brand__title">Panel Administrador</div>
-          <div class="brand__sub">Galería + Multimedia (tiempo real)</div>
+          <div class="brand__title">Panel Administrador ICEA</div>
+          <div class="brand__sub">Galería, multimedia y gestión en tiempo real</div>
         </div>
       </div>
 
       <div class="topbar__right">
+        <a href="index.html" class="chip">← Volver al sitio</a>
         <span class="chip" id="userChip">Cargando usuario…</span>
         <button id="logoutBtn" class="btn btn--ghost">Salir</button>
       </div>
@@ -27,25 +529,44 @@
   </header>
 
   <main class="wrap">
-    <!-- Tabs -->
+    <section class="hero-admin">
+      <article class="hero-card">
+        <div class="hero-badge">🔐 Acceso administrativo seguro</div>
+        <h1>Gestiona el contenido del ministerio de forma profesional</h1>
+        <p>
+          Desde este panel puedes administrar imágenes, videos y recursos en tiempo real, manteniendo actualizado el contenido público del sitio conectado con Firebase.
+        </p>
+      </article>
+
+      <aside class="summary-card">
+        <h3>Accesos rápidos</h3>
+        <div class="summary-list">
+          <div class="summary-item"><span>🖼️</span><span>Subir y organizar galería</span></div>
+          <div class="summary-item"><span>🎬</span><span>Publicar videos y multimedia</span></div>
+          <div class="summary-item"><span>⚡</span><span>Visualización en vivo</span></div>
+        </div>
+      </aside>
+    </section>
+
     <section class="tabs">
       <button class="tab tab--active" data-tab="galeria">🖼️ Galería</button>
       <button class="tab" data-tab="multimedia">📺 Multimedia</button>
     </section>
 
-    <!-- ===== GALERIA ===== -->
     <section class="panel" data-pane="galeria">
       <div class="panel__head">
         <h2>Subir imágenes</h2>
-        <p>Cualquier usuario activo puede subir. Solo admin/líder puede eliminar.</p>
+        <p>Cualquier usuario activo puede subir contenido. Solo administradores o líderes pueden eliminar.</p>
       </div>
 
       <div class="upload">
         <label class="dropzone" for="imageInput">
           <input type="file" id="imageInput" multiple accept="image/*" />
-          <div class="dropzone__icon">⬆️</div>
-          <div class="dropzone__text"><strong>Haz clic</strong> o arrastra imágenes aquí</div>
-          <div class="dropzone__hint">PNG, JPG, WEBP • recomendado: 5MB</div>
+          <div>
+            <div class="dropzone__icon">⬆️</div>
+            <div class="dropzone__text"><strong>Haz clic</strong> o arrastra imágenes aquí</div>
+            <div class="dropzone__hint">PNG, JPG, WEBP • recomendado: máximo 5MB</div>
+          </div>
         </label>
 
         <div class="upload__actions">
@@ -57,7 +578,7 @@
       <div class="panel__head panel__head--row">
         <div>
           <h2>Imágenes actuales</h2>
-          <p>Vista en vivo (Firestore realtime).</p>
+          <p>Contenido sincronizado en tiempo real.</p>
         </div>
         <div class="chips">
           <span class="chip" id="imagesCount">0 imágenes</span>
@@ -69,37 +590,36 @@
         <div class="empty">
           <div class="empty__icon">🖼️</div>
           <div class="empty__title">No hay imágenes todavía</div>
-          <div class="empty__text">Sube tu primera foto para verla aquí.</div>
+          <div class="empty__text">Sube tu primera foto para verla publicada aquí.</div>
         </div>
       </div>
     </section>
 
-    <!-- ===== MULTIMEDIA ===== -->
     <section class="panel" data-pane="multimedia" hidden>
       <div class="panel__head">
-        <h2>Subir videos</h2>
-        <p>Agrega videos con link de YouTube o sube un archivo local (tiempo real).</p>
+        <h2>Subir videos y contenido multimedia</h2>
+        <p>Agrega videos de YouTube o sube archivos locales para mantener actualizada la sección multimedia.</p>
       </div>
 
       <div class="split">
-        <!-- YouTube -->
         <div class="cardbox">
-          <div class="cardbox__title">Link de YouTube</div>
+          <div class="cardbox__title">Agregar enlace de YouTube</div>
           <div class="row">
             <input id="youtubeUrl" class="input" placeholder="Pega aquí cualquier enlace de YouTube" />
             <button id="addYoutubeBtn" class="btn btn--primary">Agregar</button>
           </div>
-          <div class="hint">Se guardará como embed (youtubeId).</div>
+          <div class="hint">Se guardará como video embebido mediante su youtubeId.</div>
         </div>
 
-        <!-- Local video -->
         <div class="cardbox">
-          <div class="cardbox__title">Video local (Cloudinary)</div>
+          <div class="cardbox__title">Subir video local</div>
           <label class="dropzone dropzone--small" for="videoInput">
             <input type="file" id="videoInput" accept="video/*" />
-            <div class="dropzone__icon">🎬</div>
-            <div class="dropzone__text"><strong>Haz clic</strong> o arrastra un video aquí</div>
-            <div class="dropzone__hint">MP4 / WEBM recomendado</div>
+            <div>
+              <div class="dropzone__icon">🎬</div>
+              <div class="dropzone__text"><strong>Haz clic</strong> o arrastra un video aquí</div>
+              <div class="dropzone__hint">MP4 / WEBM recomendado</div>
+            </div>
           </label>
           <div class="upload__actions">
             <button id="uploadVideoBtn" class="btn btn--primary">Subir video</button>
@@ -111,7 +631,7 @@
       <div class="panel__head panel__head--row">
         <div>
           <h2>Videos actuales</h2>
-          <p>Administra contenido publicado.</p>
+          <p>Administra el contenido multimedia publicado.</p>
         </div>
         <div class="chips">
           <span class="chip" id="videosCount">0 videos</span>
@@ -123,17 +643,15 @@
         <div class="empty">
           <div class="empty__icon">📺</div>
           <div class="empty__title">No hay videos todavía</div>
-          <div class="empty__text">Agrega uno de YouTube o sube un archivo.</div>
+          <div class="empty__text">Agrega un enlace de YouTube o sube un archivo local.</div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Toast -->
   <div class="toast" id="toast" aria-hidden="true"></div>
 
   <script>
-    // Tabs UI (solo front)
     document.querySelectorAll(".tab").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".tab").forEach(b => b.classList.remove("tab--active"));
@@ -146,7 +664,6 @@
       });
     });
 
-    // Toast
     window.showToast = function (msg, type = "ok") {
       const t = document.getElementById("toast");
       if (!t) return;
