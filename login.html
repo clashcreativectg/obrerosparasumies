@@ -2,78 +2,383 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Acceso Administrativo | Iglesia</title>
+  <title>Acceso Administrativo | ICEA - Obreros para Su Mies</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f04a00" />
+  <meta name="description" content="Acceso administrativo seguro para gestionar galería, multimedia y eventos de ICEA." />
+  <link rel="shortcut icon" href="img/ICEA.png" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/login.css" />
-  <link rel="shortcut icon" href="/img/ICEA.png" type="image/x-icon">
+  <style>
+    :root {
+      --primary: #f04a00;
+      --primary-dark: #c73b00;
+      --secondary: #2f4fa8;
+      --secondary-dark: #1f3475;
+      --bg-light: #f6f8fc;
+      --text: #1f1f1f;
+      --muted: #5f6470;
+      --white: #ffffff;
+      --border: #e6eaf2;
+      --shadow: 0 20px 45px rgba(25, 40, 79, 0.14);
+      --radius-xl: 30px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Open Sans", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(240,74,0,0.10), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(47,79,168,0.14), transparent 26%),
+        linear-gradient(180deg, #f8faff 0%, #eef3ff 100%);
+      display: grid;
+      place-items: center;
+      padding: 24px 16px;
+      overflow-x: hidden;
+    }
+
+    .bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(10px);
+      opacity: 0.24;
+    }
+
+    .blob--1 {
+      width: 280px;
+      height: 280px;
+      background: rgba(240,74,0,0.30);
+      top: -80px;
+      left: -60px;
+    }
+
+    .blob--2 {
+      width: 340px;
+      height: 340px;
+      background: rgba(47,79,168,0.22);
+      bottom: -110px;
+      right: -80px;
+    }
+
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(47,79,168,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(47,79,168,0.03) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    .auth {
+      position: relative;
+      z-index: 2;
+      width: min(460px, 100%);
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.7);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .auth__card {
+      padding: 34px 30px;
+    }
+
+    .top-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .back-link {
+      color: var(--secondary-dark);
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.94rem;
+    }
+
+    .back-link:hover { color: var(--primary); }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .brand__logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      font-size: 1.3rem;
+      font-weight: 800;
+      box-shadow: 0 12px 24px rgba(240,74,0,0.22);
+    }
+
+    .brand__text strong {
+      display: block;
+      font-family: "Montserrat", sans-serif;
+      font-size: 1rem;
+      color: var(--secondary-dark);
+    }
+
+    .brand__text span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .login-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(47,79,168,0.08);
+      color: var(--secondary-dark);
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-family: "Montserrat", sans-serif;
+      color: var(--secondary-dark);
+      font-size: clamp(1.9rem, 4vw, 2.4rem);
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .quick-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .quick-info div {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 10px;
+      text-align: center;
+      background: #fff;
+      font-size: 0.85rem;
+      color: var(--secondary-dark);
+      font-weight: 700;
+    }
+
+    .field {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      background: #fff;
+      transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+    }
+
+    .field:focus-within {
+      border-color: rgba(47,79,168,0.32);
+      box-shadow: 0 0 0 4px rgba(47,79,168,0.08);
+      transform: translateY(-1px);
+    }
+
+    .field__icon {
+      width: 32px;
+      text-align: center;
+      font-size: 1.05rem;
+    }
+
+    .field input {
+      border: 0;
+      outline: none;
+      width: 100%;
+      font: inherit;
+      color: var(--text);
+      background: transparent;
+    }
+
+    .btn {
+      width: 100%;
+      border: 0;
+      border-radius: 999px;
+      padding: 15px 22px;
+      font-weight: 700;
+      font-size: 0.98rem;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn--primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      box-shadow: 0 12px 24px rgba(240,74,0,0.22);
+      margin-top: 6px;
+    }
+
+    .btn--dark {
+      background: linear-gradient(135deg, #24345d, #1a2747);
+      color: var(--white);
+      margin-top: 12px;
+    }
+
+    .btn--google {
+      background: #fff;
+      color: var(--secondary-dark);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 20px rgba(25,40,79,0.05);
+    }
+
+    .glogo {
+      width: 18px;
+      height: 18px;
+    }
+
+    .forgot-link {
+      display: inline-block;
+      margin: 14px 0 0;
+      color: var(--secondary);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .forgot-link:hover { color: var(--primary); }
+
+    .divider {
+      position: relative;
+      text-align: center;
+      margin: 22px 0;
+    }
+
+    .divider::before {
+      content: "";
+      position: absolute;
+      inset: 50% 0 auto;
+      border-top: 1px solid var(--border);
+    }
+
+    .divider span {
+      position: relative;
+      z-index: 1;
+      background: #fff;
+      padding: 0 14px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    #recaptcha-container {
+      margin-top: 18px;
+    }
+
+    #error,
+    #ok {
+      display: block;
+      margin-top: 16px;
+      font-size: 0.94rem;
+      font-weight: 700;
+      min-height: 22px;
+    }
+
+    #error { color: #c62828; }
+    #ok { color: #1b8f42; }
+
+    .footer {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 14px; }
+      .auth__card { padding: 28px 20px; }
+      .top-actions { flex-direction: column; align-items: flex-start; }
+      .quick-info { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-
 <body>
-
-  <!-- Fondo decorativo -->
   <div class="bg">
     <div class="blob blob--1"></div>
     <div class="blob blob--2"></div>
     <div class="grid-overlay"></div>
   </div>
 
-  <!-- Card -->
   <section class="auth">
-
-    <!-- Lado imagen (solo desktop) -->
-    <aside class="auth__media">
-      <div class="media__overlay"></div>
-      <div class="media__content">
-        <h2>Bienvenido</h2>
-        <p>Acceso seguro para líderes y administradores de la Iglesia.</p>
-
-        <div class="media__stats">
-          <div class="stat">
-            <span class="stat__num">●</span>
-            <span class="stat__text">Galería en tiempo real</span>
-          </div>
-          <div class="stat">
-            <span class="stat__num">●</span>
-            <span class="stat__text">Control de roles y activación</span>
-          </div>
-          <div class="stat">
-            <span class="stat__num">●</span>
-            <span class="stat__text">Acceso con Google / Email</span>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- Form -->
     <div class="auth__card">
+      <div class="top-actions">
+        <a href="index.html" class="back-link">← Volver al sitio</a>
+        <a href="admin-panel.html" class="back-link">Ir al panel</a>
+      </div>
+
       <div class="brand">
         <div class="brand__logo">✦</div>
         <div class="brand__text">
-          <strong>Panel Iglesia</strong>
+          <strong>Panel ICEA</strong>
           <span>Acceso administrativo</span>
         </div>
       </div>
 
+      <div class="login-badge">🔐 Acceso seguro para administradores</div>
       <h1>Iniciar sesión</h1>
-      <p class="subtitle">Ingresa con tu correo o con Google</p>
+      <p class="subtitle">Accede con tu correo o con Google para administrar fotos, videos y eventos.</p>
 
-      <!-- EMAIL -->
+      <div class="quick-info">
+        <div>Galería</div>
+        <div>Multimedia</div>
+        <div>Eventos</div>
+      </div>
+
       <label class="field">
         <span class="field__icon">✉️</span>
-        <input type="email" id="email" placeholder="Correo electrónico" />
+        <input type="email" id="email" placeholder="Correo electrónico" autocomplete="email" />
       </label>
 
-      <!-- PASS -->
       <label class="field">
         <span class="field__icon">🔒</span>
-        <input type="password" id="password" placeholder="Contraseña" />
+        <input type="password" id="password" placeholder="Contraseña" autocomplete="current-password" />
       </label>
 
       <button id="loginBtn" class="btn btn--primary">Ingresar</button>
-      <a href="#" id="forgotPassword" class="forgot-link">
-       ¿Olvidaste tu contraseña?
-      </a>
+      <a href="#" id="forgotPassword" class="forgot-link">¿Olvidaste tu contraseña?</a>
       <button id="registerBtn" class="btn btn--dark">Registrarme</button>
 
       <div class="divider"><span>o</span></div>
@@ -83,17 +388,15 @@
         Continuar con Google
       </button>
 
-      <!-- reCAPTCHA -->
       <div id="recaptcha-container"></div>
 
       <span id="error"></span>
       <span id="ok"></span>
 
       <div class="footer">
-        <small>© <span id="year"></span> ICEA • Seguridad y Control</small>
+        <small>© <span id="year"></span> ICEA • Seguridad y control administrativo</small>
       </div>
     </div>
-
   </section>
 
   <script>
