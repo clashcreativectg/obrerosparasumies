@@ -49,24 +49,37 @@
       margin: 0 auto;
     }
 
-    .section {
-      padding: 90px 0;
-    }
+    .oracion-section {
+  text-align: center;
+  padding: 20px;
+}
 
-    .section-title {
-      font-family: "Montserrat", sans-serif;
-      font-size: clamp(1.9rem, 4vw, 2.7rem);
-      line-height: 1.15;
-      margin: 0 0 16px;
-      color: var(--secondary-dark);
-    }
+.oracion-img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
 
-    .section-text {
-      max-width: 700px;
-      margin: 0 auto;
-      color: var(--muted);
-      font-size: 1.02rem;
-    }
+.texto-biblico {
+  font-size: 16px;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.invitacion {
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.btn-oracion {
+  display: inline-block;
+  background-color: #ff5a00;
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 25px;
+  text-decoration: none;
+}
 
     .topbar {
       position: sticky;
@@ -596,34 +609,80 @@
     <div class="cards">
 
       <article class="card">
-        <div class="card__icon"><i class="fa-solid fa-book-bible"></i></div>
-        <h3>Oración e Intercesión</h3>
-        <p>Así que, ante todo, exhorto a que se hagan rogativas...</p>
-        <p>Únete a nuestra cadena de oración...</p>
 
-        <!-- Imagen -->
-        <img src="img/oracion.jpg" alt="Oración" class="card__image">
-      </article>
+  <img src="img/evangelismo.jpg" alt="Evangelismo y discipulado" class="card__img">
 
-      <article class="card">
-        <div class="card__icon"><i class="fa-solid fa-people-group"></i></div>
-        <h3>Evangelismo y Discipulado</h3>
-        <p>Por tanto, id, y haced discípulos...</p>
-        <p>Lleva el mensaje de salvación...</p>
+  <div class="card__icon">
+    <i class="fa-solid fa-bullhorn"></i>
+  </div>
 
-        <!-- Imagen -->
-        <img src="img/evangelismo.jpg" alt="Evangelismo" class="card__image">
-      </article>
+  <h3>Evangelismo y Discipulado</h3>
 
-      <article class="card">
-        <div class="card__icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
-        <h3>Escuela de Formación Misionera</h3>
-        <p>Lo que has oído de mí...</p>
-        <p>Prepárate para servir a Dios...</p>
+  <p class="texto-biblico">
+    "Por tanto, id, y haced discípulos a todas las naciones, bautizándolos en el nombre del Padre, y del Hijo, y del Espíritu Santo."
+    <br><strong>Mateo 28:19</strong>
+  </p>
 
-        <!-- Imagen -->
-        <img src="img/misionera.jpg" alt="Formación misionera" class="card__image">
-      </article>
+  <p class="descripcion">
+    Lleva el mensaje de salvación a otros y sé parte de la misión. Comparte el amor de Cristo y forma nuevos discípulos en cada lugar.
+  </p>
+</article>
+
+        
+
+     <article class="card">
+
+  <!-- Imagen -->
+  <img src="img/evangelismo.jpg" alt="Evangelismo y discipulado" class="card__img">
+
+  <!-- Icono -->
+  <div class="card__icon">
+    <i class="fa-solid fa-bullhorn"></i>
+  </div>
+
+  <!-- Título -->
+  <h3>Evangelismo y Discipulado</h3>
+
+  <!-- Texto bíblico -->
+  <p class="texto-biblico">
+    "Por tanto, id, y haced discípulos a todas las naciones, bautizándolos en el nombre del Padre, y del Hijo, y del Espíritu Santo."
+    <br><strong>Mateo 28:19</strong>
+  </p>
+
+  <!-- Descripción -->
+  <p class="descripcion">
+    Lleva el mensaje de salvación a otros y sé parte de la misión. Comparte el amor de Cristo y forma nuevos discípulos en cada lugar.
+  </p>
+</article>
+
+     <article class="card">
+
+  <!-- Imagen -->
+  <img src="img/misionera.jpg" alt="Formación misionera" class="card__img">
+
+  <!-- Icono -->
+  <div class="card__icon">
+    <i class="fa-solid fa-hand-holding-heart"></i>
+  </div>
+
+  <!-- Título -->
+  <h3>Escuela de Formación Misionera</h3>
+
+  <!-- Texto bíblico -->
+  <p class="texto-biblico">
+    "Lo que has oído de mí ante muchos testigos, esto encarga a hombres fieles que sean idóneos para enseñar también a otros."
+    <br><strong>2 Timoteo 2:2</strong>
+  </p>
+
+  <!-- Descripción -->
+  <p class="descripcion">
+    Prepárate para servir a Dios con excelencia. Recibe formación bíblica y práctica para cumplir el llamado misionero y discipular a otros.
+  </p>
+
+  <!-- Botón -->
+  <a href="#contacto" class="btn-card">Quiero formarme</a>
+
+</article>
 
     </div>
   </div>
