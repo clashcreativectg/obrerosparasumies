@@ -13,33 +13,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    :root {
-  /* 🔶 Naranja (logo) */
+   :root {
+  /* 🔶 Naranja exacto cruz */
   --primary: #F04A00;
-  --primary-dark: #C73B00;
-  --primary-soft: #FF7A3C;
+  --primary-dark: #D84300;
 
-  /* 🔵 Azul (logo) */
-  --secondary: #2F4FA8;
-  --secondary-dark: #1F3475;
-  --secondary-soft: #6C85D8;
+  /* 🔵 Azul principal (texto/logo) */
+  --secondary: #2E3192;
+  --secondary-dark: #1F2266;
+
+  /* 🔵 Azules del globo (variaciones reales del logo) */
+  --secondary-light: #4F6BD9;
+  --secondary-soft: #A9B8F5;
 
   /* ⚪ Neutros */
-  --bg-light: #F6F8FC;
-  --bg-soft: #F9FAFD;
-  --text: #1F1F1F;
-  --muted: #5F6470;
   --white: #FFFFFF;
-  --border: #E6EAF2;
+  --bg-light: #F5F7FB;
+  --text: #1A1A1A;
+  --muted: #6B6F7A;
+  --border: #E4E7F0;
 
-  /* ✨ Sombras más elegantes */
-  --shadow: 0 10px 30px rgba(31, 52, 117, 0.10);
-
-  --radius-lg: 24px;
-  --radius-md: 16px;
-  --radius-sm: 12px;
-
-  --container: 1120px;
+  /* sombra más acorde al azul del logo */
+  --shadow: 0 12px 30px rgba(46, 49, 146, 0.12);
 }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -146,10 +141,11 @@
     }
 
     .nav__links a {
-      color: var(--secondary-dark);
-      font-weight: 700;
-      font-size: 0.96rem;
-    }
+  color: var(--secondary);
+}
+    .nav__links a:hover {
+  color: var(--primary);
+}
 
     .btn {
       display: inline-flex;
@@ -167,9 +163,9 @@
     .btn:hover { transform: translateY(-2px); }
 
     .btn--primary {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: var(--white);
-  box-shadow: 0 10px 20px rgba(240,74,0,0.25);
+  background: linear-gradient(135deg, #F04A00, #D84300);
+  color: white;
+  box-shadow: 0 10px 25px rgba(240,74,0,0.30);
 }
 
 .btn--primary:hover {
@@ -185,9 +181,9 @@
 
     .hero {
   background:
-    radial-gradient(circle at top left, rgba(240,74,0,0.10), transparent 45%),
-    radial-gradient(circle at top right, rgba(47,79,168,0.15), transparent 45%),
-    linear-gradient(180deg, #ffffff 0%, #f6f8fc 100%);
+    radial-gradient(circle at top left, rgba(240,74,0,0.10), transparent 40%),
+    radial-gradient(circle at top right, rgba(46,49,146,0.15), transparent 40%),
+    linear-gradient(180deg, #ffffff 0%, #f5f7fb 100%);
 }
 
   
@@ -212,10 +208,9 @@
     }
 
      .hero h1 {
-  color: var(--secondary-dark);
-  letter-spacing: -1px;
+  color: var(--secondary);
 }
-
+    
 .hero h1 span {
   color: var(--primary);
 }
@@ -308,28 +303,22 @@ details {
     }
 
     .card {
-  background: var(--white);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 28px;
   box-shadow: var(--shadow);
-  transition: all .3s ease;
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 45px rgba(31, 52, 117, 0.15);
+  box-shadow: 0 18px 40px rgba(46, 49, 146, 0.18);
 }
 
     .card__icon {
   background: linear-gradient(
     135deg,
-    rgba(240,74,0,0.12),
-    rgba(47,79,168,0.14)
+    rgba(240,74,0,0.15),
+    rgba(46,49,146,0.15)
   );
   color: var(--primary);
 }
-
     .card h3 {
       margin: 0 0 10px;
       font-family: "Montserrat", sans-serif;
