@@ -409,3 +409,45 @@ summary{
   .section{padding:64px 0;}
   .card__img{height:170px;}
 }
+
+/* =========================
+   TEXTOS EN CURSIVA (MEJORADOS)
+========================= */
+
+/* Versículos */
+.texto-biblico {
+  font-style: italic;
+  color: var(--primary-dark);
+  line-height: 1.6;
+  border-left: 4px solid var(--primary);
+  padding-left: 12px;
+}
+
+/* Versículo del hero */
+.versiculo {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* Frases importantes (hero) */
+.hero p {
+  font-style: italic;
+}
+
+/* Lema o frase principal */
+.hero h1 span {
+  font-style: italic;
+}
+
+/* Testimonios */
+.testimonial p {
+  font-style: italic;
+}
+
+/* Descripciones suaves */
+.descripcion {
+  font-style: italic;
+  opacity: 0.9;
+}
