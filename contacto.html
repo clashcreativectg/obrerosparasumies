@@ -4,185 +4,718 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contacto | ICEA - Obreros para Su Mies</title>
-  <meta name="theme-color" content="#f04a00" />
+  <meta name="theme-color" content="#08111f" />
   <link rel="shortcut icon" href="img/ICEA.png" type="image/x-icon" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    :root {
-      --primary: #f04a00;
-      --secondary: #2f4fa8;
-      --secondary-dark: #1f3475;
-      --bg: #f6f8fc;
-      --text: #1f1f1f;
-      --white: #ffffff;
-      --border: #e6eaf2;
+    :root{
+      --primary:#f04a00;
+      --primary-2:#ff7a1a;
+      --gold:#ffd36a;
+      --blue:#2f4fa8;
+      --blue-2:#55a7ff;
+      --dark:#08111f;
+      --dark-2:#0e1d36;
+      --text:#f7fbff;
+      --muted:rgba(247,251,255,.74);
+      --glass:rgba(255,255,255,.105);
+      --glass-2:rgba(255,255,255,.06);
+      --border:rgba(255,255,255,.18);
+      --shadow:0 28px 95px rgba(0,0,0,.36);
+      --radius:28px;
+      --container:1120px;
     }
 
-    body {
-      margin: 0;
-      font-family: "Open Sans", sans-serif;
-      background: var(--white);
-      color: var(--text);
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:"Open Sans",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 18% 8%, rgba(240,74,0,.34), transparent 31%),
+        radial-gradient(circle at 88% 18%, rgba(255,211,106,.22), transparent 28%),
+        radial-gradient(circle at 50% 100%, rgba(47,79,168,.28), transparent 34%),
+        linear-gradient(135deg,#08111f 0%,#0f2444 48%,#150b07 100%);
+      overflow-x:hidden;
     }
 
-    .container {
-      width: 92%;
-      max-width: 1100px;
-      margin: auto;
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    .container{width:min(92%,var(--container));margin:auto}
+
+    #three-world{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:-4;
+      pointer-events:none;
+    }
+    .three-overlay{
+      position:fixed;
+      inset:0;
+      z-index:-3;
+      pointer-events:none;
+      background:
+        linear-gradient(180deg, rgba(8,17,31,.22), rgba(8,17,31,.88)),
+        radial-gradient(circle at 50% 0%, rgba(255,211,106,.16), transparent 44%);
+    }
+    .noise{
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      pointer-events:none;
+      opacity:.10;
+      background-image:
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,.28) 0 1px, transparent 1px);
+      background-size:28px 28px;
+      mask-image:linear-gradient(180deg, transparent, #000 15%, #000 80%, transparent);
+    }
+    .scroll-progress{
+      position:fixed;
+      top:0;
+      left:0;
+      height:4px;
+      width:100%;
+      z-index:3000;
+      background:rgba(255,255,255,.08);
+    }
+    .scroll-progress span{
+      display:block;
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg,var(--primary),var(--gold),var(--blue-2));
+      box-shadow:0 0 20px rgba(255,211,106,.6);
+    }
+    .cursor-glow{
+      position:fixed;
+      width:360px;
+      height:360px;
+      border-radius:50%;
+      pointer-events:none;
+      z-index:-1;
+      transform:translate(-50%,-50%);
+      background:radial-gradient(circle, rgba(255,211,106,.16), rgba(240,74,0,.08) 38%, transparent 67%);
+      filter:blur(4px);
+      opacity:.85;
     }
 
-    /* NAV */
-    .topbar {
-      background: #fff;
-      border-bottom: 1px solid var(--border);
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(8,17,31,.68);
+      backdrop-filter:blur(22px);
+      border-bottom:1px solid rgba(255,255,255,.12);
+      box-shadow:0 14px 48px rgba(0,0,0,.22);
+    }
+    .nav{
+      min-height:84px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:24px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      color:#fff;
+    }
+    .brand__logo{
+      width:60px;
+      height:60px;
+      object-fit:contain;
+      border-radius:18px;
+      padding:5px;
+      background:rgba(255,255,255,.94);
+      box-shadow:0 14px 35px rgba(255,211,106,.18);
+    }
+    .brand__title{
+      margin:0;
+      font-family:"Montserrat",sans-serif;
+      font-weight:900;
+      line-height:1.1;
+      letter-spacing:.01em;
+    }
+    .brand__subtitle{
+      display:block;
+      color:var(--muted);
+      font-size:.85rem;
+      margin-top:3px;
+      font-weight:700;
+    }
+    .nav__links{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav__links a{
+      padding:10px 13px;
+      border-radius:999px;
+      color:rgba(255,255,255,.82);
+      font-weight:800;
+      font-size:.94rem;
+      transition:.28s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .nav__links a:hover,
+    .nav__links a.active{
+      color:#fff;
+      background:rgba(255,255,255,.10);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
+      transform:translateY(-2px);
     }
 
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 0;
+    .btn{
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      gap:10px;
+      border:0;
+      border-radius:999px;
+      padding:13px 22px!important;
+      font-family:"Montserrat",sans-serif;
+      font-weight:900!important;
+      cursor:pointer;
+      transition:transform .3s ease, box-shadow .3s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .btn--primary{
+      color:#fff!important;
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));
+      box-shadow:0 18px 42px rgba(240,74,0,.34);
+    }
+    .btn::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(105deg, transparent 20%, rgba(255,255,255,.45), transparent 64%);
+      transform:translateX(-120%);
+    }
+    .btn:hover{
+      transform:translateY(-4px) scale(1.02);
+      box-shadow:0 24px 58px rgba(240,74,0,.46);
+    }
+    .btn:hover::before{animation:shine .85s ease forwards}
+    @keyframes shine{to{transform:translateX(120%)}}
+
+    .hero{
+      min-height:52vh;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:96px 0 74px;
+      position:relative;
+      isolation:isolate;
+      perspective:1200px;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:52px 5% 26px;
+      border-radius:44px;
+      border:1px solid rgba(255,255,255,.14);
+      background:linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.035));
+      box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.18);
+      transform:rotateX(5deg) rotateY(-2deg);
+      z-index:-1;
+    }
+    .hero__eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 18px 45px rgba(0,0,0,.18);
+      color:#fff;
+      font-weight:900;
+      margin-bottom:18px;
+    }
+    .hero h1{
+      margin:0 0 18px;
+      font-family:"Montserrat",sans-serif;
+      font-size:clamp(2.7rem,7vw,5.8rem);
+      line-height:.96;
+      letter-spacing:-.06em;
+      text-shadow:0 20px 55px rgba(0,0,0,.36);
+    }
+    .hero h1 span{
+      color:var(--gold);
+      text-shadow:0 0 32px rgba(255,211,106,.48);
+      animation:goldPulse 3.2s ease-in-out infinite;
+    }
+    @keyframes goldPulse{
+      0%,100%{filter:drop-shadow(0 0 0 rgba(255,211,106,.15))}
+      50%{filter:drop-shadow(0 0 18px rgba(255,211,106,.72))}
+    }
+    .hero p{
+      max-width:760px;
+      margin:0 auto;
+      color:var(--muted);
+      font-size:1.13rem;
+      font-weight:600;
     }
 
-    .logo {
-      font-weight: 800;
-      color: var(--secondary-dark);
-      font-family: "Montserrat";
+    .contact-wrap{
+      padding:80px 0 96px;
+      position:relative;
+    }
+    .contact{
+      display:grid;
+      grid-template-columns:.92fr 1.08fr;
+      gap:26px;
+      align-items:stretch;
+      perspective:1100px;
+    }
+    .box{
+      position:relative;
+      overflow:hidden;
+      border-radius:var(--radius);
+      background:linear-gradient(145deg, var(--glass), var(--glass-2));
+      border:1px solid var(--border);
+      box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.18);
+      backdrop-filter:blur(20px);
+      padding:28px;
+      transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+    }
+    .box::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:linear-gradient(115deg, transparent 20%, rgba(255,255,255,.26), transparent 62%);
+      transform:translateX(-120%);
+      opacity:0;
+      pointer-events:none;
+    }
+    .box:hover{
+      border-color:rgba(255,211,106,.46);
+      box-shadow:0 34px 100px rgba(0,0,0,.42), 0 0 42px rgba(240,74,0,.14), inset 0 1px 0 rgba(255,255,255,.22);
+    }
+    .box:hover::after{
+      opacity:1;
+      animation:shine 1.1s ease forwards;
+    }
+    .box h2{
+      margin:0 0 18px;
+      font-family:"Montserrat",sans-serif;
+      font-size:1.6rem;
+      color:#fff;
+    }
+    .info{
+      display:flex;
+      align-items:flex-start;
+      gap:13px;
+      margin:16px 0;
+      color:var(--muted);
+      font-weight:700;
+    }
+    .info i{
+      width:44px;
+      height:44px;
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      border-radius:15px;
+      color:#fff;
+      background:linear-gradient(135deg,var(--primary),var(--gold));
+      box-shadow:0 15px 35px rgba(240,74,0,.22);
+    }
+    .contact-note{
+      margin-top:24px;
+      padding:18px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.13);
+      background:rgba(255,255,255,.07);
+      color:rgba(255,255,255,.82);
+      font-weight:700;
+    }
+    .form-grid{display:grid;gap:14px}
+    input, textarea{
+      width:100%;
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:18px;
+      background:rgba(255,255,255,.10);
+      color:#fff;
+      padding:15px 16px;
+      outline:none;
+      font:inherit;
+      transition:.25s ease;
+    }
+    textarea{min-height:150px;resize:vertical}
+    input::placeholder, textarea::placeholder{color:rgba(255,255,255,.54)}
+    input:focus, textarea:focus{
+      border-color:rgba(255,211,106,.52);
+      box-shadow:0 0 0 5px rgba(255,211,106,.08), 0 16px 35px rgba(0,0,0,.18);
+      transform:translateY(-2px);
+      background:rgba(255,255,255,.14);
+    }
+    button{
+      width:100%;
+      border:0;
+      margin-top:4px;
+      border-radius:999px;
+      padding:16px 22px;
+      color:#fff;
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));
+      font-family:"Montserrat",sans-serif;
+      font-weight:900;
+      font-size:1rem;
+      cursor:pointer;
+      box-shadow:0 18px 42px rgba(240,74,0,.32);
+      transition:.3s ease;
+    }
+    button:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(240,74,0,.44)}
+
+    .map-section{
+      width:min(92%,var(--container));
+      margin:0 auto 92px;
+      border-radius:var(--radius);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow:var(--shadow);
+      background:rgba(255,255,255,.08);
+      backdrop-filter:blur(18px);
+    }
+    .map-section iframe{
+      display:block;
+      width:100%;
+      height:330px;
+      border:0;
+      filter:saturate(.9) contrast(1.08) brightness(.82);
+      opacity:.88;
+    }
+    .map-caption{
+      padding:18px 22px;
+      color:var(--muted);
+      font-weight:800;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .map-caption strong{color:#fff;font-family:"Montserrat",sans-serif}
+
+    footer{
+      background:rgba(8,17,31,.72);
+      backdrop-filter:blur(18px);
+      color:rgba(255,255,255,.78);
+      text-align:center;
+      padding:26px 18px;
+      border-top:1px solid rgba(255,255,255,.12);
     }
 
-    .nav a {
-      margin-left: 20px;
-      text-decoration: none;
-      font-weight: 600;
-      color: var(--secondary-dark);
+    .reveal-3d{
+      opacity:0;
+      transform:translateY(42px) rotateX(8deg) scale(.965);
+      transition:opacity .8s ease, transform .85s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal-3d.is-visible{
+      opacity:1;
+      transform:translateY(0) rotateX(0) scale(1);
     }
 
-    .nav a.active {
-      color: var(--primary);
+    @media(max-width:900px){
+      .nav{flex-direction:column;padding:16px 0}
+      .nav__links{justify-content:center}
+      .contact{grid-template-columns:1fr}
+      .hero::before{inset:42px 12px 18px;transform:none;border-radius:30px}
     }
-
-    .btn {
-      background: var(--primary);
-      color: white;
-      padding: 10px 18px;
-      border-radius: 30px;
+    @media(max-width:640px){
+      .cursor-glow{display:none}
+      .hero{padding:78px 0 58px;min-height:auto}
+      .contact-wrap{padding:62px 0 72px}
+      .box{padding:22px}
+      .btn{width:100%}
+      .nav__links a{font-size:.88rem;padding:8px 10px}
+      #three-world{opacity:.58}
     }
-
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, #1f3475, #2f4fa8);
-      color: white;
-      text-align: center;
-      padding: 80px 20px;
-    }
-
-    /* CONTACT */
-    .contact {
-      padding: 60px 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-    }
-
-    .box {
-      background: white;
-      padding: 25px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-    }
-
-    .info i {
-      color: var(--primary);
-      margin-right: 10px;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-    }
-
-    button {
-      margin-top: 15px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 30px;
-      cursor: pointer;
-    }
-
-    iframe {
-      width: 100%;
-      height: 300px;
-      border: 0;
-    }
-
-    footer {
-      background: #101b3e;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-    }
-
-    @media(max-width:768px){
-      .contact{
-        grid-template-columns: 1fr;
-      }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+      #three-world{display:none}
     }
   </style>
 </head>
 <body>
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+  <canvas id="three-world" aria-hidden="true"></canvas>
+  <div class="three-overlay" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
-<header class="topbar">
-  <nav class="nav container">
-    <div class="logo">ICEA - Obreros</div>
-    <div>
-      <a href="index.html">Inicio</a>
-      <a href="nosotros.html">Nosotros</a>
-      <a href="galeria.html">Galería</a>
-      <a href="contacto.html" class="active">Contacto</a>
-    </div>
-  </nav>
-</header>
+  <header class="topbar">
+    <nav class="nav container">
+      <a href="index.html" class="brand">
+        <img src="img/ICEA.png" alt="Logo de ICEA" class="brand__logo" />
+        <div>
+          <p class="brand__title">ICEA - Obreros para Su Mies</p>
+          <span class="brand__subtitle">Formación bíblica y ministerial</span>
+        </div>
+      </a>
+      <div class="nav__links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Historia</a>
+        <a href="galeria.html">Galería</a>
+        <a href="multimedia.html">Multimedia</a>
+        <a href="contacto.html" class="active">Contacto</a>
+        <a href="contacto.html" class="btn btn--primary">Solicitar información</a>
+      </div>
+    </nav>
+  </header>
 
-<section class="hero">
-  <h1>Contáctanos</h1>
-  <p>Estamos para ayudarte, orientarte y acompañarte</p>
-</section>
+  <main>
+    <section class="hero reveal-3d">
+      <div class="container">
+        <div class="hero__eyebrow">
+          <i class="fa-solid fa-paper-plane"></i>
+          Estamos listos para orientarte
+        </div>
+        <h1>Conecta con <span>ICEA</span></h1>
+        <p>Estamos para ayudarte, orientarte y acompañarte en tu proceso de formación bíblica, servicio y crecimiento espiritual.</p>
+      </div>
+    </section>
 
-<section class="contact container">
+    <section class="contact-wrap">
+      <div class="contact container">
+        <div class="box tilt-card reveal-3d">
+          <h2>Información de contacto</h2>
+          <p class="info"><i class="fa-solid fa-location-dot"></i><span>Barrio Obrero, Colombia</span></p>
+          <p class="info"><i class="fa-solid fa-phone"></i><span>+57 300 000 0000</span></p>
+          <p class="info"><i class="fa-solid fa-envelope"></i><span>iceaobreros@gmail.com</span></p>
 
-  <div class="box">
-    <h2>Información</h2>
-    <p class="info"><i class="fa-solid fa-location-dot"></i>Barrio Obrero, Colombia</p>
-    <p class="info"><i class="fa-solid fa-phone"></i>+57 300 000 0000</p>
-    <p class="info"><i class="fa-solid fa-envelope"></i>iceaobreros@gmail.com</p>
-  </div>
+          <div class="contact-note">
+            También puedes escribirnos para conocer horarios, programas, actividades y procesos de formación.
+          </div>
+        </div>
 
-  <form class="box">
-    <h2>Envíanos un mensaje</h2>
-    <input type="text" placeholder="Nombre" required>
-    <input type="email" placeholder="Correo" required>
-    <textarea placeholder="Mensaje" required></textarea>
-    <button>Enviar</button>
-  </form>
+        <form class="box tilt-card reveal-3d" action="mailto:iceaobreros@gmail.com" method="post" enctype="text/plain">
+          <h2>Envíanos un mensaje</h2>
+          <div class="form-grid">
+            <input type="text" name="nombre" placeholder="Nombre completo" required>
+            <input type="email" name="correo" placeholder="Correo electrónico" required>
+            <textarea name="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
+            <button type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar mensaje</button>
+          </div>
+        </form>
+      </div>
+    </section>
 
-</section>
+    <section class="map-section reveal-3d">
+      <iframe src="https://www.google.com/maps" title="Ubicación ICEA"></iframe>
+      <div class="map-caption">
+        <strong>Ubicación y orientación</strong>
+        <span>Confirma dirección y horarios antes de visitarnos.</span>
+      </div>
+    </section>
+  </main>
 
-<section>
-  <iframe src="https://www.google.com/maps"></iframe>
-</section>
+  <footer>
+    <p>&copy; 2025 ICEA - Obreros para Su Mies. Todos los derechos reservados.</p>
+  </footer>
 
-<footer>
-  <p>&copy; 2025 ICEA - Obreros para Su Mies</p>
-</footer>
+  <script type="module">
+    import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js";
 
+    const progress = document.getElementById("scrollProgress");
+    const glow = document.getElementById("cursorGlow");
+
+    window.addEventListener("scroll", () => {
+      const h = document.documentElement;
+      const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+      progress.style.width = `${Math.max(0, Math.min(100, pct))}%`;
+    }, { passive:true });
+
+    window.addEventListener("pointermove", (e) => {
+      if (glow) {
+        glow.style.left = `${e.clientX}px`;
+        glow.style.top = `${e.clientY}px`;
+      }
+    }, { passive:true });
+
+    const revealItems = document.querySelectorAll(".reveal-3d");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold:.16 });
+    revealItems.forEach((el, i) => {
+      el.style.transitionDelay = `${Math.min(i * 90, 360)}ms`;
+      observer.observe(el);
+    });
+
+    document.querySelectorAll(".tilt-card").forEach((card) => {
+      card.addEventListener("mousemove", (event) => {
+        const rect = card.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        const rotateY = ((x / rect.width) - .5) * 10;
+        const rotateX = -((y / rect.height) - .5) * 10;
+        card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-7px)`;
+      });
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "";
+      });
+    });
+
+    const canvas = document.querySelector("#three-world");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (canvas && !reduceMotion) {
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x08111f, 0.036);
+
+      const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, .1, 130);
+      camera.position.set(0, 0, 18);
+
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      const mouse = new THREE.Vector2();
+      const target = new THREE.Vector2();
+      const clock = new THREE.Clock();
+
+      const ambient = new THREE.AmbientLight(0xffffff, .68);
+      scene.add(ambient);
+
+      const goldLight = new THREE.PointLight(0xffd36a, 22, 44);
+      goldLight.position.set(4, 5, 8);
+      scene.add(goldLight);
+
+      const blueLight = new THREE.PointLight(0x55a7ff, 13, 40);
+      blueLight.position.set(-6, -2, 7);
+      scene.add(blueLight);
+
+      const group = new THREE.Group();
+      scene.add(group);
+
+      const spriteCanvas = document.createElement("canvas");
+      spriteCanvas.width = spriteCanvas.height = 128;
+      const ctx = spriteCanvas.getContext("2d");
+      const gradient = ctx.createRadialGradient(64,64,0,64,64,64);
+      gradient.addColorStop(0,"rgba(255,211,106,1)");
+      gradient.addColorStop(.34,"rgba(240,74,0,.78)");
+      gradient.addColorStop(1,"rgba(240,74,0,0)");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0,0,128,128);
+      const particleTexture = new THREE.CanvasTexture(spriteCanvas);
+
+      const count = window.innerWidth < 768 ? 520 : 1150;
+      const positions = new Float32Array(count * 3);
+      const colors = new Float32Array(count * 3);
+      const c1 = new THREE.Color("#ffd36a");
+      const c2 = new THREE.Color("#f04a00");
+      const c3 = new THREE.Color("#55a7ff");
+
+      for(let i=0;i<count;i++){
+        const i3 = i*3;
+        const angle = i * .12;
+        const radius = 5 + Math.random() * 31;
+        positions[i3] = Math.cos(angle) * radius * (.18 + Math.random() * .14);
+        positions[i3+1] = (Math.random() - .5) * 22;
+        positions[i3+2] = Math.sin(angle) * radius * .52 - Math.random() * 38;
+
+        const mixed = c1.clone().lerp(i % 4 === 0 ? c3 : c2, Math.random() * .6);
+        colors[i3] = mixed.r; colors[i3+1] = mixed.g; colors[i3+2] = mixed.b;
+      }
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+
+      const material = new THREE.PointsMaterial({
+        size:.2,
+        map:particleTexture,
+        transparent:true,
+        opacity:.86,
+        vertexColors:true,
+        depthWrite:false,
+        blending:THREE.AdditiveBlending
+      });
+
+      const particles = new THREE.Points(geometry, material);
+      scene.add(particles);
+
+      const matOrange = new THREE.MeshStandardMaterial({
+        color:0xf04a00,
+        roughness:.25,
+        metalness:.42,
+        emissive:0x4d1700,
+        emissiveIntensity:.38
+      });
+      const matGold = new THREE.MeshStandardMaterial({
+        color:0xffd36a,
+        roughness:.18,
+        metalness:.52,
+        emissive:0x403000,
+        emissiveIntensity:.45
+      });
+
+      const torus = new THREE.Mesh(new THREE.TorusKnotGeometry(1.35,.16,150,18), matOrange);
+      torus.position.set(6.1,2.3,-5.7);
+      group.add(torus);
+
+      const ringA = new THREE.Mesh(new THREE.TorusGeometry(2.8,.035,18,150), matGold);
+      ringA.position.set(-5.6,-1.8,-7.5);
+      ringA.rotation.set(1.1,.15,.2);
+      group.add(ringA);
+
+      const ringB = new THREE.Mesh(new THREE.TorusGeometry(1.8,.028,18,130), matGold);
+      ringB.position.set(0,3.4,-10);
+      ringB.rotation.set(.5,.8,.15);
+      group.add(ringB);
+
+      window.addEventListener("mousemove", (e) => {
+        target.x = (e.clientX / window.innerWidth - .5) * 2;
+        target.y = (e.clientY / window.innerHeight - .5) * 2;
+      }, { passive:true });
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      function tick(){
+        const elapsed = clock.getElapsedTime();
+        mouse.lerp(target, .055);
+
+        particles.rotation.y = elapsed * .035 + mouse.x * .11;
+        particles.rotation.x = -mouse.y * .06;
+
+        group.rotation.y = Math.sin(elapsed * .32) * .18 + mouse.x * .22;
+        group.rotation.x = Math.cos(elapsed * .25) * .08 - mouse.y * .12;
+
+        torus.rotation.x += .006;
+        torus.rotation.y += .009;
+        ringA.rotation.z += .004;
+        ringB.rotation.x += .003;
+
+        camera.position.x += (mouse.x * 1.05 - camera.position.x) * .035;
+        camera.position.y += (-mouse.y * .72 - camera.position.y) * .035;
+        camera.lookAt(0,0,-4);
+
+        renderer.render(scene,camera);
+        requestAnimationFrame(tick);
+      }
+      tick();
+    }
+  </script>
 </body>
 </html>
