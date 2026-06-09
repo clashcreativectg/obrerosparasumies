@@ -439,9 +439,203 @@
     }
     @media(max-width:480px){.grid,#admin-grid,#imagesGrid,#videosGrid,#media-grid_mm,#events-grid_admin{grid-template-columns:1fr;}.card__media{height:240px;}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}#admin-three-world{display:none;}}
+    /* ===========================
+   SIDEBAR ICEA
+=========================== */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:260px;
+    height:100vh;
+    z-index:9999;
+
+    background:rgba(14,18,33,.95);
+    backdrop-filter:blur(20px);
+
+    border-right:1px solid rgba(255,255,255,.08);
+
+    display:flex;
+    flex-direction:column;
+}
+
+.sidebar-header{
+    padding:24px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.sidebar-logo{
+    width:52px;
+    height:52px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:16px;
+
+    background:linear-gradient(
+        135deg,
+        #ff7b00,
+        #ffb347
+    );
+
+    font-size:22px;
+    font-weight:bold;
+    color:#fff;
+}
+
+.sidebar-header h3{
+    color:#fff;
+    margin:0;
+    font-size:1rem;
+}
+
+.sidebar-header small{
+    color:#9aa3b2;
+}
+
+.sidebar-menu{
+    padding:20px 14px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.sidebar-menu a{
+    text-decoration:none;
+    color:#d7dbe7;
+
+    padding:14px 18px;
+    border-radius:14px;
+
+    transition:.3s;
+}
+
+.sidebar-menu a:hover{
+    background:rgba(255,255,255,.08);
+    color:white;
+}
+
+.sidebar-menu a.active{
+    background:linear-gradient(
+        135deg,
+        #ff7b00,
+        #ff9933
+    );
+
+    color:white;
+}
+
+.sidebar-footer{
+    margin-top:auto;
+    padding:20px;
+}
+
+.sidebar-footer button{
+    width:100%;
+    border:none;
+    border-radius:14px;
+    padding:14px;
+
+    background:#ff7b00;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* MOVER CONTENIDO */
+
+.topbar{
+    margin-left:260px !important;
+}
+
+main,
+.container,
+.wrap{
+    margin-left:260px !important;
+    width:calc(100% - 260px);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .sidebar{
+        width:80px;
+    }
+
+    .sidebar-header h3,
+    .sidebar-header small{
+        display:none;
+    }
+
+    .sidebar-menu a{
+        text-align:center;
+        padding:14px 8px;
+    }
+
+    .topbar,
+    main,
+    .container,
+    .wrap{
+        margin-left:80px !important;
+        width:calc(100% - 80px);
+    }
+}
   </style>
 </head>
 <body>
+  <!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="sidebar-header">
+        <div class="sidebar-logo">
+            ✦
+        </div>
+
+        <div>
+            <h3>ICEA Admin</h3>
+            <small>Panel de Control</small>
+        </div>
+    </div>
+
+    <nav class="sidebar-menu">
+
+        <a href="#dashboard" class="active">
+            🏠 Dashboard
+        </a>
+
+        <a href="#galeria">
+            🖼️ Galería
+        </a>
+
+        <a href="#multimedia">
+            🎥 Multimedia
+        </a>
+
+        <a href="#eventos">
+            📅 Eventos
+        </a>
+
+        <a href="#configuracion">
+            ⚙️ Configuración
+        </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+        <button onclick="location.href='index.html'">
+            🌐 Ver sitio
+        </button>
+    </div>
+
+</aside>
   <canvas id="admin-three-world" aria-hidden="true"></canvas>
   <div class="admin-three-overlay" aria-hidden="true"></div>
   <div class="admin-noise" aria-hidden="true"></div>
