@@ -267,6 +267,12 @@
       border:1px solid rgba(255,255,255,.13);
       color:#fff;
       font-weight:800;
+      cursor:pointer;
+      transition: all 0.25s ease;
+    }
+    .summary-item:hover{
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateX(3px);
     }
     .summary-item span:first-child{
       width:40px;height:40px;border-radius:15px;display:grid;place-items:center;
@@ -439,166 +445,190 @@
     }
     @media(max-width:480px){.grid,#admin-grid,#imagesGrid,#videosGrid,#media-grid_mm,#events-grid_admin{grid-template-columns:1fr;}.card__media{height:240px;}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}#admin-three-world{display:none;}}
-    /* ===========================
-   SIDEBAR ICEA
-=========================== */
 
-.sidebar{
-    position:fixed;
-    left:0;
-    top:0;
-    width:260px;
-    height:100vh;
-    z-index:9999;
-
-    background:rgba(14,18,33,.95);
-    backdrop-filter:blur(20px);
-
-    border-right:1px solid rgba(255,255,255,.08);
-
-    display:flex;
-    flex-direction:column;
-}
-
-.sidebar-header{
-    padding:24px;
-    display:flex;
-    align-items:center;
-    gap:14px;
-
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.sidebar-logo{
-    width:52px;
-    height:52px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:16px;
-
-    background:linear-gradient(
-        135deg,
-        #ff7b00,
-        #ffb347
-    );
-
-    font-size:22px;
-    font-weight:bold;
-    color:#fff;
-}
-
-.sidebar-header h3{
-    color:#fff;
-    margin:0;
-    font-size:1rem;
-}
-
-.sidebar-header small{
-    color:#9aa3b2;
-}
-
-.sidebar-menu{
-    padding:20px 14px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.sidebar-menu a{
-    text-decoration:none;
-    color:#d7dbe7;
-
-    padding:14px 18px;
-    border-radius:14px;
-
-    transition:.3s;
-}
-
-.sidebar-menu a:hover{
-    background:rgba(255,255,255,.08);
-    color:white;
-}
-
-.sidebar-menu a.active{
-    background:linear-gradient(
-        135deg,
-        #ff7b00,
-        #ff9933
-    );
-
-    color:white;
-}
-
-.sidebar-footer{
-    margin-top:auto;
-    padding:20px;
-}
-
-.sidebar-footer button{
-    width:100%;
-    border:none;
-    border-radius:14px;
-    padding:14px;
-
-    background:#ff7b00;
-    color:white;
-    font-weight:600;
-    cursor:pointer;
-}
-
-/* MOVER CONTENIDO */
-
-.topbar{
-    margin-left:260px !important;
-}
-
-main,
-.container,
-.wrap{
-    margin-left:260px !important;
-    width:calc(100% - 260px);
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-
+    /* ==========================================================================
+       SIDEBAR ICEA - PREMIUM & INTERACTIVO
+       ========================================================================== */
     .sidebar{
-        width:80px;
+        position:fixed;
+        left:0;
+        top:0;
+        width:270px;
+        height:100vh;
+        z-index:2000;
+        background:linear-gradient(180deg, rgba(10, 15, 30, 0.96) 0%, rgba(5, 9, 20, 0.98) 100%);
+        backdrop-filter:blur(20px);
+        -webkit-backdrop-filter:blur(20px);
+        border-right:1px solid rgba(255, 255, 255, 0.07);
+        display:flex;
+        flex-direction:column;
+        box-sizing:border-box;
+        box-shadow:10px 0 40px rgba(0, 0, 0, 0.3);
     }
 
-    .sidebar-header h3,
+    .sidebar-header{
+        padding:30px 24px;
+        display:flex;
+        align-items:center;
+        gap:14px;
+        border-bottom:1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .sidebar-logo{
+        width:46px;
+        height:46px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:14px;
+        background:linear-gradient(135deg, var(--primary), var(--gold));
+        font-size:20px;
+        font-weight:bold;
+        color:#050914;
+        box-shadow:0 8px 24px rgba(240, 74, 0, 0.35);
+        text-shadow:0 1px 2px rgba(255,255,255,0.4);
+    }
+
+    .sidebar-header h3{
+        color:#fff;
+        margin:0;
+        font-family:"Montserrat", sans-serif;
+        font-weight:800;
+        font-size:1.05rem;
+        letter-spacing:-0.02em;
+    }
+
     .sidebar-header small{
-        display:none;
+        color:var(--muted-2);
+        font-size:0.82rem;
+        display:block;
+        margin-top:2px;
+    }
+
+    .sidebar-menu{
+        padding:24px 16px;
+        display:flex;
+        flex-direction:column;
+        gap:8px;
     }
 
     .sidebar-menu a{
-        text-align:center;
-        padding:14px 8px;
+        text-decoration:none;
+        color:var(--muted);
+        font-weight:600;
+        font-size:0.95rem;
+        padding:12px 16px;
+        border-radius:14px;
+        display:flex;
+        align-items:center;
+        gap:12px;
+        transition:all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        border:1px solid transparent;
     }
 
-    .topbar,
-    main,
-    .container,
-    .wrap{
-        margin-left:80px !important;
-        width:calc(100% - 80px);
+    .sidebar-menu a:hover{
+        background:rgba(255, 255, 255, 0.05);
+        color:#fff;
+        transform:translateX(4px);
+        border-color:rgba(255, 255, 255, 0.05);
     }
-}
+
+    .sidebar-menu a.active{
+        background:linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color:white;
+        font-weight:700;
+        box-shadow:0 8px 25px rgba(240, 74, 0, 0.25);
+        border-color:rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar-menu a.active:hover{
+        transform:none;
+    }
+
+    .sidebar-footer{
+        margin-top:auto;
+        padding:24px 16px;
+        border-top:1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .sidebar-footer button{
+        width:100%;
+        border:1px solid rgba(255, 255, 255, 0.15);
+        border-radius:14px;
+        padding:13px;
+        background:rgba(255, 255, 255, 0.06);
+        color:white;
+        font-weight:700;
+        font-size:0.92rem;
+        cursor:pointer;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:8px;
+        transition:all 0.25s ease;
+    }
+
+    .sidebar-footer button:hover{
+        background:#fff;
+        color:#050914;
+        box-shadow:0 12px 35px rgba(255, 255, 255, 0.15);
+        transform:translateY(-2px);
+    }
+
+    /* MÁRGENES DINÁMICOS DEL CONTENIDO */
+    .topbar {
+        margin-left:270px !important;
+        width:calc(100% - 270px) !important;
+    }
+
+    main.wrap {
+        margin-left:calc(270px + 3%) !important;
+        width:calc(94% - 270px) !important;
+    }
+
+    /* SISTEMA DE PESTAÑAS (OCULTAR/MOSTRAR) */
+    .admin-tab-section {
+        display:none; /* Oculto por defecto */
+    }
+
+    .admin-tab-section.tab-active {
+        display:block; /* Visible cuando está activo */
+        animation:fadeInTab 0.4s ease-in-out forwards;
+    }
+
+    @keyframes fadeInTab {
+        from { opacity:0; transform:translateY(12px); }
+        to { opacity:1; transform:translateY(0); }
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:1024px){
+        .sidebar { width:80px; }
+        .sidebar-header { padding:20px 0; justify-content:center; }
+        .sidebar-logo { margin:0; }
+        .sidebar-header div { display:none; }
+        .sidebar-menu { padding:20px 10px; }
+        .sidebar-menu a { justify-content:center; padding:12px 0; }
+        .sidebar-menu a span:last-child { display:none; }
+        .sidebar-footer { padding:16px 10px; }
+        .sidebar-footer button { padding:12px 0; }
+        .sidebar-footer button span:last-child { display:none; }
+        .topbar { margin-left:80px !important; width:calc(100% - 80px) !important; }
+        main.wrap { margin-left:calc(80px + 3%) !important; width:calc(94% - 80px) !important; }
+    }
+
+    @media(max-width:720px){
+        .topbar, main.wrap { margin-left:0 !important; width:94% !important; }
+        .topbar { width:100% !important; }
+        .sidebar { display:none; }
+    }
   </style>
 </head>
 <body>
-  <!-- SIDEBAR -->
-<aside class="sidebar">
 
+  <aside class="sidebar">
     <div class="sidebar-header">
-        <div class="sidebar-logo">
-            ✦
-        </div>
-
+        <div class="sidebar-logo">✦</div>
         <div>
             <h3>ICEA Admin</h3>
             <small>Panel de Control</small>
@@ -606,41 +636,36 @@ main,
     </div>
 
     <nav class="sidebar-menu">
-
         <a href="#dashboard" class="active">
-            🏠 Dashboard
+            <span>🏠</span><span>Dashboard</span>
         </a>
-
         <a href="#galeria">
-            🖼️ Galería
+            <span>🖼️</span><span>Galería</span>
         </a>
-
         <a href="#multimedia">
-            🎥 Multimedia
+            <span>🎥</span><span>Multimedia</span>
         </a>
-
         <a href="#eventos">
-            📅 Eventos
+            <span>📅</span><span>Eventos</span>
         </a>
-
         <a href="#configuracion">
-            ⚙️ Configuración
+            <span>⚙️</span><span>Configuración</span>
         </a>
-
     </nav>
 
     <div class="sidebar-footer">
         <button onclick="location.href='index.html'">
-            🌐 Ver sitio
+            <span>🌐</span><span>Ver sitio</span>
         </button>
     </div>
+  </aside>
 
-</aside>
   <canvas id="admin-three-world" aria-hidden="true"></canvas>
   <div class="admin-three-overlay" aria-hidden="true"></div>
   <div class="admin-noise" aria-hidden="true"></div>
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
   <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  
   <header class="topbar">
     <div class="topbar__inner">
       <div class="brand">
@@ -659,203 +684,288 @@ main,
   </header>
 
   <main class="wrap">
-    <section class="hero-admin">
-      <article class="hero-card">
-        <div class="hero-badge">🔐 Panel administrativo profesional</div>
-        <h1>Gestiona el contenido de ICEA desde un solo lugar</h1>
-        <p>
-          Desde este panel puedes administrar imágenes, videos y eventos con una interfaz más clara, profesional y alineada con la identidad visual del ministerio.
-        </p>
-      </article>
+    
+    <div id="section-dashboard" class="admin-tab-section tab-active">
+      <section class="hero-admin">
+        <article class="hero-card">
+          <div class="hero-badge">🔐 Panel administrativo profesional</div>
+          <h1>Gestiona el contenido de ICEA desde un solo lugar</h1>
+          <p>
+            Desde este panel puedes administrar imágenes, videos y eventos con una interfaz más clara, profesional y alineada con la identidad visual del ministerio.
+          </p>
+        </article>
 
-      <aside class="summary-card">
-        <h3>Áreas de control</h3>
-        <div class="summary-list">
-          <div class="summary-item"><span>🖼️</span><span>Galería en vivo</span></div>
-          <div class="summary-item"><span>🎬</span><span>Multimedia actualizada</span></div>
-          <div class="summary-item"><span>📅</span><span>Eventos y calendario</span></div>
-        </div>
-      </aside>
-    </section>
-
-    <section class="panel">
-      <div class="section-badge">🖼️ Gestión de galería</div>
-      <div class="panel__head">
-        <h2>Subir a galería</h2>
-        <p>Publica fotos y videos locales que aparecerán en la galería del sitio en tiempo real.</p>
-      </div>
-
-      <div class="upload">
-        <label class="dropzone" for="fileInput">
-          <input type="file" id="fileInput" multiple accept="image/*,video/*" />
-          <div>
-            <div class="dropzone__icon">⬆️</div>
-            <div class="dropzone__text"><strong>Haz clic para seleccionar</strong> o arrastra archivos aquí</div>
-            <div class="dropzone__hint">PNG, JPG, WEBP, MP4 • Máximo recomendado: 500MB</div>
+        <aside class="summary-card">
+          <h3>Áreas de control</h3>
+          <div class="summary-list">
+            <div class="summary-item" data-target="#galeria"><span>🖼️</span><span>Galería en vivo</span></div>
+            <div class="summary-item" data-target="#multimedia"><span>🎬</span><span>Multimedia actualizada</span></div>
+            <div class="summary-item" data-target="#eventos"><span>📅</span><span>Eventos y calendario</span></div>
           </div>
-        </label>
+        </aside>
+      </section>
+    </div>
 
-        <div class="upload__actions">
-          <button id="uploadBtn" class="btn btn--primary">Subir a galería</button>
-          <div id="uploadStatus" class="status"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel">
-      <div class="panel__head panel__head--row">
-        <div>
-          <h2>Contenido actual de galería</h2>
-          <p>Administra lo publicado y revisa el contenido cargado en vivo.</p>
+    <div id="section-galeria" class="admin-tab-section">
+      <section class="panel">
+        <div class="section-badge">🖼️ Gestión de galería</div>
+        <div class="panel__head">
+          <h2>Subir a galería</h2>
+          <p>Publica fotos y videos locales que aparecerán en la galería del sitio en tiempo real.</p>
         </div>
 
-        <div class="chips">
-          <span class="chip" id="countChip">0 items</span>
-          <span class="chip chip--live">● En vivo</span>
-        </div>
-      </div>
-
-      <div id="admin-grid" class="grid">
-        <div class="empty">
-          <div class="empty__icon">🖼️</div>
-          <div class="empty__title">No hay contenido todavía</div>
-          <div class="empty__text">Sube tu primer archivo para verlo aquí.</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel">
-      <div class="section-badge">🎬 Gestión multimedia</div>
-      <div class="panel__head">
-        <h2>Subir videos</h2>
-        <p>Agrega contenido desde YouTube o sube videos locales para la sección multimedia.</p>
-      </div>
-
-      <div class="split">
-        <div class="cardbox">
-          <div class="cardbox__title">Link de YouTube</div>
-          <div class="inline">
-            <input id="youtubeUrl_mm" class="input" placeholder="https://www.youtube.com/watch?v=XXXX o https://youtu.be/XXXX" />
-            <button id="addYoutubeBtn_mm" class="btn btn--primary">Agregar</button>
-          </div>
-          <div class="hint">Se guardará el video como contenido embebido.</div>
-        </div>
-
-        <div class="cardbox">
-          <div class="cardbox__title">Video local</div>
-          <label class="dropzone" for="videoInput_mm">
-            <input type="file" id="videoInput_mm" accept="video/*" />
+        <div class="upload">
+          <label class="dropzone" for="fileInput">
+            <input type="file" id="fileInput" multiple accept="image/*,video/*" />
             <div>
-              <div class="dropzone__icon">🎬</div>
-              <div class="dropzone__text"><strong>Haz clic para seleccionar</strong> o arrastra un video aquí</div>
-              <div class="dropzone__hint">MP4 / WEBM recomendado • Máximo según Cloudinary</div>
+              <div class="dropzone__icon">⬆️</div>
+              <div class="dropzone__text"><strong>Haz clic para seleccionar</strong> o arrastra archivos aquí</div>
+              <div class="dropzone__hint">PNG, JPG, WEBP, MP4 • Máximo recomendado: 500MB</div>
             </div>
           </label>
+
+          <div class="upload__actions">
+            <button id="uploadBtn" class="btn btn--primary">Subir a galería</button>
+            <div id="uploadStatus" class="status"></div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div class="upload__actions">
-        <button id="uploadVideoBtn_mm" class="btn btn--primary">Subir video</button>
-        <div id="uploadStatus_mm" class="status"></div>
-      </div>
-    </section>
+      <section class="panel">
+        <div class="panel__head panel__head--row">
+          <div>
+            <h2>Contenido actual de galería</h2>
+            <p>Administra lo publicado y revisa el contenido cargado en vivo.</p>
+          </div>
 
-    <section class="panel">
-      <div class="panel__head panel__head--row">
-        <div>
-          <h2>Videos actuales</h2>
-          <p>Administra el contenido publicado en la sección multimedia.</p>
+          <div class="chips">
+            <span class="chip" id="countChip">0 items</span>
+            <span class="chip chip--live">● En vivo</span>
+          </div>
         </div>
 
-        <div class="chips">
-          <span class="chip" id="countChip_mm">0 videos</span>
-          <span class="chip chip--live">● En vivo</span>
+        <div id="admin-grid" class="grid">
+          <div class="empty">
+            <div class="empty__icon">🖼️</div>
+            <div class="empty__title">No hay contenido todavía</div>
+            <div class="empty__text">Sube tu primer archivo para verlo aquí.</div>
+          </div>
         </div>
-      </div>
+      </section>
+    </div>
 
-      <div id="media-grid_mm" class="grid">
-        <div class="empty">
-          <div class="empty__icon">📺</div>
-          <div class="empty__title">No hay videos todavía</div>
-          <div class="empty__text">Agrega uno de YouTube o sube un archivo.</div>
+    <div id="section-multimedia" class="admin-tab-section">
+      <section class="panel">
+        <div class="section-badge">🎬 Gestión multimedia</div>
+        <div class="panel__head">
+          <h2>Subir videos</h2>
+          <p>Agrega contenido desde YouTube o sube videos locales para la sección multimedia.</p>
         </div>
-      </div>
-    </section>
 
-    <section class="panel">
-      <div class="section-badge">📅 Gestión de eventos</div>
-      <div class="panel__head">
-        <h2>Administrar eventos</h2>
-        <p>Crea eventos que se mostrarán en <b>eventos.html</b> y alimentarán el calendario del sitio.</p>
-      </div>
-
-      <div class="form-card">
-        <div class="form-grid">
-          <div class="formrow">
-            <label class="label">Título</label>
-            <input id="evTitle" class="input" placeholder="Ej: Vigilia, Taller, Congreso..." />
+        <div class="split">
+          <div class="cardbox">
+            <div class="cardbox__title">Link de YouTube</div>
+            <div class="inline">
+              <input id="youtubeUrl_mm" class="input" placeholder="https://www.youtube.com/watch?v=XXXX o https://youtu.be/XXXX" />
+              <button id="addYoutubeBtn_mm" class="btn btn--primary">Agregar</button>
+            </div>
+            <div class="hint">Se guardará el video como contenido embebido.</div>
           </div>
 
-          <div class="formrow">
-            <label class="label">Fecha</label>
-            <input id="evDate" class="input" type="date" />
-          </div>
-
-          <div class="formrow">
-            <label class="label">Hora</label>
-            <input id="evTime" class="input" placeholder="Ej: 6:30 PM" />
-          </div>
-
-          <div class="formrow">
-            <label class="label">Lugar</label>
-            <input id="evPlace" class="input" placeholder="Ej: Auditorio, Parque, Salón 2..." />
-          </div>
-
-          <div class="formrow formrow--full">
-            <label class="label">Descripción</label>
-            <textarea id="evDesc" class="input" rows="4" placeholder="Detalles del evento..."></textarea>
-          </div>
-
-          <div class="formrow formrow--full">
-            <label class="label">Link de registro (opcional)</label>
-            <input id="evLink" class="input" placeholder="Ej: https://wa.me/57... o Google Forms" />
-            <div class="hint">Si lo dejas vacío, se usará “#”.</div>
+          <div class="cardbox">
+            <div class="cardbox__title">Video local</div>
+            <label class="dropzone" for="videoInput_mm">
+              <input type="file" id="videoInput_mm" accept="video/*" />
+              <div>
+                <div class="dropzone__icon">🎬</div>
+                <div class="dropzone__text"><strong>Haz clic para seleccionar</strong> o arrastra un video aquí</div>
+                <div class="dropzone__hint">MP4 / WEBM recomendado • Máximo según Cloudinary</div>
+              </div>
+            </label>
           </div>
         </div>
 
         <div class="upload__actions">
-          <button id="evAddBtn" class="btn btn--primary">Guardar evento</button>
-          <button id="evClearBtn" class="btn btn--ghost">Borrar todo</button>
-          <div id="evStatus" class="status"></div>
+          <button id="uploadVideoBtn_mm" class="btn btn--primary">Subir video</button>
+          <div id="uploadStatus_mm" class="status"></div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="panel">
-      <div class="panel__head panel__head--row">
-        <div>
-          <h2>Eventos actuales</h2>
-          <p>Esto alimenta el calendario de <b>eventos.html</b>.</p>
+      <section class="panel">
+        <div class="panel__head panel__head--row">
+          <div>
+            <h2>Videos actuales</h2>
+            <p>Administra el contenido publicado en la sección multimedia.</p>
+          </div>
+
+          <div class="chips">
+            <span class="chip" id="countChip_mm">0 videos</span>
+            <span class="chip chip--live">● En vivo</span>
+          </div>
         </div>
 
-        <div class="chips">
-          <span class="chip" id="evCountChip">0 eventos</span>
-          <span class="chip chip--live">● En vivo</span>
+        <div id="media-grid_mm" class="grid">
+          <div class="empty">
+            <div class="empty__icon">📺</div>
+            <div class="empty__title">No hay videos todavía</div>
+            <div class="empty__text">Agrega uno de YouTube o sube un archivo.</div>
+          </div>
         </div>
-      </div>
+      </section>
+    </div>
 
-      <div id="events-grid_admin" class="grid">
-        <div class="empty">
-          <div class="empty__icon">📅</div>
-          <div class="empty__title">No hay eventos todavía</div>
-          <div class="empty__text">Crea tu primer evento para verlo aquí.</div>
+    <div id="section-eventos" class="admin-tab-section">
+      <section class="panel">
+        <div class="section-badge">📅 Gestión de eventos</div>
+        <div class="panel__head">
+          <h2>Administrar eventos</h2>
+          <p>Crea eventos que se mostrarán en <b>eventos.html</b> y alimentarán el calendario del sitio.</p>
         </div>
-      </div>
-    </section>
+
+        <div class="form-card">
+          <div class="form-grid">
+            <div class="formrow">
+              <label class="label">Título</label>
+              <input id="evTitle" class="input" placeholder="Ej: Vigilia, Taller, Congreso..." />
+            </div>
+
+            <div class="formrow">
+              <label class="label">Fecha</label>
+              <input id="evDate" class="input" type="date" />
+            </div>
+
+            <div class="formrow">
+              <label class="label">Hora</label>
+              <input id="evTime" class="input" placeholder="Ej: 6:30 PM" />
+            </div>
+
+            <div class="formrow">
+              <label class="label">Lugar</label>
+              <input id="evPlace" class="input" placeholder="Ej: Auditorio, Parque, Salón 2..." />
+            </div>
+
+            <div class="formrow formrow--full">
+              <label class="label">Descripción</label>
+              <textarea id="evDesc" class="input" rows="4" placeholder="Detalles del evento..."></textarea>
+            </div>
+
+            <div class="formrow formrow--full">
+              <label class="label">Link de registro (opcional)</label>
+              <input id="evLink" class="input" placeholder="Ej: https://wa.me/57... o Google Forms" />
+              <div class="hint">Si lo dejas vacío, se usará “#”.</div>
+            </div>
+          </div>
+
+          <div class="upload__actions">
+            <button id="evAddBtn" class="btn btn--primary">Guardar evento</button>
+            <button id="evClearBtn" class="btn btn--ghost">Borrar todo</button>
+            <div id="evStatus" class="status"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel__head panel__head--row">
+          <div>
+            <h2>Eventos actuales</h2>
+            <p>Esto alimenta el calendario de <b>eventos.html</b>.</p>
+          </div>
+
+          <div class="chips">
+            <span class="chip" id="evCountChip">0 eventos</span>
+            <span class="chip chip--live">● En vivo</span>
+          </div>
+        </div>
+
+        <div id="events-grid_admin" class="grid">
+          <div class="empty">
+            <div class="empty__icon">📅</div>
+            <div class="empty__title">No hay eventos todavía</div>
+            <div class="empty__text">Crea tu primer evento para verlo aquí.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="section-configuracion" class="admin-tab-section">
+      <section class="panel">
+        <div class="section-badge">⚙️ Configuración</div>
+        <div class="panel__head">
+          <h2>Configuración del Panel</h2>
+          <p>Ajustes generales del administrador de ICEA - Obreros para Su Mies.</p>
+        </div>
+        <div class="cardbox">
+          <p>Módulo de configuración en desarrollo. Aquí podrás cambiar las claves de acceso y tokens de servicios.</p>
+        </div>
+      </section>
+    </div>
+
   </main>
 
   <div class="toast" id="toast" aria-hidden="true"></div>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuLinks = document.querySelectorAll(".sidebar-menu a");
+      const summaryItems = document.querySelectorAll(".summary-item");
+      
+      const sections = {
+        "#dashboard": document.getElementById("section-dashboard"),
+        "#galeria": document.getElementById("section-galeria"),
+        "#multimedia": document.getElementById("section-multimedia"),
+        "#eventos": document.getElementById("section-eventos"),
+        "#configuracion": document.getElementById("section-configuracion")
+      };
+
+      function switchTab(targetHash) {
+        if (!sections[targetHash]) return;
+
+        // Quitar clases activas de los enlaces
+        menuLinks.forEach(link => link.classList.remove("active"));
+
+        // Ocultar todas las secciones contenedoras
+        Object.values(sections).forEach(section => {
+          if (section) section.classList.remove("tab-active");
+        });
+
+        // Activar el enlace del Sidebar correspondiente
+        const activeLink = document.querySelector(`.sidebar-menu a[href="${targetHash}"]`);
+        if (activeLink) activeLink.classList.add("active");
+
+        // Mostrar la pestaña seleccionada
+        sections[targetHash].classList.add("tab-active");
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Clics desde el Sidebar
+      menuLinks.forEach(link => {
+        link.addEventListener("click", (e) => {
+          const hash = link.getAttribute("href");
+          if (hash.startsWith("#")) {
+            e.preventDefault();
+            window.location.hash = hash;
+            switchTab(hash);
+          }
+        });
+      });
+
+      // Clics rápidos desde las tarjetas "Áreas de control" del Dashboard
+      summaryItems.forEach(item => {
+        item.addEventListener("click", () => {
+          const target = item.getAttribute("data-target");
+          if (target) {
+            window.location.hash = target;
+            switchTab(target);
+          }
+        });
+      });
+
+      // Leer Hash inicial por si refrescan la página
+      const currentHash = window.location.hash || "#dashboard";
+      switchTab(currentHash);
+    });
+  </script>
 
   <script type="module">
     import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js";
@@ -1023,7 +1133,7 @@ main,
           knot.rotation.x+=.007; knot.rotation.y+=.010;
           cross.position.y=-2.9+Math.sin(t*1.15)*.25;
           cross.rotation.y=Math.sin(t*.9)*.45;
-          group.children.forEach((child,idx)=>{ if(child.geometry?.type==="TorusGeometry") child.rotation.z += .0025+(idx*.0007); });
+          group.children.forEach((child,idx)=>{ if(child.geometry?.type===\"TorusGeometry\") child.rotation.z += .0025+(idx*.0007); });
           camera.position.x += (mouse.x*1.05-camera.position.x)*.035;
           camera.position.y += (-mouse.y*.72-camera.position.y)*.035;
           camera.lookAt(0,0,-4);
