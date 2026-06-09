@@ -507,9 +507,153 @@
         width: 100%;
       }
     }
+   
+    /* ===== SIDEBAR ADMIN ===== */
+
+body{
+  display:flex;
+}
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  width:260px;
+  height:100vh;
+  background:linear-gradient(
+    180deg,
+    var(--secondary-dark),
+    var(--secondary)
+  );
+  color:white;
+  z-index:2000;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 0 30px rgba(0,0,0,.15);
+}
+
+.sidebar-header{
+  padding:25px;
+  text-align:center;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.sidebar-logo{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:white;
+  padding:5px;
+  object-fit:contain;
+}
+
+.sidebar-title{
+  margin-top:10px;
+  font-weight:700;
+  font-family:"Montserrat",sans-serif;
+}
+
+.sidebar-menu{
+  padding:20px 12px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.sidebar-menu a{
+  color:white;
+  text-decoration:none;
+  padding:14px 16px;
+  border-radius:14px;
+  transition:.3s;
+  font-weight:600;
+}
+
+.sidebar-menu a:hover{
+  background:rgba(255,255,255,.15);
+}
+
+.sidebar-menu a.active{
+  background:var(--primary);
+}
+
+.sidebar-footer{
+  margin-top:auto;
+  padding:20px;
+}
+
+.sidebar-footer button{
+  width:100%;
+}
+
+.topbar{
+  margin-left:260px;
+}
+
+.wrap{
+  margin-left:290px !important;
+  width:calc(100% - 320px);
+}
+
+@media(max-width:900px){
+
+  .sidebar{
+    width:80px;
+  }
+
+  .sidebar-title,
+  .sidebar-menu span{
+    display:none;
+  }
+
+  .topbar{
+    margin-left:80px;
+  }
+
+  .wrap{
+    margin-left:100px !important;
+    width:calc(100% - 120px);
+  }
+}
   </style>
 </head>
 <body>
+  <aside class="sidebar">
+
+  <div class="sidebar-header">
+    <img src="img/ICEA.png" class="sidebar-logo">
+    <div class="sidebar-title">
+      ICEA Admin
+    </div>
+  </div>
+
+  <nav class="sidebar-menu">
+
+    <a href="#" class="active">
+      🏠 <span>Dashboard</span>
+    </a>
+
+    <a href="#" onclick="document.querySelector('[data-tab=galeria]').click()">
+      🖼️ <span>Galería</span>
+    </a>
+
+    <a href="#" onclick="document.querySelector('[data-tab=multimedia]').click()">
+      📺 <span>Multimedia</span>
+    </a>
+
+    <a href="index.html">
+      🌐 <span>Sitio Web</span>
+    </a>
+
+  </nav>
+
+  <div class="sidebar-footer">
+    <button id="sidebarLogout" class="btn btn--primary">
+      🚪 Salir
+    </button>
+  </div>
+
+</aside>
   <header class="topbar">
     <div class="topbar__inner">
       <div class="brand">
@@ -677,6 +821,12 @@
       }, 2400);
     };
   </script>
+  <script>
+document.getElementById("sidebarLogout")
+.addEventListener("click", () => {
+    document.getElementById("logoutBtn").click();
+});
+</script>
 
   <script type="module" src="js/admin-panel.js"></script>
 </body>
