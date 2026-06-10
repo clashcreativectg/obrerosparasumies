@@ -1,8 +1,7 @@
-import { db } from "./galeria-firebase.js";
-import {
-  collection, addDoc, onSnapshot, query, orderBy,
-  deleteDoc, doc, serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+// Reemplaza el encabezado de admin-eventos.js con esto:
+import { 
+  db, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc, serverTimestamp 
+} from "./firebase-config.js";
 
 const $ = (id) => document.getElementById(id);
 
