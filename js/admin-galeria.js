@@ -1,9 +1,18 @@
-// Reemplaza el encabezado de admin-galeria.js con esto:
-import { 
-  auth, db, onAuthStateChanged, signOut,
-  collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, deleteDoc, doc 
+import {
+  auth,
+  db,
+  onAuthStateChanged,
+  signOut,
+  collection,
+  addDoc,
+  serverTimestamp,
+  query,
+  orderBy,
+  onSnapshot,
+  deleteDoc,
+  doc,
+  getDoc
 } from "./firebase-config.js";
-
 
 /* =========================
    CLOUDINARY
