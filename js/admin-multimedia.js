@@ -4,16 +4,6 @@ import {
   collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, deleteDoc, doc 
 } from "./firebase-config.js";
 
-/* 🔥 FIREBASE CONFIG */
-const firebaseConfig = {
-  apiKey: "AIzaSyAN1JxitWiiw9Az7hgo-N-tl_w52Jra87U",
-  authDomain: "cristianosenaccion-71a36.firebaseapp.com",
-  projectId: "cristianosenaccion-71a36",
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
 
 /* ☁️ CLOUDINARY (VIDEO) */
 const CLOUD_NAME = "dwap3udvq";
