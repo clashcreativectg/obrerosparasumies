@@ -763,30 +763,32 @@
         </div>
 
         <div class="split">
-          <div class="cardbox">
-            <div class="cardbox__title">Link de YouTube</div>
-            <div class="inline">
-              <input id="youtubeUrl_mm" class="input" placeholder="https://www.youtube.com/watch?v=XXXX o https://youtu.be/XXXX" />
-              <button id="addYoutubeBtn_mm" class="btn btn--primary">Agregar</button>
+          
+          <div class="cardbox" style="display: flex; flex-direction: column; justify-content: space-between; gap: 15px;">
+            <div>
+              <div class="cardbox__title" style="margin-bottom: 10px;">Link de YouTube</div>
+              <input id="youtubeUrl_mm" class="input" placeholder="https://www.youtube.com/watch?v=XXXX" style="margin-bottom: 12px;" />
+              <div class="hint">Se guardará el video como contenido embebido.</div>
             </div>
-            <div class="hint">Se guardará el video como contenido embebido.</div>
+            <button id="addYoutubeBtn_mm" class="btn btn--primary" style="width: 100%;">Agregar desde YouTube</button>
           </div>
 
-          <div class="cardbox">
+          <div class="cardbox" style="display: flex; flex-direction: column; gap: 12px;">
             <div class="cardbox__title">Video local</div>
-            <label class="dropzone" for="videoInput_mm">
+            <label class="dropzone" for="videoInput_mm" style="min-height: 140px; padding: 15px;">
               <input type="file" id="videoInput_mm" accept="video/*" />
               <div>
-                <div class="dropzone__icon">🎬</div>
-                <div class="dropzone__text"><strong>Haz clic para seleccionar</strong> o arrastra un video aquí</div>
-                <div class="dropzone__hint">MP4 / WEBM recomendado • Máximo según Cloudinary</div>
+                <div class="dropzone__icon" style="font-size: 1.8rem; margin-bottom: 5px;">🎬</div>
+                <div class="dropzone__text" style="font-size: 0.9rem;"><strong>Seleccionar archivo</strong></div>
+                <div class="dropzone__hint" style="font-size: 0.78rem;">MP4 / WEBM recomendado</div>
               </div>
             </label>
           </div>
+
         </div>
 
-        <div class="upload__actions">
-          <button id="uploadVideoBtn_mm" class="btn btn--primary">Subir video</button>
+        <div class="upload__actions" style="margin-top: 15px; display: flex; align-items: center; gap: 15px;">
+          <button id="uploadVideoBtn_mm" class="btn btn--primary">Subir video local</button>
           <div id="uploadStatus_mm" class="status"></div>
         </div>
       </section>
