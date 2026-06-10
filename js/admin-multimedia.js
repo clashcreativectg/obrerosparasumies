@@ -28,8 +28,10 @@ const videoInput = document.getElementById("videoInput_mm");
 const uploadVideoBtn = document.getElementById("uploadVideoBtn_mm");
 
 const uploadStatus = document.getElementById("uploadStatus_mm");
-const grid = document.getElementById("media-grid_mm");
+const grid = document.getElementById("videosGrid");
 const countChip = document.getElementById("countChip_mm");
+
+console.log("GRID:", grid);
 
 let currentUser = null;
 let canDelete = false; // admin/lider
