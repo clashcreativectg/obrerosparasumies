@@ -335,7 +335,7 @@
     .form-grid{grid-template-columns:repeat(2,1fr);margin-bottom:18px;}
     .formrow--full{grid-column:1/-1;}
 
-    .grid,#admin-grid,#imagesGrid,#videosGrid,#media-grid_mm,#events-grid_admin{
+    .grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
       gap:19px;
@@ -443,7 +443,7 @@
       .btn,.input{width:100%;}
       .hero-card h1{font-size:2.1rem;}
     }
-    @media(max-width:480px){.grid,#admin-grid,#imagesGrid,#videosGrid,#media-grid_mm,#events-grid_admin{grid-template-columns:1fr;}.card__media{height:240px;}}
+    @media(max-width:480px){.card__media{height:240px;}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}#admin-three-world{display:none;}}
 
     /* ==========================================================================
@@ -588,11 +588,11 @@
 
     /* SISTEMA DE PESTAÑAS (OCULTAR/MOSTRAR) */
     .admin-tab-section {
-        display:none; /* Oculto por defecto */
+        display:none;
     }
 
     .admin-tab-section.tab-active {
-        display:block; /* Visible cuando está activo */
+        display:block;
         animation:fadeInTab 0.4s ease-in-out forwards;
     }
 
@@ -744,7 +744,7 @@
           </div>
         </div>
 
-        <div id="admin-grid" class="grid">
+        <div id="imagesGrid" class="grid">
           <div class="empty">
             <div class="empty__icon">🖼️</div>
             <div class="empty__title">No hay contenido todavía</div>
@@ -804,7 +804,7 @@
           </div>
         </div>
 
-        <div id="media-grid_mm" class="grid">
+        <div id="videosGrid" class="grid">
           <div class="empty">
             <div class="empty__icon">📺</div>
             <div class="empty__title">No hay videos todavía</div>
@@ -920,25 +920,20 @@
       function switchTab(targetHash) {
         if (!sections[targetHash]) return;
 
-        // Quitar clases activas de los enlaces
         menuLinks.forEach(link => link.classList.remove("active"));
 
-        // Ocultar todas las secciones contenedoras
         Object.values(sections).forEach(section => {
           if (section) section.classList.remove("tab-active");
         });
 
-        // Activar el enlace del Sidebar correspondiente
         const activeLink = document.querySelector(`.sidebar-menu a[href="${targetHash}"]`);
         if (activeLink) activeLink.classList.add("active");
 
-        // Mostrar la pestaña seleccionada
         sections[targetHash].classList.add("tab-active");
         
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      // Clics desde el Sidebar
       menuLinks.forEach(link => {
         link.addEventListener("click", (e) => {
           const hash = link.getAttribute("href");
@@ -950,7 +945,6 @@
         });
       });
 
-      // Clics rápidos desde las tarjetas "Áreas de control" del Dashboard
       summaryItems.forEach(item => {
         item.addEventListener("click", () => {
           const target = item.getAttribute("data-target");
@@ -961,7 +955,6 @@
         });
       });
 
-      // Leer Hash inicial por si refrescan la página
       const currentHash = window.location.hash || "#dashboard";
       switchTab(currentHash);
     });
@@ -1133,7 +1126,7 @@
           knot.rotation.x+=.007; knot.rotation.y+=.010;
           cross.position.y=-2.9+Math.sin(t*1.15)*.25;
           cross.rotation.y=Math.sin(t*.9)*.45;
-          group.children.forEach((child,idx)=>{ if(child.geometry?.type===\"TorusGeometry\") child.rotation.z += .0025+(idx*.0007); });
+          group.children.forEach((child,idx)=>{ if(child.geometry?.type==="TorusGeometry") child.rotation.z += .0025+(idx*.0007); });
           camera.position.x += (mouse.x*1.05-camera.position.x)*.035;
           camera.position.y += (-mouse.y*.72-camera.position.y)*.035;
           camera.lookAt(0,0,-4);
