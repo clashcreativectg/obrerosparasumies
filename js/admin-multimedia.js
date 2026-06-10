@@ -1,17 +1,8 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  serverTimestamp,
-  query,
-  orderBy,
-  onSnapshot,
-  deleteDoc,
-  doc,
-  getDoc,
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+// Reemplaza el encabezado de admin-multimedia.js con esto:
+import { 
+  auth, db, onAuthStateChanged, signOut,
+  collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, deleteDoc, doc 
+} from "./firebase-config.js";
 
 /* 🔥 FIREBASE CONFIG */
 const firebaseConfig = {
