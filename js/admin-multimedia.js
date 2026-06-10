@@ -34,8 +34,8 @@ const countChip = document.getElementById("countChip_mm");
 console.log("GRID:", grid);
 
 let currentUser = null;
-let canDelete = false; // admin/lider
-let canUpload = false; // activo
+let canDelete = true; // admin/lider
+let canUpload = true; // activo
 
 /* UI */
 function setStatus(msg = "") {
