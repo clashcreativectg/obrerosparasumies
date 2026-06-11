@@ -107,7 +107,15 @@ async function ensureUserDoc(user) {
 
 /* LOGIN email/pass */
 loginBtn?.addEventListener("click", async () => {
+
+  const captcha = grecaptcha.getResponse();
+
+  if (!captcha) {
+    return setError("✅ Verifica primero que no eres un robot.");
+  }
+
   setError("");
+
   const { email, password } = getEmailPass();
 
   if (!email) return setError("Escribe tu correo.");
@@ -117,11 +125,22 @@ loginBtn?.addEventListener("click", async () => {
   try {
     const cred = await signInWithEmailAndPassword(auth, email, password);
     await checkRoleAndGo(cred.user);
+
   } catch (e) {
+
+    grecaptcha.reset();
+
     console.error(e);
-    if (e?.message === "NO_USER_DOC") return setError("Usuario no autorizado.");
-    if (e?.message === "INACTIVE") return setError("Tu usuario está inactivo. Pide activación.");
-    if (e?.message === "ROLE") return setError("No tienes permiso para entrar.");
+
+    if (e?.message === "NO_USER_DOC")
+      return setError("Usuario no autorizado.");
+
+    if (e?.message === "INACTIVE")
+      return setError("Tu usuario está inactivo. Pide activación.");
+
+    if (e?.message === "ROLE")
+      return setError("No tienes permiso para entrar.");
+
     setError(mapAuthError(e));
   }
 });
@@ -129,18 +148,36 @@ loginBtn?.addEventListener("click", async () => {
 /* REGISTRO email/pass */
 registerBtn?.addEventListener("click", async () => {
   setError("");
+  setOk("");
+
   const { email, password } = getEmailPass();
+
+  const captcha = grecaptcha.getResponse();
+
+  if (!captcha) {
+    return setError("Verifica primero que no eres un robot.");
+  }
 
   if (!email) return setError("Escribe tu correo.");
   if (!isValidEmail(email)) return setError("Correo inválido.");
-  if (!password || password.length < 6) return setError("Contraseña mínimo 6 caracteres.");
+  if (!password || password.length < 6) {
+    return setError("Contraseña mínimo 6 caracteres.");
+  }
 
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
+
     await ensureUserDoc(cred.user);
+
+    grecaptcha.reset();
+
     setOk("✅ Registrado. Espera activación del administrador.");
+
   } catch (e) {
     console.error(e);
+
+    grecaptcha.reset();
+
     setError(mapAuthError(e));
   }
 });
