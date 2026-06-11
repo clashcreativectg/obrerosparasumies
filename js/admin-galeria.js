@@ -176,6 +176,10 @@ onAuthStateChanged(auth, async (user) => {
     currentProfile = profile;
     canUpload = profile.activo === true;
     canDelete = profile.activo === true && (profile.rol === "admin" || profile.rol === "lider");
+    console.log("PROFILE:", profile);
+    console.log("ROL:", profile.rol);
+    console.log("ACTIVO:", profile.activo);
+    console.log("CAN DELETE:", canDelete);
 
     updateUserChip();
 
