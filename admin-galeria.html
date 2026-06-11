@@ -622,6 +622,40 @@
         .topbar { width:100% !important; }
         .sidebar { display:none; }
     }
+
+    .config-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+    gap:20px;
+}
+
+.config-card{
+    background:#fff;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.config-card h3{
+    margin-bottom:15px;
+}
+
+.config-card input{
+    width:100%;
+    padding:12px;
+    margin-bottom:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+.config-card button{
+    background:#ff7b00;
+    color:white;
+    border:none;
+    padding:12px 18px;
+    border-radius:10px;
+    cursor:pointer;
+}
   </style>
 </head>
 <body>
@@ -649,7 +683,8 @@
             <span>📅</span><span>Eventos</span>
         </a>
         <a href="#configuracion">
-            <span>⚙️</span><span>Configuración</span>
+            <i class="fas fa-cog"></i>
+   Configuración
         </a>
     </nav>
 
@@ -901,6 +936,53 @@
         </div>
       </section>
     </div>
+
+    <section id="configuracion" class="panel-section">
+
+   <div class="section-header">
+      <h2>⚙️ Configuración General</h2>
+      <p>Administra la información del sitio.</p>
+   </div>
+
+   <div class="config-grid">
+
+      <div class="config-card">
+         <h3>Información General</h3>
+
+         <input type="text" id="nombreIglesia"
+            placeholder="Nombre de la iglesia">
+
+         <input type="text" id="telefono"
+            placeholder="Teléfono">
+
+         <input type="email" id="correo"
+            placeholder="Correo">
+
+         <button id="guardarInfo">
+            Guardar cambios
+         </button>
+      </div>
+
+      <div class="config-card">
+         <h3>Redes Sociales</h3>
+
+         <input type="text" id="facebook"
+            placeholder="Facebook">
+
+         <input type="text" id="youtube"
+            placeholder="YouTube">
+
+         <input type="text" id="instagram"
+            placeholder="Instagram">
+
+         <button id="guardarRedes">
+            Guardar Redes
+         </button>
+      </div>
+
+   </div>
+
+</section>
 
   </main>
 
