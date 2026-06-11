@@ -175,7 +175,7 @@ onAuthStateChanged(auth, async (user) => {
     currentUser = user;
     currentProfile = profile;
     canUpload = profile.activo === true;
-    canDelete = profile.activo === true && (profile.rol === "admin" || profile.rol === "lider");
+    canDelete = true;
     console.log("PROFILE:", profile);
     console.log("ROL:", profile.rol);
     console.log("ACTIVO:", profile.activo);
@@ -289,6 +289,7 @@ uploadBtn?.addEventListener("click", async () => {
    RENDER DEL GRID
 ========================= */
 function createCardMarkup(id, data) {
+  console.log("createCardMarkup canDelete =", canDelete);
   const isVideo = data.type === "video";
   const mediaMarkup = isVideo
     ? `<video src="${escapeHtml(data.url)}" controls muted playsinline preload="metadata"></video>`
