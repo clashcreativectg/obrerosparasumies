@@ -172,14 +172,14 @@ onAuthStateChanged(auth, async (user) => {
       return;
     }
 
-    currentUser = user;
-    currentProfile = profile;
-    canUpload = profile.activo === true;
-    canDelete = true;
-    console.log("PROFILE:", profile);
-    console.log("ROL:", profile.rol);
-    console.log("ACTIVO:", profile.activo);
-    console.log("CAN DELETE:", canDelete);
+   currentUser = user;
+currentProfile = profile;
+
+canUpload = profile.activo === true;
+canDelete = profile.activo === true &&
+            (profile.rol === "admin" || profile.rol === "lider");
+
+loadGallery();
 
     updateUserChip();
 
@@ -321,53 +321,91 @@ function createCardMarkup(id, data) {
   `;
 }
 
-const mediaQuery = query(collection(db, "media"), orderBy("createdAt", "desc"));
 
-onSnapshot(
-  mediaQuery,
-  (snapshot) => {
-    if (!grid) return;
+  function loadGallery() {
 
-    const docs = snapshot.docs;
-    setCount(docs.length);
+  const mediaQuery = query(
+    collection(db, "media"),
+    orderBy("createdAt", "desc")
+  );
 
-    if (!docs.length) {
-      renderEmptyState();
-      return;
-    }
+  onSnapshot(
+    mediaQuery,
+    (snapshot) => {
 
-    grid.innerHTML = docs
-      .map((docSnap) => createCardMarkup(docSnap.id, docSnap.data()))
-      .join("");
+      if (!grid) return;
 
-    if (!canDelete) return;
+      const docs = snapshot.docs;
 
-    grid.querySelectorAll(".delete-btn").forEach((button) => {
-      button.addEventListener("click", async () => {
-        const id = button.dataset.id;
-        if (!id) return;
+      setCount(docs.length);
 
-        const confirmed = confirm("¿Eliminar este contenido?");
-        if (!confirmed) return;
+      if (!docs.length) {
+        renderEmptyState();
+        return;
+      }
 
-        try {
-          button.disabled = true;
-          await deleteDoc(doc(db, "media", id));
-          notify("Contenido eliminado correctamente", "ok");
-        } catch (error) {
-          console.error("Error eliminando:", error);
-          notify(`Error eliminando: ${error.message || error.code}`, "error");
-        } finally {
-          button.disabled = false;
-        }
+      grid.innerHTML = docs
+        .map((docSnap) => createCardMarkup(docSnap.id, docSnap.data()))
+        .join("");
+
+      console.log("Renderizando galería. canDelete =", canDelete);
+
+      if (!canDelete) return;
+
+      grid.querySelectorAll(".delete-btn").forEach((button) => {
+
+        button.addEventListener("click", async () => {
+
+          const id = button.dataset.id;
+
+          if (!id) return;
+
+          const confirmed = confirm("¿Eliminar este contenido?");
+
+          if (!confirmed) return;
+
+          try {
+
+            button.disabled = true;
+
+            await deleteDoc(doc(db, "media", id));
+
+            notify("Contenido eliminado correctamente", "ok");
+
+          } catch (error) {
+
+            console.error("Error eliminando:", error);
+
+            notify(
+              `Error eliminando: ${error.message || error.code}`,
+              "error"
+            );
+
+          } finally {
+
+            button.disabled = false;
+
+          }
+
+        });
+
       });
-    });
-  },
-  (error) => {
-    console.error("Error en onSnapshot(media):", error);
-    setStatus("❌ Error cargando contenido", "error");
-    notify("No se pudo cargar la galería en tiempo real.", "error");
-    renderEmptyState();
-  }
-);
+
+    },
+    (error) => {
+
+      console.error("Error en onSnapshot(media):", error);
+
+      setStatus("❌ Error cargando contenido", "error");
+
+      notify(
+        "No se pudo cargar la galería en tiempo real.",
+        "error"
+      );
+
+      renderEmptyState();
+
+    }
+  );
+}
 
