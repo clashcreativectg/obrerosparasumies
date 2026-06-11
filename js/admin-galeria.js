@@ -26,7 +26,7 @@ const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/uploa
 ========================= */
 const fileInput = document.getElementById("fileInput");
 const uploadBtn = document.getElementById("uploadBtn");
-const grid = document.getElementById("admin-grid");
+const grid = document.getElementById("imagesGrid");
 const uploadStatus = document.getElementById("uploadStatus");
 const logoutBtn = document.getElementById("logoutBtn");
 const countChip = document.getElementById("countChip");
