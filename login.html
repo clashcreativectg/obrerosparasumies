@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
-
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     :root{
       --orange:#f04a00;
@@ -507,6 +507,17 @@
       font-size:.9rem;
     }
 
+    .g-recaptcha{
+  transform:scale(.95);
+  transform-origin:center;
+}
+
+@media(max-width:480px){
+  .g-recaptcha{
+    transform:scale(.82);
+  }
+} 
+    
     #recaptcha-container{margin-top:18px}
     #error,#ok{
       display:block;
@@ -568,7 +579,6 @@
     <section class="login-hero reveal">
       <div class="top-actions">
         <a href="index.html" class="back-link">← Volver al sitio</a>
-        <a href="admin-panel.html" class="back-link">Ir al panel</a>
       </div>
 
       <div class="brand">
@@ -618,7 +628,12 @@
           Continuar con Google
         </button>
 
-        <div id="recaptcha-container"></div>
+       <div style="margin:15px 0; display:flex; justify-content:center;">
+  <div
+    class="g-recaptcha"
+    data-sitekey="6Lc1EBotAAAAABdLF7rCB0TnsKUjZd9GNw-H4Pca">
+  </div>
+</div>
 
         <span id="error"></span>
         <span id="ok"></span>
