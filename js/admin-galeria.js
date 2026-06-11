@@ -159,6 +159,7 @@ logoutBtn?.addEventListener("click", async () => {
 
 onAuthStateChanged(auth, async (user) => {
   try {
+
     if (!user) {
       window.location.href = "login.html";
       return;
@@ -172,16 +173,19 @@ onAuthStateChanged(auth, async (user) => {
       return;
     }
 
-   currentUser = user;
-currentProfile = profile;
+    currentUser = user;
+    currentProfile = profile;
 
-canUpload = profile.activo === true;
-canDelete = profile.activo === true &&
-            (profile.rol === "admin" || profile.rol === "lider");
+    canUpload = profile.activo === true;
 
-loadGallery();
+    canDelete =
+      profile.activo === true &&
+      ["admin", "lider"].includes(profile.rol);
 
     updateUserChip();
+
+    console.log("Perfil:", profile);
+    console.log("canDelete:", canDelete);
 
     if (!canUpload) {
       await signOut(auth);
@@ -189,19 +193,13 @@ loadGallery();
       return;
     }
 
-    console.log("Usuario autenticado:", {
-      uid: user.uid,
-      email: user.email,
-      rol: profile.rol,
-      activo: profile.activo
-    });
+    // IMPORTANTE
+    loadGallery();
+
   } catch (error) {
-    console.error("Error validando sesión:", error);
-    notify("No se pudo validar la sesión.", "error");
-    window.location.href = "login.html";
+    console.error(error);
   }
 });
-
 /* =========================
    CLOUDINARY
 ========================= */
@@ -293,45 +291,46 @@ function createCardMarkup(id, data) {
   const isVideo = data.type === "video";
 
   const mediaMarkup = isVideo
-    ? `<video src="${escapeHtml(data.url)}" controls muted playsinline preload="metadata"></video>`
+    ? `<video src="${escapeHtml(data.url)}" controls></video>`
     : `<img src="${escapeHtml(data.url)}"
-            alt="${escapeHtml(data.originalName || "Contenido de galería")}"
-            loading="lazy" />`;
-
-  const meta = `
-    <div class="card__meta">
-      <div class="card__name">
-        ${escapeHtml(data.originalName || (isVideo ? "Video" : "Imagen"))}
-      </div>
-      <div class="card__date">
-        ${formatDate(data.createdAt)}
-      </div>
-    </div>
-  `;
-
-  const actions = canDelete
-    ? `
-      <div class="card__actions">
-        <button class="delete-btn" data-id="${id}" type="button">
-          🗑️ Eliminar
-        </button>
-      </div>
-    `
-    : "";
+            alt="${escapeHtml(data.originalName || "Imagen")}"
+            loading="lazy">`;
 
   return `
     <article class="card">
+
       <div class="card__media">
         ${mediaMarkup}
       </div>
 
-      ${meta}
+      <div class="card__meta">
+        <div class="card__name">
+          ${escapeHtml(data.originalName || "Archivo")}
+        </div>
 
-      ${actions}
+        <div class="card__date">
+          ${formatDate(data.createdAt)}
+        </div>
+      </div>
+
+      ${
+        canDelete
+          ? `
+          <div class="card__actions">
+            <button
+              class="delete-btn"
+              data-id="${id}"
+              type="button">
+              🗑️ Eliminar
+            </button>
+          </div>
+          `
+          : ""
+      }
+
     </article>
   `;
 }
-
 
   function loadGallery() {
 
