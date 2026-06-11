@@ -924,65 +924,71 @@
       </section>
     </div>
 
-    <div id="section-configuracion" class="admin-tab-section">
-      <section class="panel">
-        <div class="section-badge">⚙️ Configuración</div>
-        <div class="panel__head">
-          <h2>Configuración del Panel</h2>
-          <p>Ajustes generales del administrador de ICEA - Obreros para Su Mies.</p>
-        </div>
-        <div class="cardbox">
-          <p>Módulo de configuración en desarrollo. Aquí podrás cambiar las claves de acceso y tokens de servicios.</p>
-        </div>
-      </section>
+   <div class="cardbox">
+        <h3>Información General</h3>
+
+        <input
+          type="text"
+          id="nombreIglesia"
+          class="input"
+          placeholder="Nombre de la iglesia"
+        >
+
+        <input
+          type="text"
+          id="telefono"
+          class="input"
+          placeholder="Teléfono"
+        >
+
+        <input
+          type="email"
+          id="correo"
+          class="input"
+          placeholder="Correo"
+        >
+
+        <button id="guardarInfo" class="btn btn--primary">
+          Guardar Información
+        </button>
+      </div>
+
+      <div class="cardbox">
+        <h3>Redes Sociales</h3>
+
+        <input
+          type="text"
+          id="facebook"
+          class="input"
+          placeholder="Facebook"
+        >
+
+        <input
+          type="text"
+          id="youtube"
+          class="input"
+          placeholder="YouTube"
+        >
+
+        <input
+          type="text"
+          id="instagram"
+          class="input"
+          placeholder="Instagram"
+        >
+
+        <button id="guardarRedes" class="btn btn--primary">
+          Guardar Redes
+        </button>
+      </div>
+
     </div>
 
-    <section id="configuracion" class="panel-section">
+  </section>
 
-   <div class="section-header">
-      <h2>⚙️ Configuración General</h2>
-      <p>Administra la información del sitio.</p>
-   </div>
+</div>
 
-   <div class="config-grid">
-
-      <div class="config-card">
-         <h3>Información General</h3>
-
-         <input type="text" id="nombreIglesia"
-            placeholder="Nombre de la iglesia">
-
-         <input type="text" id="telefono"
-            placeholder="Teléfono">
-
-         <input type="email" id="correo"
-            placeholder="Correo">
-
-         <button id="guardarInfo">
-            Guardar cambios
-         </button>
-      </div>
-
-      <div class="config-card">
-         <h3>Redes Sociales</h3>
-
-         <input type="text" id="facebook"
-            placeholder="Facebook">
-
-         <input type="text" id="youtube"
-            placeholder="YouTube">
-
-         <input type="text" id="instagram"
-            placeholder="Instagram">
-
-         <button id="guardarRedes">
-            Guardar Redes
-         </button>
-      </div>
-
-   </div>
-
-</section>
+   
 
   </main>
 
