@@ -290,25 +290,43 @@ uploadBtn?.addEventListener("click", async () => {
 ========================= */
 function createCardMarkup(id, data) {
 
-  console.log("createCardMarkup canDelete =", canDelete);
+  const isVideo = data.type === "video";
+
+  const mediaMarkup = isVideo
+    ? `<video src="${escapeHtml(data.url)}" controls muted playsinline preload="metadata"></video>`
+    : `<img src="${escapeHtml(data.url)}"
+            alt="${escapeHtml(data.originalName || "Contenido de galería")}"
+            loading="lazy" />`;
+
+  const meta = `
+    <div class="card__meta">
+      <div class="card__name">
+        ${escapeHtml(data.originalName || (isVideo ? "Video" : "Imagen"))}
+      </div>
+      <div class="card__date">
+        ${formatDate(data.createdAt)}
+      </div>
+    </div>
+  `;
 
   const actions = canDelete
     ? `
       <div class="card__actions">
         <button class="delete-btn" data-id="${id}" type="button">
-          Eliminar
+          🗑️ Eliminar
         </button>
       </div>
     `
     : "";
 
-  console.log("actions =", actions);
   return `
     <article class="card">
       <div class="card__media">
         ${mediaMarkup}
       </div>
+
       ${meta}
+
       ${actions}
     </article>
   `;
