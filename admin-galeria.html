@@ -1252,5 +1252,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
       }, 2400);
     }
   </script>
+  <script>
+  // Cambia el texto del dropzone al seleccionar un archivo de video
+  document.getElementById('videoInput_mm')?.addEventListener('change', function(e) {
+    const textTarget = document.getElementById('videoDropzoneText_mm');
+    if(this.files && this.files[0] && textTarget) {
+      textTarget.innerHTML = `<strong>Archivo:</strong> ${this.files[0].name}`;
+    }
+  });
+</script>
 </body>
 </html>
