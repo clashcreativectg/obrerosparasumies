@@ -790,7 +790,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
       </section>
     </div>
 
-    <div id="section-multimedia" class="admin-tab-section">
+   <div id="section-multimedia" class="admin-tab-section">
       <section class="panel">
         <div class="section-badge">🎬 Gestión multimedia</div>
         <div class="panel__head">
@@ -802,21 +802,27 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
           
           <div class="cardbox" style="display: flex; flex-direction: column; justify-content: space-between; gap: 15px;">
             <div>
-              <div class="cardbox__title" style="margin-bottom: 10px;">Link de YouTube</div>
+              <div class="cardbox__title" style="margin-bottom: 10px;"><i class="fab fa-youtube" style="color: #ff0000;"></i> Desde YouTube</div>
+              
+              <input id="youtubeTitle_mm" class="input" placeholder="Título de la predicación / video" style="margin-bottom: 10px;" />
+              
               <input id="youtubeUrl_mm" class="input" placeholder="https://www.youtube.com/watch?v=XXXX" style="margin-bottom: 12px;" />
-              <div class="hint">Se guardará el video como contenido embebido.</div>
+              <div class="hint">Se guardará el video como contenido embebido en la web principal.</div>
             </div>
             <button id="addYoutubeBtn_mm" class="btn btn--primary" style="width: 100%;">Agregar desde YouTube</button>
           </div>
 
           <div class="cardbox" style="display: flex; flex-direction: column; gap: 12px;">
-            <div class="cardbox__title">Video local</div>
-            <label class="dropzone" for="videoInput_mm" style="min-height: 140px; padding: 15px;">
-              <input type="file" id="videoInput_mm" accept="video/*" />
+            <div class="cardbox__title"><i class="fas fa-file-video" style="color: var(--gold);"></i> Archivo de Video Local</div>
+            
+            <input id="localTitle_mm" class="input" placeholder="Título de la predicación / video" style="margin-bottom: 2px;" />
+
+            <label class="dropzone" for="videoInput_mm" style="min-height: 110px; padding: 12px; position: relative; cursor: pointer;">
+              <input type="file" id="videoInput_mm" accept="video/*" style="position: absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" />
               <div>
-                <div class="dropzone__icon" style="font-size: 1.8rem; margin-bottom: 5px;">🎬</div>
-                <div class="dropzone__text" style="font-size: 0.9rem;"><strong>Seleccionar archivo</strong></div>
-                <div class="dropzone__hint" style="font-size: 0.78rem;">MP4 / WEBM recomendado</div>
+                <div class="dropzone__icon" style="font-size: 1.5rem; margin-bottom: 2px;">🎬</div>
+                <div class="dropzone__text" style="font-size: 0.85rem;" id="videoDropzoneText_mm"><strong>Seleccionar archivo</strong></div>
+                <div class="dropzone__hint" style="font-size: 0.75rem;">MP4 / WEBM recomendado</div>
               </div>
             </label>
           </div>
@@ -851,7 +857,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         </div>
       </section>
     </div>
-
     <div id="section-eventos" class="admin-tab-section">
       <section class="panel">
         <div class="section-badge">📅 Gestión de eventos</div>
