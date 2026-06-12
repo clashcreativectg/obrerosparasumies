@@ -20,839 +20,148 @@
       --blue:#2f4fa8;
       --dark:#07111f;
       --dark-2:#0d2242;
-      --panel:rgba(255,255,255,.105);
-      --panel-2:rgba(255,255,255,.07);
-      --border:rgba(255,255,255,.18);
-      --text:#f8fbff;
-      --muted:rgba(248,251,255,.72);
-      --shadow:0 26px 80px rgba(0,0,0,.32);
-      --radius-lg:28px;
-      --container:1120px;
+      --panel:#122b4f;
+      --text:#ffffff;
+      --text-muted:rgba(255,255,255,0.7);
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:"Open Sans",sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 18% 8%, rgba(240,74,0,.34), transparent 28%),
-        radial-gradient(circle at 82% 18%, rgba(255,211,106,.22), transparent 25%),
-        radial-gradient(circle at 52% 82%, rgba(47,79,168,.28), transparent 35%),
-        linear-gradient(135deg,#07111f 0%,#0d2242 48%,#150b06 100%);
-      line-height:1.6;
-      overflow-x:hidden;
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background-color: var(--dark);
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
+      overflow-x: hidden;
     }
 
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      z-index:-4;
-      background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-      background-size:44px 44px;
-      mask-image:linear-gradient(to bottom, rgba(0,0,0,.95), rgba(0,0,0,.18));
-      pointer-events:none;
+    /* Header & Navigation */
+    .header {
+      background: rgba(7, 17, 31, 0.85);
+      backdrop-filter: blur(12px);
+      position: fixed; top:0; left:0; width:100%; z-index:100;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-
-    a{text-decoration:none;color:inherit}
-    img{max-width:100%;display:block}
-    .container{width:min(92%,var(--container));margin:0 auto}
-
-    #three-media{
-      position:fixed;
-      inset:0;
-      width:100%;
-      height:100%;
-      z-index:-3;
-      pointer-events:none;
-      opacity:.92;
+    .nav {
+      max-width:1200px; margin:0 auto; padding:1.2rem 2rem;
+      display:flex; justify-content:space-between; align-items:center;
     }
-
-    .three-overlay{
-      position:fixed;
-      inset:0;
-      z-index:-2;
-      pointer-events:none;
-      background:
-        linear-gradient(180deg,rgba(7,17,31,.18),rgba(7,17,31,.86)),
-        radial-gradient(circle at 50% 5%, rgba(255,211,106,.14), transparent 42%);
+    .brand { display:flex; align-items:center; gap:.8rem; text-decoration:none; }
+    .brand__logo { width:42px; height:42px; object-fit:contain; }
+    .brand__title {
+      font-family:'Montserrat', sans-serif; font-weight:900;
+      font-size:1.4rem; line-height:1.2; letter-spacing:.02em; color:#fff;
     }
-
-    .scroll-progress{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:4px;
-      z-index:5000;
-      background:rgba(255,255,255,.08);
+    .menu { display:flex; gap:1.8rem; list-style:none; align-items:center; }
+    .menu__link {
+      text-decoration:none; color:var(--text-muted); font-weight:600; font-size:.95rem;
+      transition:color .3s, transform .3s; display:flex; align-items:center; gap:8px;
     }
-    .scroll-progress span{
-      display:block;
-      height:100%;
-      width:0%;
-      background:linear-gradient(90deg,var(--primary),var(--gold));
-      box-shadow:0 0 22px rgba(255,211,106,.65);
-    }
+    .menu__link:hover, .menu__link--active { color:var(--primary); transform:translateY(-1px); }
 
-    .cursor-glow{
-      position:fixed;
-      width:260px;
-      height:260px;
-      border-radius:999px;
-      pointer-events:none;
-      z-index:2;
-      background:radial-gradient(circle,rgba(255,211,106,.16),rgba(240,74,0,.08) 36%,transparent 70%);
-      transform:translate(-50%,-50%);
-      mix-blend-mode:screen;
-      opacity:.85;
-    }
-
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      background:rgba(7,17,31,.66);
-      backdrop-filter:blur(22px);
-      border-bottom:1px solid rgba(255,255,255,.12);
-      box-shadow:0 18px 55px rgba(0,0,0,.25);
-    }
-
-    .nav{
-      min-height:84px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:24px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      color:var(--text);
-    }
-
-    .brand__logo{
-      width:60px;
-      height:60px;
-      border-radius:18px;
-      object-fit:cover;
-      border:1px solid rgba(255,211,106,.42);
-      background:#fff;
-      box-shadow:0 12px 34px rgba(240,74,0,.24),0 0 28px rgba(255,211,106,.18);
-    }
-
-    .brand__title{
-      font-family:"Montserrat",sans-serif;
-      font-size:1rem;
-      font-weight:800;
-      line-height:1.2;
-      margin:0;
-      letter-spacing:.01em;
-    }
-
-    .brand__subtitle{
-      display:block;
-      color:var(--muted);
-      font-size:.85rem;
-      font-weight:700;
-      margin-top:2px;
-    }
-
-    .nav__links{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
-    .nav__links a{
-      color:rgba(255,255,255,.82);
-      font-weight:800;
-      font-size:.93rem;
-      padding:10px 13px;
-      border-radius:999px;
-      transition:.25s ease;
-      font-family:"Montserrat",sans-serif;
-    }
-
-    .nav__links a:hover,
-    .nav__links a.active{
-      color:#fff;
-      background:rgba(255,255,255,.10);
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.10);
-      transform:translateY(-2px);
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      border:0;
-      border-radius:999px;
-      padding:14px 24px!important;
-      font-weight:800;
-      transition:transform .25s ease, box-shadow .25s ease;
-      cursor:pointer;
+    /* Hero Section */
+    .hero {
+      padding:10rem 2rem 5rem; text-align:center;
+      background: radial-gradient(circle at 50% -20%, var(--dark-2) 0%, var(--dark) 70%);
       position:relative;
-      overflow:hidden;
-      font-family:"Montserrat",sans-serif;
+    }
+    .section-title {
+      font-family:'Montserrat', sans-serif; font-size:2.8rem; font-weight:800;
+      margin-bottom:1rem; text-transform:uppercase; letter-spacing:-0.02em;
+    }
+    .section-title span { color:var(--primary); }
+    .hero__subtitle { color:var(--text-muted); font-size:1.1rem; max-width:600px; margin:0 auto 2rem; }
+
+    /* Layout Grids */
+    .container { max-width:1200px; margin:0 auto; padding:0 2rem 7rem; }
+    .grid {
+      display:grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap:2.5rem; width:100%;
     }
 
-    .btn::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.46),transparent 64%);
-      transform:translateX(-120%);
+    /* Media Cards */
+    .media-card {
+      background: var(--dark-2); border-radius:16px; overflow:hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: transform .1s ease, box-shadow .3s ease;
+      transform-style: preserve-3d;
     }
-    .btn:hover::before{animation:btnShine .8s ease forwards}
-    @keyframes btnShine{to{transform:translateX(120%)}}
-
-    .btn:hover{transform:translateY(-4px) scale(1.02)}
-    .btn--primary{
-      background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-      color:#fff!important;
-      box-shadow:0 16px 36px rgba(240,74,0,.32),0 0 26px rgba(240,74,0,.18);
+    .media-card:hover {
+      box-shadow: 0 20px 40px rgba(240,74,0,0.15);
+      border-color: rgba(240,74,0,0.25);
     }
-
-    .hero{
-      position:relative;
-      isolation:isolate;
-      min-height:72vh;
-      display:grid;
-      place-items:center;
-      padding:110px 0 90px;
-      text-align:center;
-      overflow:hidden;
-      perspective:1200px;
-    }
-
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:84px 4% 45px;
-      border-radius:42px;
-      background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.035));
-      border:1px solid rgba(255,255,255,.14);
-      box-shadow:0 42px 130px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.16);
-      transform:rotateX(7deg) rotateY(-2deg);
-      z-index:-1;
-    }
-
-    .hero::after{
-      content:"";
-      position:absolute;
-      width:420px;
-      height:420px;
-      border-radius:50%;
-      right:-110px;
-      top:70px;
-      background:radial-gradient(circle,rgba(255,211,106,.24),rgba(240,74,0,.09) 46%,transparent 72%);
-      filter:blur(2px);
-      animation:floatOrb 7s ease-in-out infinite alternate;
-      z-index:-1;
-    }
-
-    @keyframes floatOrb{
-      from{transform:translate3d(0,0,0) scale(.92)}
-      to{transform:translate3d(-26px,28px,0) scale(1.1)}
-    }
-
-    .hero__eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 16px;
-      border-radius:999px;
-      background:rgba(255,255,255,.11);
-      color:rgba(255,255,255,.94);
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow:0 16px 42px rgba(0,0,0,.18);
-      font-size:.93rem;
-      font-weight:800;
-      margin-bottom:18px;
-      backdrop-filter:blur(16px);
-    }
-
-    .hero h1{
-      font-family:"Montserrat",sans-serif;
-      font-size:clamp(3rem,7vw,6.2rem);
-      margin:0 0 16px;
-      line-height:.96;
-      letter-spacing:-.06em;
-      text-shadow:0 16px 58px rgba(0,0,0,.42);
-      background:linear-gradient(90deg,#fff,var(--gold),#fff);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      animation:titlePulse 4.5s ease-in-out infinite;
-    }
-    @keyframes titlePulse{
-      0%,100%{filter:drop-shadow(0 0 0 rgba(255,211,106,.0))}
-      50%{filter:drop-shadow(0 0 22px rgba(255,211,106,.28))}
-    }
-
-    .hero p{
-      max-width:780px;
-      margin:0 auto;
-      color:var(--muted);
-      font-size:1.12rem;
-    }
-
-    .media-section{
-      position:relative;
-      padding:95px 0;
-      background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.02));
-    }
-
-    .section-header{text-align:center;margin-bottom:46px}
-    .section-title{
-      font-family:"Montserrat",sans-serif;
-      font-size:clamp(2rem,4vw,3.2rem);
-      line-height:1.05;
-      margin:0 0 14px;
-      color:#fff;
-      text-shadow:0 12px 45px rgba(0,0,0,.35);
-    }
-
-    .section-text{
-      color:var(--muted);
-      max-width:760px;
-      margin:0 auto;
-      font-size:1.04rem;
-    }
-
-    .content-block{
-      position:relative;
-      padding:26px;
-      border-radius:34px;
-      background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.035));
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:0 28px 85px rgba(0,0,0,.23);
-      backdrop-filter:blur(16px);
+    .media-card__wrapper {
+      position:relative; width:100%;
+      height: 0; padding-top: 56.25%; background:#000;
       overflow:hidden;
     }
-
-    .content-block::before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      background:linear-gradient(120deg,rgba(255,211,106,.16),transparent 28%,rgba(240,74,0,.12) 72%,transparent);
-      opacity:.85;
-      pointer-events:none;
+    .media-card__video {
+      position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;
     }
+    .media-card__body { padding:1.5rem; transform: translateZ(30px); }
+    .media-card__meta { display:flex; justify-content:space-between; margin-bottom:.8rem; font-size:.8rem; }
+    .media-card__date { color:var(--text-muted); }
+    .media-card__tag { color:var(--gold); font-weight:700; text-transform:uppercase; letter-spacing:.05em; }
+    .media-card__title { font-family:'Montserrat', sans-serif; font-size:1.15rem; font-weight:700; line-height:1.4; color:#fff; }
 
-    .content-block + .content-block{margin-top:54px}
-    .content-block h2{
-      position:relative;
-      margin:0 0 22px;
-      color:#fff;
-      font-family:"Montserrat",sans-serif;
-      font-size:clamp(1.55rem,3vw,2.15rem);
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
+    /* Footer */
+    .footer { text-align:center; padding:3rem; border-top:1px solid rgba(255,255,255,0.05); color:var(--text-muted); font-size:.9rem; }
 
-    .content-block h2::before{
-      content:"";
-      width:12px;
-      height:12px;
-      border-radius:50%;
-      background:var(--gold);
-      box-shadow:0 0 24px rgba(255,211,106,.7);
-    }
+    /* Animations */
+    .reveal-item { opacity:0; transform:translateY(30px); transition:opacity .8s ease, transform .8s ease; }
+    .reveal-item.is-visible { opacity:1; transform:translateY(0); }
 
-    .firebase-grid{
-      position:relative;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:24px;
-    }
-
-    .media-card,
-    .audio-card{
-      position:relative;
-      background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.045))!important;
-      border:1px solid rgba(255,255,255,.18)!important;
-      border-radius:28px;
-      overflow:hidden;
-      box-shadow:0 24px 70px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.15)!important;
-      backdrop-filter:blur(16px);
-      transform-style:preserve-3d;
-      transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease;
-    }
-
-    .media-card::after,
-    .audio-card::after{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.25),transparent 68%);
-      transform:translateX(-120%);
-      opacity:0;
-      pointer-events:none;
-    }
-
-    .media-card:hover,
-    .audio-card:hover{
-      border-color:rgba(255,211,106,.52)!important;
-      box-shadow:0 34px 95px rgba(0,0,0,.34),0 0 35px rgba(240,74,0,.14)!important;
-    }
-
-    .media-card:hover::after,
-    .audio-card:hover::after{
-      opacity:1;
-      animation:shine3d 1s ease forwards;
-    }
-    @keyframes shine3d{to{transform:translateX(120%)}}
-
-    .media-card iframe,
-    .media-card video,
-    .media-card img{
-      width:100%;
-      height:260px;
-      display:block;
-      border:none;
-      object-fit:cover;
-      background:#000;
-      transition:transform .55s cubic-bezier(.2,.9,.2,1),filter .55s ease;
-      filter:saturate(1.08) contrast(1.08);
-    }
-
-    .media-card:hover iframe,
-    .media-card:hover video,
-    .media-card:hover img{
-      transform:scale(1.045);
-      filter:saturate(1.2) contrast(1.1);
-    }
-
-    .media-card__body,
-    .audio-card__body{
-      padding:22px;
-      position:relative;
-      z-index:1;
-    }
-
-    .media-card__body h3,
-    .audio-card__body h3{
-      margin:0 0 10px;
-      color:#fff;
-      font-family:"Montserrat",sans-serif;
-      font-size:1.18rem;
-    }
-
-    .media-card__body p,
-    .audio-card__body p{margin:0;color:var(--muted)}
-
-    .audio-card__icon{
-      width:68px;
-      height:68px;
-      display:grid;
-      place-items:center;
-      border-radius:22px;
-      background:linear-gradient(135deg,rgba(240,74,0,.22),rgba(255,211,106,.14));
-      color:var(--gold);
-      font-size:1.6rem;
-      margin-bottom:16px;
-      box-shadow:0 16px 38px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.18);
-    }
-
-    .audio-card audio{width:100%;margin-top:16px}
-
-    .firebase-loading,
-    .firebase-empty,
-    .firebase-error{
-      grid-column:1/-1;
-      background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.055));
-      border:1px solid rgba(255,255,255,.16);
-      box-shadow:var(--shadow);
-      border-radius:28px;
-      padding:28px;
-      text-align:center;
-      color:var(--muted);
-      font-weight:800;
-      backdrop-filter:blur(16px);
-    }
-
-    .firebase-loading i{
-      color:var(--gold);
-      margin-right:8px;
-      filter:drop-shadow(0 0 12px rgba(255,211,106,.55));
-    }
-
-    .footer{
-      position:relative;
-      background:rgba(7,17,31,.82);
-      color:rgba(255,255,255,.86);
-      padding:58px 0 24px;
-      border-top:1px solid rgba(255,255,255,.12);
-      backdrop-filter:blur(14px);
-    }
-
-    .footer__grid{
-      display:grid;
-      grid-template-columns:1.2fr .8fr .8fr;
-      gap:28px;
-      margin-bottom:26px;
-    }
-
-    .footer h3,.footer h4{color:#fff;margin-top:0;font-family:"Montserrat",sans-serif}
-    .footer p,.footer a,.footer span{color:rgba(255,255,255,.76)}
-    .footer a:hover{color:var(--gold)}
-    .footer__links,.footer__contact{display:grid;gap:10px}
-    .footer__copy{
-      border-top:1px solid rgba(255,255,255,.12);
-      padding-top:18px;
-      text-align:center;
-      font-size:.94rem;
-    }
-
-    .reveal-3d{
-      opacity:0;
-      transform:translateY(46px) rotateX(10deg) scale(.96);
-      transition:opacity .78s ease,transform .78s cubic-bezier(.16,1,.3,1);
-    }
-
-    .reveal-3d.is-visible{
-      opacity:1;
-      transform:translateY(0) rotateX(0) scale(1);
-    }
-
-    @media (max-width:960px){
-      .nav,.footer__grid{grid-template-columns:1fr}
-      .nav{flex-direction:column;justify-content:center;padding:16px 0}
-      .nav__links{justify-content:center}
-      .hero::before{inset:70px 16px 30px;transform:none;border-radius:30px}
-      .cursor-glow{display:none}
-    }
-
-    @media (max-width:640px){
-      .hero{padding:76px 0;min-height:auto}
-      .media-section{padding:72px 0}
-      .btn{width:100%}
-      .media-card iframe,.media-card video,.media-card img{height:220px}
-      .content-block{padding:18px;border-radius:24px}
-      #three-media{opacity:.55}
-    }
-
-    @media (prefers-reduced-motion:reduce){
-      *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-      #three-media{display:none}
+    @media (max-width:768px) {
+      .menu { display:none; }
+      .section-title { font-size:2.2rem; }
+      .grid { grid-template-columns: 1fr; gap:1.8rem; }
     }
   </style>
-
 </head>
 <body>
-  <div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
-  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
-  <canvas id="three-media" aria-hidden="true"></canvas>
-  <div class="three-overlay" aria-hidden="true"></div>
-  <header class="topbar">
-    <nav class="nav container">
-      <a href="index.html" class="brand">
-        <img src="img/ICEA.png" alt="Logo de ICEA" class="brand__logo" />
-        <div>
-          <p class="brand__title">ICEA - Obreros para Su Mies</p>
-          <span class="brand__subtitle">Formación bíblica y ministerial</span>
-        </div>
-      </a>
 
-      <div class="nav__links">
-        <a href="index.html">Inicio</a>
-        <a href="nosotros.html">Nosotros</a>
-        <a href="galeria.html">Galería</a>
-        <a href="multimedia.html" class="active">Multimedia</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="contacto.html" class="btn btn--primary">Solicitar información</a>
-      </div>
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <img class="brand__logo" src="img/ICEA.png" alt="ICEA Logo" />
+        <h1 class="brand__title">ICEA</h1>
+      </a>
+      <ul class="menu">
+        <li><a class="menu__link" href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        <li><a class="menu__link" href="nosotros.html"><i class="fas fa-book-open"></i> Historia</a></li>
+        <li><a class="menu__link" href="galeria.html"><i class="fas fa-images"></i> Galería</a></li>
+        <li><a class="menu__link menu__link--active" href="multimedia.html"><i class="fas fa-film"></i> Multimedia</a></li>
+        <li><a class="btn btn--primary" href="contacto.html"><i class="fas fa-envelope"></i> Contáctanos</a></li>
+      </ul>
     </nav>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <div class="hero__eyebrow">
-          <i class="fa-solid fa-photo-film"></i>
-          Contenido que edifica y fortalece la fe
-        </div>
-        <h1>Multimedia</h1>
-        <p>
-          Predicaciones, alabanzas y mensajes que puedes actualizar desde Firebase para mantener el contenido del ministerio siempre vigente.
-        </p>
-      </div>
-    </section>
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="hero">
+    <div class="hero__content">
+      <h2 class="section-title">Sección <span>Multimedia</span></h2>
+      <p class="hero__subtitle">Disfruta de nuestras predicaciones, enseñanzas y recursos de video directo desde la nube.</p>
+    </div>
+  </section>
 
-    <section class="media-section">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Contenido multimedia</h2>
-          <p class="section-text">
-            Esta página conserva la carga dinámica desde Firebase, para que puedas administrar videos, audios y materiales sin editar el HTML cada vez.
-          </p>
-        </div>
-
-        <div class="content-block">
-          <h2>Predicaciones</h2>
-          <div class="firebase-grid" id="predicaciones-grid">
-            <div class="firebase-loading">
-              <i class="fa-solid fa-spinner fa-spin"></i>
-              Cargando predicaciones...
-            </div>
-          </div>
-        </div>
-
-        <div class="content-block">
-          <h2>Alabanzas</h2>
-          <div class="firebase-grid" id="alabanzas-grid">
-            <div class="firebase-loading">
-              <i class="fa-solid fa-spinner fa-spin"></i>
-              Cargando alabanzas...
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__grid">
-        <div>
-          <h3>ICEA - Obreros para Su Mies</h3>
-          <p>
-            Formando discípulos y obreros comprometidos con la Palabra de Dios,
-            el servicio cristiano y la expansión del Reino.
-          </p>
-        </div>
-
-        <div>
-          <h4>Enlaces</h4>
-          <div class="footer__links">
-            <a href="index.html">Inicio</a>
-            <a href="nosotros.html">Nosotros</a>
-            <a href="galeria.html">Galería</a>
-            <a href="multimedia.html">Multimedia</a>
-            <a href="contacto.html">Contacto</a>
-          </div>
-        </div>
-
-        <div>
-          <h4>Contacto</h4>
-          <div class="footer__contact">
-            <a href="contacto.html">Solicitar información</a>
-            <a href="mailto:iceaobreros@gmail.com">iceaobreros@gmail.com</a>
-            <span>Atención y orientación ministerial</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer__copy">
-        <p>&copy; 2025 ICEA - Obreros para Su Mies. Todos los derechos reservados.</p>
+  <!-- ==================== CONTENIDO MULTIMEDIA ==================== -->
+  <main class="container">
+    <div class="grid firebase-grid">
+      <div class="empty" style="grid-column: 1/-1; text-align: center; padding: 60px;">
+        <div style="font-size: 3.5rem; color: var(--primary); margin-bottom: 12px;"><i class="fas fa-spinner fa-spin"></i></div>
+        <h3 style="color: #fff; font-family:'Montserrat', sans-serif;">Conectando con el servidor...</h3>
       </div>
     </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <p>&copy; 2026 ICEA - Obreros para Su Mies. Todos los derechos reservados.</p>
   </footer>
 
-
-  <script type="module">
-    import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js";
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const canvas = document.getElementById("three-media");
-
-    function initThreeMedia(){
-      if (!canvas || reduceMotion || !window.THREE && false) return;
-
-      const scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x07111f, 0.036);
-
-      const camera = new THREE.PerspectiveCamera(65, innerWidth / innerHeight, 0.1, 130);
-      camera.position.set(0, 0, 18);
-
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
-      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-      renderer.setSize(innerWidth, innerHeight);
-
-      const clock = new THREE.Clock();
-      const mouse = new THREE.Vector2();
-      const target = new THREE.Vector2();
-
-      const makeGlowTexture = () => {
-        const c = document.createElement("canvas");
-        c.width = c.height = 128;
-        const ctx = c.getContext("2d");
-        const g = ctx.createRadialGradient(64,64,0,64,64,64);
-        g.addColorStop(0,"rgba(255,211,106,1)");
-        g.addColorStop(.33,"rgba(240,74,0,.82)");
-        g.addColorStop(1,"rgba(240,74,0,0)");
-        ctx.fillStyle = g;
-        ctx.fillRect(0,0,128,128);
-        return new THREE.CanvasTexture(c);
-      };
-
-      const count = innerWidth < 768 ? 700 : 1550;
-      const positions = new Float32Array(count * 3);
-      const colors = new Float32Array(count * 3);
-      const gold = new THREE.Color("#ffd36a");
-      const orange = new THREE.Color("#f04a00");
-      const blue = new THREE.Color("#48a6ff");
-
-      for(let i=0;i<count;i++){
-        const i3 = i * 3;
-        const radius = 7 + Math.random() * 34;
-        const angle = i * .075;
-        const branch = (i % 6) * Math.PI * 2 / 6;
-
-        positions[i3] = Math.cos(angle + branch) * radius * (.18 + Math.random() * .19);
-        positions[i3+1] = (Math.random() - .5) * 22;
-        positions[i3+2] = Math.sin(angle + branch) * radius * .55 - Math.random() * 42;
-
-        const mixed = gold.clone().lerp(i % 4 === 0 ? blue : orange, Math.random() * .58);
-        colors[i3] = mixed.r;
-        colors[i3+1] = mixed.g;
-        colors[i3+2] = mixed.b;
-      }
-
-      const geo = new THREE.BufferGeometry();
-      geo.setAttribute("position", new THREE.BufferAttribute(positions,3));
-      geo.setAttribute("color", new THREE.BufferAttribute(colors,3));
-
-      const particles = new THREE.Points(
-        geo,
-        new THREE.PointsMaterial({
-          size:.18,
-          map:makeGlowTexture(),
-          transparent:true,
-          opacity:.86,
-          depthWrite:false,
-          blending:THREE.AdditiveBlending,
-          vertexColors:true
-        })
-      );
-      scene.add(particles);
-
-      const group = new THREE.Group();
-      scene.add(group);
-
-      const orangeMat = new THREE.MeshStandardMaterial({
-        color:0xf04a00, roughness:.27, metalness:.38,
-        emissive:0x5f1b00, emissiveIntensity:.42
-      });
-      const goldMat = new THREE.MeshStandardMaterial({
-        color:0xffd36a, roughness:.18, metalness:.5,
-        emissive:0x3b2800, emissiveIntensity:.55
-      });
-      const blueMat = new THREE.MeshStandardMaterial({
-        color:0x48a6ff, roughness:.25, metalness:.35,
-        emissive:0x061f3b, emissiveIntensity:.35
-      });
-
-      const torus = new THREE.Mesh(new THREE.TorusKnotGeometry(1.45,.17,150,20), orangeMat);
-      torus.position.set(6.2,2.1,-5.2);
-      group.add(torus);
-
-      const ringA = new THREE.Mesh(new THREE.TorusGeometry(3.15,.035,16,150), goldMat);
-      ringA.position.set(-5.7,-1.2,-7.6);
-      ringA.rotation.set(1.2,.32,.1);
-      group.add(ringA);
-
-      const ringB = new THREE.Mesh(new THREE.TorusGeometry(2.25,.025,16,130), blueMat);
-      ringB.position.set(1.5,3.2,-9.5);
-      ringB.rotation.set(.6,.15,.75);
-      group.add(ringB);
-
-      const mediaIcon = new THREE.Group();
-      const box = new THREE.Mesh(new THREE.BoxGeometry(1.9,1.15,.13), goldMat);
-      const playShape = new THREE.Shape();
-      playShape.moveTo(-.22,.34);
-      playShape.lineTo(-.22,-.34);
-      playShape.lineTo(.38,0);
-      playShape.lineTo(-.22,.34);
-      const play = new THREE.Mesh(new THREE.ShapeGeometry(playShape), orangeMat);
-      play.position.z = .09;
-      mediaIcon.add(box, play);
-      mediaIcon.position.set(0,-2.9,-8.5);
-      mediaIcon.rotation.set(.12,-.44,.05);
-      group.add(mediaIcon);
-
-      scene.add(new THREE.AmbientLight(0xffffff,.72));
-      const light1 = new THREE.PointLight(0xffd36a,26,45);
-      light1.position.set(3,4,8);
-      scene.add(light1);
-      const light2 = new THREE.PointLight(0x48a6ff,14,40);
-      light2.position.set(-7,-3,5);
-      scene.add(light2);
-
-      addEventListener("mousemove", e => {
-        target.x = (e.clientX / innerWidth - .5) * 2;
-        target.y = (e.clientY / innerHeight - .5) * 2;
-      }, { passive:true });
-
-      addEventListener("resize", () => {
-        camera.aspect = innerWidth / innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-        renderer.setSize(innerWidth,innerHeight);
-      });
-
-      function animate(){
-        const t = clock.getElapsedTime();
-        mouse.lerp(target,.055);
-
-        particles.rotation.y = t * .035 + mouse.x * .12;
-        particles.rotation.x = -mouse.y * .06;
-
-        group.rotation.y = Math.sin(t * .32) * .12 + mouse.x * .23;
-        group.rotation.x = Math.cos(t * .26) * .07 - mouse.y * .13;
-
-        torus.rotation.x += .007;
-        torus.rotation.y += .01;
-        ringA.rotation.z += .004;
-        ringB.rotation.x += .003;
-        mediaIcon.rotation.y = Math.sin(t * .85) * .45;
-        mediaIcon.position.y = -2.9 + Math.sin(t * 1.1) * .22;
-
-        camera.position.x += (mouse.x * 1.05 - camera.position.x) * .035;
-        camera.position.y += (-mouse.y * .72 - camera.position.y) * .035;
-        camera.lookAt(0,0,-4);
-
-        renderer.render(scene,camera);
-        requestAnimationFrame(animate);
-      }
-      animate();
-    }
-
-    try { initThreeMedia(); } catch(error) { console.warn("Three.js multimedia no cargó:", error); }
-
-    const scrollBar = document.getElementById("scrollBar");
-    const cursorGlow = document.getElementById("cursorGlow");
-
-    addEventListener("scroll", () => {
-      const max = document.documentElement.scrollHeight - innerHeight;
-      const progress = max > 0 ? (scrollY / max) * 100 : 0;
-      if (scrollBar) scrollBar.style.width = progress + "%";
-    }, { passive:true });
-
-    addEventListener("mousemove", (e) => {
-      if (!cursorGlow) return;
-      cursorGlow.style.left = e.clientX + "px";
-      cursorGlow.style.top = e.clientY + "px";
-    }, { passive:true });
-
-    const revealItems = document.querySelectorAll(".hero .container, .section-header, .content-block, .footer__grid");
-    revealItems.forEach((item, index) => {
-      item.classList.add("reveal-3d");
-      item.style.transitionDelay = `${Math.min(index * 90, 300)}ms`;
-    });
-
+  <!-- ==================== SCRIPTS VISUALES ==================== -->
+  <script>
+    const revealItems = document.querySelectorAll(".reveal-item, .section-title, .hero__content");
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if(entry.isIntersecting){
@@ -864,7 +173,7 @@
     revealItems.forEach(item => revealObserver.observe(item));
 
     function applyTiltToCards(){
-      const cards = document.querySelectorAll(".media-card, .audio-card");
+      const cards = document.querySelectorAll(".media-card");
       cards.forEach(card => {
         if (card.dataset.tiltReady) return;
         card.dataset.tiltReady = "true";
@@ -885,13 +194,14 @@
     }
 
     applyTiltToCards();
+
     const gridObserver = new MutationObserver(applyTiltToCards);
     document.querySelectorAll(".firebase-grid").forEach(grid => {
       gridObserver.observe(grid, { childList:true, subtree:true });
     });
   </script>
 
-  <script type="module" src="js/multimedia-firebase.js"></script>
+  <!-- CONTROL DE CONEXIÓN CON FIREBASE -->
   <script type="module" src="js/render-multimedia.js"></script>
 </body>
 </html>
