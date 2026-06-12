@@ -1,7 +1,23 @@
-import { db } from "./firebase-config.js"; 
-import { collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+// 1. Importaciones oficiales desde el CDN de Firebase (versión 10.11.0)
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+import { getFirestore, collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-// Capturamos el contenedor de la grilla de videos
+// 2. CONFIGURACIÓN DE TU PROYECTO FIREBASE
+// REEMPLAZA estos datos de ejemplo por los valores reales de tu proyecto (los encuentras en tu firebase-config.js anterior)
+const firebaseConfig = {
+  apiKey: "AIzaSyA_TU_API_KEY_REAL",
+  authDomain: "tu-proyecto.firebaseapp.com",
+  projectId: "tu-proyecto-id",
+  storageBucket: "tu-proyecto.appspot.com",
+  messagingSenderId: "1234567890",
+  appId: "1:123456:web:abcdef"
+};
+
+// 3. Inicialización controlada e interna de Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Capturamos el contenedor de la grilla de videos en el HTML
 const firebaseGrid = document.querySelector(".firebase-grid");
 
 if (firebaseGrid) {
@@ -10,7 +26,7 @@ if (firebaseGrid) {
     const q = query(collection(db, "multimedia"), orderBy("createdAt", "desc"));
 
     onSnapshot(q, (snapshot) => {
-      firebaseGrid.innerHTML = ""; // Limpiamos el cargador circular
+      firebaseGrid.innerHTML = ""; // Limpiamos el cargador circular/spinner interno
 
       if (snapshot.empty) {
         firebaseGrid.innerHTML = `
@@ -32,7 +48,7 @@ if (firebaseGrid) {
         mediaCard.className = "media-card reveal-item is-visible"; 
         mediaCard.style.animationDelay = `${delay}ms`;
 
-        // Evaluamos si es un enlace embebido de YouTube o video de Cloudinary
+        // Evaluamos si es un enlace embebido de YouTube o video directo de Cloudinary
         let mediaHtml = "";
         if (data.type === "youtube") {
           mediaHtml = `<iframe class="media-card__video" src="${data.url}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%; border:none; display:block;"></iframe>`;
@@ -47,7 +63,7 @@ if (firebaseGrid) {
           fechaFormateada = dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
         }
 
-        // Construcción de la interfaz de usuario de la tarjeta
+        // Construcción limpia de la interfaz con los estilos premium de streaming
         mediaCard.innerHTML = `
           <div class="media-card__wrapper">
             ${mediaHtml}
@@ -66,11 +82,15 @@ if (firebaseGrid) {
         `;
 
         firebaseGrid.appendChild(mediaCard);
-        delay += 60;
+        delay += 60; // Desfase progresivo para la animación de entrada
       });
     }, (error) => {
       console.error("Error en tiempo real de Firestore: ", error);
-      firebaseGrid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color: var(--primary);">Error de conexión: Permisos insuficientes o base de datos inactiva.</p>`;
+      firebaseGrid.innerHTML = `
+        <div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--primary);">
+          <i class="fas fa-exclamation-triangle" style="font-size: 2.5rem; margin-bottom: 10px;"></i>
+          <p>Error de conexión: Permisos insuficientes o base de datos inactiva.</p>
+        </div>`;
     });
 
   } catch (err) {
