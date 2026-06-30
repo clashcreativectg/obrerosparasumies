@@ -500,15 +500,43 @@
           </div>
         </div>
 
-        <form class="box tilt-card reveal-3d" action="mailto:iceaobreros@gmail.com" method="post" enctype="text/plain">
-          <h2>Envíanos un mensaje</h2>
-          <div class="form-grid">
-            <input type="text" name="nombre" placeholder="Nombre completo" required>
-            <input type="email" name="correo" placeholder="Correo electrónico" required>
-            <textarea name="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
-            <button type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar mensaje</button>
-          </div>
-        </form>
+       <form class="box tilt-card reveal-3d"
+      action="https://formspree.io/f/xvzjbnby"
+      method="POST">
+
+    <h2>Envíanos un mensaje</h2>
+
+    <div class="form-grid">
+
+        <input type="hidden"
+               name="_subject"
+               value="Nuevo mensaje desde obrerosmiesicea.org">
+
+        <input type="hidden"
+               name="_captcha"
+               value="false">
+
+        <input type="text"
+               name="nombre"
+               placeholder="Nombre completo"
+               required>
+
+        <input type="email"
+               name="correo"
+               placeholder="Correo electrónico"
+               required>
+
+        <textarea name="mensaje"
+                  placeholder="Escribe tu mensaje aquí..."
+                  required></textarea>
+
+        <button type="submit">
+            <i class="fa-solid fa-paper-plane"></i>
+            Enviar mensaje
+        </button>
+
+    </div>
+</form>
       </div>
     </section>
 
