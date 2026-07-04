@@ -188,3 +188,50 @@
     animate();
   }
 })();
+const menuToggle=document.getElementById("menuToggle");
+
+const navLinks=document.getElementById("navLinks");
+
+const overlay=document.getElementById("menuOverlay");
+
+menuToggle.addEventListener("click",()=>{
+
+navLinks.classList.toggle("active");
+
+overlay.classList.toggle("active");
+
+if(navLinks.classList.contains("active")){
+
+menuToggle.innerHTML='<i class="fas fa-times"></i>';
+
+}else{
+
+menuToggle.innerHTML='<i class="fas fa-bars"></i>';
+
+}
+
+});
+
+overlay.onclick=()=>{
+
+navLinks.classList.remove("active");
+
+overlay.classList.remove("active");
+
+menuToggle.innerHTML='<i class="fas fa-bars"></i>';
+
+};
+
+document.querySelectorAll(".nav__links a").forEach(link=>{
+
+link.onclick=()=>{
+
+navLinks.classList.remove("active");
+
+overlay.classList.remove("active");
+
+menuToggle.innerHTML='<i class="fas fa-bars"></i>';
+
+};
+
+});
