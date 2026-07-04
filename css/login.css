@@ -221,6 +221,31 @@ body{
   font-size:.96rem;
   background:transparent;
 }
+.password-field{
+    position:relative;
+}
+
+.password-field input{
+    padding-right:55px;
+}
+
+.toggle-password{
+    position:absolute;
+    right:18px;
+    top:50%;
+    transform:translateY(-50%);
+    border:none;
+    background:none;
+    color:#bfbfbf;
+    cursor:pointer;
+    font-size:18px;
+    transition:.3s;
+    z-index:5;
+}
+
+.toggle-password:hover{
+    color:#ff6b00;
+}
 
 /* ===== BUTTONS ===== */
 .btn{
