@@ -612,11 +612,21 @@
           <input type="email" id="email" placeholder="Correo electrónico" autocomplete="email" />
         </label>
 
-        <label class="field">
-          <span class="field__icon">🔒</span>
-          <input type="password" id="password" placeholder="Contraseña" autocomplete="current-password" />
-        </label>
+       <label class="field password-field">
 
+  <span class="field__icon">🔒</span>
+
+  <input
+      type="password"
+      id="password"
+      placeholder="Contraseña"
+      autocomplete="current-password" />
+
+  <button type="button" id="togglePassword" class="toggle-password">
+      <i class="fa-solid fa-eye"></i>
+  </button>
+
+</label>
         <button id="loginBtn" class="btn btn--primary">Ingresar</button>
         <a href="#" id="forgotPassword" class="forgot-link">¿Olvidaste tu contraseña?</a>
         <button id="registerBtn" class="btn btn--dark">Registrarme</button>
