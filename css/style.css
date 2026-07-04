@@ -713,38 +713,272 @@ details[open] summary::after{content:"–";}
 }
 @keyframes wordIn{to{opacity:1;transform:translateY(0) rotateX(0);}}
 
-/* ======= RESPONSIVE ======= */
+/* ===========================
+   TABLETS
+=========================== */
 @media (max-width:1000px){
-  .nav{align-items:flex-start;flex-direction:column;padding:16px 0;}
-  .nav__links{justify-content:flex-start;}
-  .hero__grid,.split__grid{grid-template-columns:1fr;}
-  .hero{padding:86px 0;}
-  .mission-badge{display:none;}
-  .cards,.testimonials__grid{grid-template-columns:1fr 1fr;}
-  .footer__grid{grid-template-columns:1fr 1fr;}
+
+  .container{
+      width:min(100% - 40px,1180px);
+  }
+
+  .nav{
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      padding:15px 0;
+  }
+
+  .hero__grid,
+  .split__grid{
+      grid-template-columns:1fr;
+      gap:40px;
+  }
+
+  .hero{
+      padding:80px 0;
+      min-height:auto;
+  }
+
+  .mission-badge{
+      display:none;
+  }
+
+  .cards,
+  .testimonials__grid{
+      grid-template-columns:repeat(2,1fr);
+      gap:20px;
+  }
+
+  .footer__grid{
+      grid-template-columns:1fr 1fr;
+  }
+
 }
-@media (max-width:680px){
-  .container{width:min(100% - 28px, 1180px);}
-  .section{padding:72px 0;}
-  .brand{min-width:0;}
-  .brand__logo{width:54px;height:54px;border-radius:16px;}
-  .brand__title{font-size:.78rem;}
-  .nav__links{width:100%;gap:6px;}
-  .nav__links a{font-size:.82rem;padding:8px 10px;}
-  .hero{min-height:auto;padding:72px 0;}
-  .hero::before{inset:40px 10px 18px;border-radius:28px;transform:none;}
-  .hero h1{font-size:clamp(2.55rem,14vw,4rem);}
-  .hero__actions{flex-direction:column;align-items:stretch;}
-  .hero__highlights{grid-template-columns:1fr;}
-  .hero__card{padding:24px;border-radius:26px;}
-  .cards,.testimonials__grid,.footer__grid{grid-template-columns:1fr;}
-  .card__img{height:180px;}
-  .split__content{padding:24px;}
-  .cta-band .container{padding:28px 18px;}
-  .cursor-glow{display:none;}
-  #three-world{opacity:.62;}
+
+
+/* ===========================
+   CELULARES
+=========================== */
+
+@media (max-width:768px){
+
+  .container{
+      width:calc(100% - 24px);
+  }
+
+  .section{
+      padding:60px 0;
+  }
+
+  /* LOGO */
+
+  .brand{
+      gap:10px;
+      align-items:center;
+  }
+
+  .brand__logo{
+
+      width:48px;
+      height:48px;
+      border-radius:14px;
+
+  }
+
+  .brand__title{
+
+      font-size:.9rem;
+      line-height:1.2;
+
+  }
+
+  /* MENÚ */
+
+  .nav{
+
+      flex-direction:row;
+      justify-content:space-between;
+      align-items:center;
+
+  }
+
+  .nav__links{
+
+      display:none;
+
+  }
+
+  .menu-toggle{
+
+      display:flex;
+
+  }
+
+  /* HERO */
+
+  .hero{
+
+      padding:55px 0;
+      min-height:75vh;
+
+  }
+
+  .hero::before{
+
+      display:none;
+
+  }
+
+  .hero h1{
+
+      font-size:clamp(2.3rem,10vw,3.4rem);
+      line-height:1.05;
+      text-align:center;
+
+  }
+
+  .hero p{
+
+      text-align:center;
+
+  }
+
+  .hero__actions{
+
+      flex-direction:column;
+      gap:15px;
+
+  }
+
+  .hero__actions .btn{
+
+      width:100%;
+
+  }
+
+  .hero__highlights{
+
+      grid-template-columns:1fr;
+
+  }
+
+  .hero__card{
+
+      padding:20px;
+      border-radius:20px;
+
+  }
+
+  /* TARJETAS */
+
+  .cards,
+  .testimonials__grid,
+  .footer__grid{
+
+      grid-template-columns:1fr;
+
+  }
+
+  .card{
+
+      padding:20px;
+
+  }
+
+  .card__img{
+
+      height:180px;
+
+  }
+
+  .split__content{
+
+      padding:20px;
+
+  }
+
+  .cta-band .container{
+
+      padding:24px 18px;
+
+  }
+
+  /* EFECTOS */
+
+  .cursor-glow,
+  .mission-badge,
+  .noise-layer{
+
+      display:none;
+
+  }
+
+  #three-world{
+
+      opacity:.35;
+
+  }
+
 }
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
-  #three-world,.cursor-glow,.site-loader{display:none!important;}
+
+
+/* ===========================
+   MÓVILES PEQUEÑOS
+=========================== */
+
+@media (max-width:480px){
+
+  .brand__title{
+
+      font-size:.8rem;
+
+  }
+
+  .hero h1{
+
+      font-size:2rem;
+
+  }
+
+  .btn{
+
+      font-size:.95rem;
+      padding:14px 18px;
+
+  }
+
+  .card{
+
+      padding:16px;
+
+  }
+
+}
+
+
+/* ===========================
+   REDUCIR ANIMACIONES
+=========================== */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+
+      animation:none!important;
+      transition:none!important;
+      scroll-behavior:auto!important;
+
+  }
+
+  #three-world,
+  .cursor-glow,
+  .site-loader{
+
+      display:none!important;
+
+  }
+
 }
