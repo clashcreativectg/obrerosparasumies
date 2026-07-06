@@ -8,6 +8,7 @@
   <meta name="description" content="Acceso administrativo seguro para gestionar galería, multimedia y eventos de ICEA." />
   <link rel="shortcut icon" href="img/ICEA.png" type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -613,9 +614,10 @@
           <input type="email" id="email" placeholder="Correo electrónico" autocomplete="email" />
         </label>
 
-      <label class="field password-field">
-
-    <span class="field__icon">🔒</span>
+     <label class="field password-field">
+    <span class="field__icon">
+        <i class="fas fa-lock"></i>
+    </span>
 
     <input
         type="password"
@@ -624,10 +626,14 @@
         autocomplete="current-password"
     >
 
-    <button type="button" id="togglePassword" class="toggle-password">
-        <i class="fa-solid fa-eye"></i>
-    </button>
+    <button
+        type="button"
+        class="toggle-password"
+        id="togglePassword">
 
+        <i class="fas fa-eye"></i>
+
+    </button>
 </label>
         <button id="loginBtn" class="btn btn--primary">Ingresar</button>
         <a href="#" id="forgotPassword" class="forgot-link">¿Olvidaste tu contraseña?</a>
