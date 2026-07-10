@@ -7,6 +7,8 @@ import {
   onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+console.log("EVENTOS-FIREBASE CARGADO");
+
 /* Firebase */
 const firebaseConfig = {
   apiKey: "AIzaSyAN1JxitWiiw9Az7hgo-N-tl_w52Jra87U",
