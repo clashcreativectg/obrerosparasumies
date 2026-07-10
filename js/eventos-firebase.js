@@ -31,8 +31,8 @@ function escapeHtml(str = "") {
 
 /* Leer eventos en tiempo real */
 const q = query(
-  collection(db, "eventos"),
-  orderBy("createdAt", "desc")
+    collection(db, "events"),
+    orderBy("createdAt", "desc")
 );
 
 onSnapshot(q, (snapshot) => {
