@@ -3,13 +3,6 @@ import {
   db, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc, serverTimestamp 
 } from "./firebase-config.js";
 
-import { getAuth } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-
-const auth = getAuth();
-
-console.log(auth.currentUser);
-console.log(auth.currentUser?.email);
-console.log(auth.currentUser?.uid);
 
 const $ = (id) => document.getElementById(id);
 
