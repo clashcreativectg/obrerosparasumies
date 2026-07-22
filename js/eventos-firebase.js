@@ -62,7 +62,17 @@ onSnapshot(
       const e = doc.data();
 
       html += `
-        <article class="evento-card reveal-3d">
+  <article class="evento-card reveal-3d">
+
+    ${
+      e.image
+        ? `
+        <div class="evento-img">
+          <img src="${e.image}" alt="${escapeHtml(e.title || "")}">
+        </div>
+        `
+        : ""
+    }
 
           <div class="evento-body">
 
