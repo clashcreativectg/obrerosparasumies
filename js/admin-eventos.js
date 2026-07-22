@@ -3,6 +3,119 @@ import {
   db, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc, serverTimestamp 
 } from "./firebase-config.js";
 
+/* ================= CLOUDINARY ================= */
+
+const CLOUD_NAME = "dwap3udvq";
+const UPLOAD_PRESET = "galeria_publica"; // el mismo preset que usas para la galería
+
+async function uploadImageCloudinary(file){
+
+    const form = new FormData();
+
+    form.append("file", file);
+    form.append("upload_preset", UPLOAD_PRESET);
+    form.append("folder","eventos");
+
+    const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+        {
+            method:"POST",
+            body:form
+        }
+    );
+
+    const data = await res.json();
+
+    if(!res.ok){
+        throw new Error(data.error?.message || "Error subiendo imagen");
+    }
+
+    return data.secure_url;
+}
+2. Reemplaza tu función addEvent() completa
+async function addEvent(){
+
+    const title = $("evTitle").value.trim();
+    const date  = $("evDate").value;
+    const time  = $("evTime").value.trim();
+    const place = $("evPlace").value.trim();
+    const desc  = $("evDesc").value.trim();
+    const link  = $("evLink").value.trim() || "#";
+
+    const imageFile = $("evImage").files[0];
+
+    if(!title || !date){
+
+        showStatus("Título y fecha son obligatorios","err");
+        return;
+
+    }
+
+    let image = "";
+
+    try{
+
+        if(imageFile){
+
+            showStatus("Subiendo imagen...");
+
+            image = await uploadImageCloudinary(imageFile);
+
+        }
+
+        await addDoc(collection(db,"events"),{
+
+            title,
+            date,
+            time,
+            place,
+            desc,
+            link,
+            image,
+            createdAt:serverTimestamp()
+
+        });
+
+        [
+            "evTitle",
+            "evDate",
+            "evTime",
+            "evPlace",
+            "evDesc",
+            "evLink",
+            "evImage"
+        ].forEach(id=>{
+
+            const el=$(id);
+
+            if(el){
+
+                if(el.type==="file"){
+
+                    el.value="";
+
+                }else{
+
+                    el.value="";
+
+                }
+
+            }
+
+        });
+
+        showStatus("✅ Evento publicado");
+
+    }catch(e){
+
+        console.error(e);
+
+        showStatus("❌ "+e.message,"err");
+
+    }
+
+}
+
 
 const $ = (id) => document.getElementById(id);
 
@@ -42,11 +155,88 @@ async function addEvent(){
     return;
   }
 
-  try{
-    await addDoc(collection(db, "events"), {
-      title, date, time, place, desc, link,
-      createdAt: serverTimestamp()
-    });
+  async function addEvent(){
+
+    const title = $("evTitle").value.trim();
+    const date  = $("evDate").value;
+    const time  = $("evTime").value.trim();
+    const place = $("evPlace").value.trim();
+    const desc  = $("evDesc").value.trim();
+    const link  = $("evLink").value.trim() || "#";
+
+    const imageFile = $("evImage").files[0];
+
+    if(!title || !date){
+
+        showStatus("Título y fecha son obligatorios","err");
+        return;
+
+    }
+
+    let image = "";
+
+    try{
+
+        if(imageFile){
+
+            showStatus("Subiendo imagen...");
+
+            image = await uploadImageCloudinary(imageFile);
+
+        }
+
+        await addDoc(collection(db,"events"),{
+
+            title,
+            date,
+            time,
+            place,
+            desc,
+            link,
+            image,
+            createdAt:serverTimestamp()
+
+        });
+
+        [
+            "evTitle",
+            "evDate",
+            "evTime",
+            "evPlace",
+            "evDesc",
+            "evLink",
+            "evImage"
+        ].forEach(id=>{
+
+            const el=$(id);
+
+            if(el){
+
+                if(el.type==="file"){
+
+                    el.value="";
+
+                }else{
+
+                    el.value="";
+
+                }
+
+            }
+
+        });
+
+        showStatus("✅ Evento publicado");
+
+    }catch(e){
+
+        console.error(e);
+
+        showStatus("❌ "+e.message,"err");
+
+    }
+
+}
 
     ["evTitle","evDate","evTime","evPlace","evDesc","evLink"].forEach(id=>{
       const el = $(id); if(el) el.value="";
