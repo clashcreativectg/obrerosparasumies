@@ -58,20 +58,7 @@ function renderEmpty(grid){
   `;
 }
 
-async function addEvent(){
-  const title = $("evTitle")?.value.trim();
-  const date  = $("evDate")?.value; // YYYY-MM-DD
-  const time  = $("evTime")?.value.trim();
-  const place = $("evPlace")?.value.trim();
-  const desc  = $("evDesc")?.value.trim();
-  const link  = ($("evLink")?.value.trim() || "#");
-
-  if(!title || !date){
-    showStatus("⚠️ Título y fecha son obligatorios.", "err");
-    return;
-  }
-
-  async function addEvent() {
+async function addEvent() {
 
     const title = $("evTitle")?.value.trim();
     const date  = $("evDate")?.value;
@@ -91,18 +78,14 @@ async function addEvent(){
 
     try {
 
-        // Subir imagen si existe
+        // Subir imagen a Cloudinary
         if (imageFile) {
-
             showStatus("Subiendo imagen...");
-
             image = await uploadImageCloudinary(imageFile);
-
         }
 
-        // Guardar evento
+        // Guardar evento en Firestore
         await addDoc(collection(db, "events"), {
-
             title,
             date,
             time,
@@ -111,7 +94,6 @@ async function addEvent(){
             link,
             image,
             createdAt: serverTimestamp()
-
         });
 
         // Limpiar formulario
@@ -124,13 +106,8 @@ async function addEvent(){
             "evLink",
             "evImage"
         ].forEach(id => {
-
             const el = $(id);
-
-            if (el) {
-                el.value = "";
-            }
-
+            if (el) el.value = "";
         });
 
         showStatus("✅ Evento publicado");
@@ -138,13 +115,11 @@ async function addEvent(){
     } catch (e) {
 
         console.error(e);
-
         showStatus("❌ " + (e.message || "Error al publicar el evento"), "err");
 
     }
 
 }
-
     ["evTitle","evDate","evTime","evPlace","evDesc","evLink"].forEach(id=>{
       const el = $(id); if(el) el.value="";
     });
