@@ -71,29 +71,28 @@ async function addEvent(){
     return;
   }
 
-  async function addEvent(){
+  async function addEvent() {
 
-    const title = $("evTitle").value.trim();
-    const date  = $("evDate").value;
-    const time  = $("evTime").value.trim();
-    const place = $("evPlace").value.trim();
-    const desc  = $("evDesc").value.trim();
-    const link  = $("evLink").value.trim() || "#";
+    const title = $("evTitle")?.value.trim();
+    const date  = $("evDate")?.value;
+    const time  = $("evTime")?.value.trim();
+    const place = $("evPlace")?.value.trim();
+    const desc  = $("evDesc")?.value.trim();
+    const link  = $("evLink")?.value.trim() || "#";
 
-    const imageFile = $("evImage").files[0];
+    const imageFile = $("evImage")?.files[0];
 
-    if(!title || !date){
-
-        showStatus("Título y fecha son obligatorios","err");
+    if (!title || !date) {
+        showStatus("⚠️ Título y fecha son obligatorios.", "err");
         return;
-
     }
 
     let image = "";
 
-    try{
+    try {
 
-        if(imageFile){
+        // Subir imagen si existe
+        if (imageFile) {
 
             showStatus("Subiendo imagen...");
 
@@ -101,7 +100,8 @@ async function addEvent(){
 
         }
 
-        await addDoc(collection(db,"events"),{
+        // Guardar evento
+        await addDoc(collection(db, "events"), {
 
             title,
             date,
@@ -110,10 +110,11 @@ async function addEvent(){
             desc,
             link,
             image,
-            createdAt:serverTimestamp()
+            createdAt: serverTimestamp()
 
         });
 
+        // Limpiar formulario
         [
             "evTitle",
             "evDate",
@@ -122,33 +123,23 @@ async function addEvent(){
             "evDesc",
             "evLink",
             "evImage"
-        ].forEach(id=>{
+        ].forEach(id => {
 
-            const el=$(id);
+            const el = $(id);
 
-            if(el){
-
-                if(el.type==="file"){
-
-                    el.value="";
-
-                }else{
-
-                    el.value="";
-
-                }
-
+            if (el) {
+                el.value = "";
             }
 
         });
 
         showStatus("✅ Evento publicado");
 
-    }catch(e){
+    } catch (e) {
 
         console.error(e);
 
-        showStatus("❌ "+e.message,"err");
+        showStatus("❌ " + (e.message || "Error al publicar el evento"), "err");
 
     }
 
