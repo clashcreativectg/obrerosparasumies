@@ -699,20 +699,67 @@
     </section>
 
     <section class="gallery-section">
-      <div class="container">
-        <h2 class="section-title reveal-3d">Nuestra galería</h2>
-        <p class="section-text reveal-3d">
-          Las imágenes se cargan dinámicamente desde Firebase, para que puedas actualizar la galería sin editar esta página.
-        </p>
+  <div class="container">
 
-        <div class="galeria-grid" id="galeria-grid">
+    <h2 class="section-title reveal-3d">
+      Nuestra galería
+    </h2>
+
+    <p class="section-text reveal-3d">
+      Explora las fotografías organizadas por categorías.
+    </p>
+
+    <div class="gallery-layout">
+
+      <!-- Panel lateral -->
+      <aside class="gallery-sidebar reveal-3d">
+
+        <h3>Categorías</h3>
+
+        <button class="cat-btn active" data-cat="Todas">
+          ⭐ Todas
+        </button>
+
+        <button class="cat-btn" data-cat="Eventos">
+          🎉 Eventos
+        </button>
+
+        <button class="cat-btn" data-cat="Oración">
+          🙏 Oración
+        </button>
+
+        <button class="cat-btn" data-cat="Escuela Bíblica">
+          📖 Escuela Bíblica
+        </button>
+
+        <button class="cat-btn" data-cat="Familias">
+          👨‍👩‍👧 Familias
+        </button>
+
+        <button class="cat-btn" data-cat="Misiones">
+          ❤️ Misiones
+        </button>
+
+      </aside>
+
+      <!-- Contenido -->
+      <div class="gallery-content">
+
+        <div id="galleryGrid" class="gallery-grid">
+
           <div class="galeria-loading">
             <i class="fa-solid fa-spinner fa-spin"></i>
             Cargando galería...
           </div>
+
         </div>
+
       </div>
-    </section>
+
+    </div>
+
+  </div>
+</section>
   </main>
 
   <div class="lightbox" id="lightbox" aria-hidden="true">
