@@ -698,67 +698,49 @@
       </div>
     </section>
 
-    <section class="gallery-section">
-  <div class="container">
+   <section class="gallery-section">
+    <div class="container">
 
-    <h2 class="section-title reveal-3d">
-      Nuestra galería
-    </h2>
+        <h2 class="section-title reveal-3d">Nuestra galería</h2>
 
-    <p class="section-text reveal-3d">
-      Explora las fotografías organizadas por categorías.
-    </p>
+        <p class="section-text reveal-3d">
+            Explora nuestras fotografías organizadas por categorías.
+        </p>
 
-    <div class="gallery-layout">
+        <div class="gallery-layout">
 
-      <!-- Panel lateral -->
-      <aside class="gallery-sidebar reveal-3d">
+            <aside class="gallery-sidebar">
 
-        <h3>Categorías</h3>
+                <h3>Categorías</h3>
 
-        <button class="cat-btn active" data-cat="Todas">
-          ⭐ Todas
-        </button>
+                <div id="categorias">
 
-        <button class="cat-btn" data-cat="Eventos">
-          🎉 Eventos
-        </button>
+                    <button class="cat-btn active" data-cat="Todas">
+                        ⭐ Todas
+                    </button>
 
-        <button class="cat-btn" data-cat="Oración">
-          🙏 Oración
-        </button>
+                    <!-- Se llenarán automáticamente -->
 
-        <button class="cat-btn" data-cat="Escuela Bíblica">
-          📖 Escuela Bíblica
-        </button>
+                </div>
 
-        <button class="cat-btn" data-cat="Familias">
-          👨‍👩‍👧 Familias
-        </button>
+            </aside>
 
-        <button class="cat-btn" data-cat="Misiones">
-          ❤️ Misiones
-        </button>
+            <div class="gallery-content">
 
-      </aside>
+                <div class="galeria-grid" id="galeria-grid">
 
-      <!-- Contenido -->
-      <div class="gallery-content">
+                    <div class="galeria-loading">
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+                        Cargando galería...
+                    </div>
 
-        <div id="galleryGrid" class="gallery-grid">
+                </div>
 
-          <div class="galeria-loading">
-            <i class="fa-solid fa-spinner fa-spin"></i>
-            Cargando galería...
-          </div>
+            </div>
 
         </div>
 
-      </div>
-
     </div>
-
-  </div>
 </section>
   </main>
 
