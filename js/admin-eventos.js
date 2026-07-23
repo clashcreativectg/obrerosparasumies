@@ -120,16 +120,7 @@ async function addEvent() {
     }
 
 }
-    ["evTitle","evDate","evTime","evPlace","evDesc","evLink"].forEach(id=>{
-      const el = $(id); if(el) el.value="";
-    });
-
-    showStatus("✅ Evento guardado en Firestore.", "ok");
-  }catch(e){
-    console.error(e);
-    showStatus("❌ Error guardando evento.", "err");
-  }
-}
+  
 
 function listenEvents(){
   const grid = $("events-grid_admin");
