@@ -846,44 +846,52 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
           <p>Publica fotos y videos locales que aparecerán en la galería del sitio en tiempo real.</p>
         </div>
 
-        <div class="upload">
-          <label class="dropzone" for="fileInput">
-            <input type="file" id="fileInput" multiple accept="image/*,video/*" />
-            <div class="formrow" style="margin-top:20px;">
+      <div class="upload">
 
-    <label class="label">Categoría</label>
+    <label class="dropzone" for="fileInput">
 
-    <select id="categoriaInput" class="input">
+        <input type="file" id="fileInput" multiple accept="image/*,video/*" />
 
-        <option value="Eventos">🎉 Eventos</option>
+        <div>
+            <div class="dropzone__icon">⬆️</div>
+            <div class="dropzone__text">
+                <strong>Haz clic para seleccionar</strong> o arrastra archivos aquí
+            </div>
+            <div class="dropzone__hint">
+                PNG, JPG, WEBP, MP4 • Máximo recomendado: 500MB
+            </div>
+        </div>
 
-        <option value="Oración">🙏 Oración</option>
+    </label>
 
-        <option value="Escuela Bíblica">📖 Escuela Bíblica</option>
+    <!-- Categoría -->
+    <div class="formrow" style="margin-top:20px;">
 
-        <option value="Familias">👨‍👩‍👧 Familias</option>
+        <label class="label">Categoría</label>
 
-        <option value="Misiones">❤️ Misiones</option>
+        <select id="categoriaInput" class="input">
 
-        <option value="Campamentos">🏕️ Campamentos</option>
+            <option value="Eventos">🎉 Eventos</option>
+            <option value="Oración">🙏 Oración</option>
+            <option value="Escuela Bíblica">📖 Escuela Bíblica</option>
+            <option value="Familias">👨‍👩‍👧 Familias</option>
+            <option value="Misiones">❤️ Misiones</option>
+            <option value="Campamentos">🏕️ Campamentos</option>
+            <option value="Otros">📂 Otros</option>
 
-        <option value="Otros">📂 Otros</option>
+        </select>
 
-    </select>
+    </div>
+
+    <div class="upload__actions">
+        <button id="uploadBtn" class="btn btn--primary">
+            Subir a galería
+        </button>
+
+        <div id="uploadStatus" class="status"></div>
+    </div>
 
 </div>
-            <div>
-              <div class="dropzone__icon">⬆️</div>
-              <div class="dropzone__text"><strong>Haz clic para seleccionar</strong> o arrastra archivos aquí</div>
-              <div class="dropzone__hint">PNG, JPG, WEBP, MP4 • Máximo recomendado: 500MB</div>
-            </div>
-          </label>
-
-          <div class="upload__actions">
-            <button id="uploadBtn" class="btn btn--primary">Subir a galería</button>
-            <div id="uploadStatus" class="status"></div>
-          </div>
-        </div>
       </section>
 
       <section class="panel">
