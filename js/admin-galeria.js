@@ -257,14 +257,17 @@ uploadBtn?.addEventListener("click", async () => {
       const detectedType = getMediaType(file);
       const { url, resourceType } = await uploadToCloudinary(file);
 
-      await addDoc(collection(db, "media"), {
-        type: resourceType === "video" ? "video" : detectedType,
-        url,
-        createdAt: serverTimestamp(),
-        createdBy: currentUser.uid,
-        createdByEmail: currentUser.email || "",
-        originalName: file.name
-      });
+     await addDoc(collection(db, "media"), {
+  type: resourceType === "video" ? "video" : detectedType,
+  url,
+
+  categoria: document.getElementById("categoriaInput").value,
+
+  createdAt: serverTimestamp(),
+  createdBy: currentUser.uid,
+  createdByEmail: currentUser.email || "",
+  originalName: file.name
+});
 
       uploadedCount += 1;
     }
