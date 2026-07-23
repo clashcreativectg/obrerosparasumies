@@ -61,56 +61,64 @@ onSnapshot(
 
       const e = doc.data();
 
-      html += `
-  <article class="evento-card reveal-3d">
+     html += `
+<article class="evento-card reveal-3d">
 
     ${
-      e.image
+        e.image
         ? `
-        <div class="evento-img">
-          <img src="${e.image}" alt="${escapeHtml(e.title || "")}">
+        <div class="evento-imagen">
+            <img
+                src="${e.image}"
+                alt="${escapeHtml(e.title || "Evento")}"
+                loading="lazy">
         </div>
         `
         : ""
     }
 
-          <div class="evento-body">
+    <div class="evento-body">
 
-            <div class="evento-fecha">
-              <i class="fa-solid fa-calendar-days"></i>
-              ${escapeHtml(e.date || "")}
-            </div>
+        <div class="evento-fecha">
+            <i class="fa-solid fa-calendar-days"></i>
+            ${escapeHtml(e.date || "")}
+        </div>
 
-            <h3>${escapeHtml(e.title || "")}</h3>
+        <h3>${escapeHtml(e.title || "")}</h3>
 
-            <div class="evento-info">
-              <span>
+        <div class="evento-info">
+
+            <span>
                 <i class="fa-solid fa-clock"></i>
                 ${escapeHtml(e.time || "")}
-              </span>
+            </span>
 
-              <span>
+            <span>
                 <i class="fa-solid fa-location-dot"></i>
                 ${escapeHtml(e.place || "")}
-              </span>
-            </div>
+            </span>
 
-            <p>${escapeHtml(e.desc || "")}</p>
+        </div>
 
-            ${
-              e.link
-                ? `<a href="${escapeHtml(e.link)}"
-                     target="_blank"
-                     class="btn-primary">
-                     Inscribirme
-                   </a>`
-                : ""
-            }
+        <p>${escapeHtml(e.desc || "")}</p>
 
-          </div>
+        ${
+            e.link
+            ? `
+            <a
+                href="${escapeHtml(e.link)}"
+                target="_blank"
+                class="btn-primary">
+                Inscribirme
+            </a>
+            `
+            : ""
+        }
 
-        </article>
-      `;
+    </div>
+
+</article>
+`;
     });
 
     grid.innerHTML = html;
