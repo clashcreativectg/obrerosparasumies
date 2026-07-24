@@ -27,6 +27,8 @@ const grid = document.getElementById("galeria-grid");
 /* Estado */
 let media = [];        // imagen + video (Cloudinary)
 let youtubeItems = []; // opcional: si quieres seguir usando colección multimedia para youtube
+let categoriaActual = "Todas";
+const categoriasDiv = document.getElementById("categorias");
 
 function tsToMs(t) {
   try {
@@ -49,8 +51,13 @@ function render() {
   if (!grid) return;
 
   // Unimos: media (img/video) + youtube (si existe)
-  const all = [...media, ...youtubeItems]
-    .sort((a, b) => tsToMs(b.createdAt) - tsToMs(a.createdAt));
+  let all = [...media, ...youtubeItems];
+
+if (categoriaActual !== "Todas") {
+    all = all.filter(item => item.categoria === categoriaActual);
+}
+
+all = all.sort((a, b) => tsToMs(b.createdAt) - tsToMs(a.createdAt));
 
   if (!all.length) {
     grid.innerHTML = `<p class="galeria-loading">No hay contenido todavía.</p>`;
