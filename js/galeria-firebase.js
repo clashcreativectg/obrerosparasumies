@@ -177,11 +177,12 @@ onSnapshot(qYoutube, (snap) => {
       const data = d.data();
       if (data.type !== "youtube") return null;
       return {
-        id: d.id,
-        kind: "youtube",
-        youtubeId: data.youtubeId,
-        createdAt: data.createdAt
-      };
+  id: d.id,
+  kind: type,
+  url: data.url,
+  categoria: data.categoria || "Otros",
+  createdAt: data.createdAt
+};
     })
     .filter(Boolean);
 
