@@ -343,6 +343,48 @@
 
     .hero p strong{color:#fff}
 
+    /* ===== Categorías ===== */
+
+#categorias{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:18px;
+}
+
+.cat-btn{
+    border:none;
+    outline:none;
+    cursor:pointer;
+
+    padding:12px 22px;
+    border-radius:999px;
+
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+
+    color:#fff;
+    font-size:.95rem;
+    font-weight:600;
+
+    transition:.35s ease;
+    backdrop-filter:blur(12px);
+}
+
+.cat-btn:hover{
+    transform:translateY(-3px);
+    background:rgba(240,74,0,.18);
+    border-color:#f04a00;
+    box-shadow:0 10px 25px rgba(240,74,0,.35);
+}
+
+.cat-btn.active{
+    background:linear-gradient(135deg,#ff8a00,#f04a00);
+    color:#fff;
+    border-color:transparent;
+    box-shadow:0 10px 30px rgba(240,74,0,.45);
+}
+
     .gallery-section{
       position:relative;
       padding:96px 0 110px;
