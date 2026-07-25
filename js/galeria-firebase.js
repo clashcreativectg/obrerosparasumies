@@ -178,14 +178,15 @@ onSnapshot(qMedia, (snap) => {
     // OJO: tu admin guarda type "image" o "video"
     const type = data.type === "video" ? "video" : "image";
 
-    return {
+   return {
       id: d.id,
       kind: type,
       url: data.url,
+      categoria: data.categoria || "Otros",
       createdAt: data.createdAt
     };
-  });
 
+  });
   render();
 }, (err) => {
   console.error("Error leyendo media:", err);
