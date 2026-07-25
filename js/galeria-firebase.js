@@ -59,6 +59,28 @@ if (categoriaActual !== "Todas") {
 
 all = all.sort((a, b) => tsToMs(b.createdAt) - tsToMs(a.createdAt));
 
+  // Crear categorías automáticamente
+const todasCategorias = [...new Set(media.map(item => item.categoria || "Otros"))];
+
+const categorias = ["Todas", ...todasCategorias];
+
+const categoriasDiv = document.getElementById("categorias");
+
+if (categoriasDiv) {
+    categoriasDiv.innerHTML = categorias.map(cat => `
+        <button class="cat-btn ${cat === categoriaActual ? "active" : ""}" data-cat="${cat}">
+            ${cat}
+        </button>
+    `).join("");
+
+    categoriasDiv.querySelectorAll(".cat-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            categoriaActual = btn.dataset.cat;
+            render();
+        });
+    });
+}
+
   if (!all.length) {
     grid.innerHTML = `<p class="galeria-loading">No hay contenido todavía.</p>`;
     return;
