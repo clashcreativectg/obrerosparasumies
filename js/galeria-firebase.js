@@ -151,6 +151,8 @@ onSnapshot(qMedia, (snap) => {
   media = snap.docs.map(d => {
     const data = d.data();
 
+    console.log(data);
+
     // OJO: tu admin guarda type "image" o "video"
     const type = data.type === "video" ? "video" : "image";
 
