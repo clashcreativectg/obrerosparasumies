@@ -816,15 +816,15 @@
           <h4>Contacto</h4>
           <div class="footer__contact">
             <a href="contacto.html">Solicitar información</a>
-            <a href="mailto:iceaobreros@gmail.com">iceaobreros@gmail.com</a>
+            <a href="mailto:obrerosmiesicea@gmail.com">obrerosmiesicea@gmail.com</a>
             <span>Atención y orientación ministerial</span>
           </div>
         </div>
       </div>
 
       <div class="footer__copy">
-        <p>&copy; 2025 ICEA - Obreros para Su Mies. Todos los derechos reservados.</p>
-      </div>
+    <p>&copy; <span id="year"></span> ICEA - Obreros para Su Mies. Todos los derechos reservados.</p>
+</div>
     </div>
   </footer>
 
@@ -910,10 +910,13 @@
     attachGalleryEffects();
 
     const galleryGrid = document.getElementById("galeria-grid");
-    if(galleryGrid){
-      const mutationObserver = new MutationObserver(() => attachGalleryEffects(galleryGrid));
-      mutationObserver.observe(galleryGrid, { childList:true, subtree:true });
-    }
+if(galleryGrid){
+  const mutationObserver = new MutationObserver(() => attachGalleryEffects(galleryGrid));
+  mutationObserver.observe(galleryGrid, { childList:true, subtree:true });
+}
+
+// Año automático del footer
+document.getElementById("currentYear").textContent = new Date().getFullYear();
   </script>
 
   <script type="module">
@@ -1096,5 +1099,6 @@
   </script>
 
   <script type="module" src="js/galeria-firebase.js"></script>
+ 
 </body>
 </html>
