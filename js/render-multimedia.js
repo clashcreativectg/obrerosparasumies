@@ -5,12 +5,12 @@ import { getFirestore, collection, query, orderBy, onSnapshot } from "https://ww
 // 2. CONFIGURACIÓN DE TU PROYECTO FIREBASE
 // REEMPLAZA estos datos de ejemplo por los valores reales de tu proyecto (los encuentras en tu firebase-config.js anterior)
 const firebaseConfig = {
-  apiKey: "AIzaSyA_TU_API_KEY_REAL",
-  authDomain: "tu-proyecto.firebaseapp.com",
-  projectId: "tu-proyecto-id",
-  storageBucket: "tu-proyecto.appspot.com",
-  messagingSenderId: "1234567890",
-  appId: "1:123456:web:abcdef"
+  apiKey: "AIzaSyAN1JxitWiiw9Az7hgo-N-tl_w52Jra87U",
+  authDomain: "cristianosenaccion-71a36.firebaseapp.com",
+  projectId: "cristianosenaccion-71a36",
+  storageBucket: "cristianosenaccion-71a36.firebasestorage.app",
+  messagingSenderId: "254538909726",
+  appId: "1:254538909726:web:6c3209d9153c602da6460f"
 };
 
 // 3. Inicialización controlada e interna de Firebase
