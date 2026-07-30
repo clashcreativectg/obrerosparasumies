@@ -20,6 +20,30 @@ const db = getFirestore(app);
 // Capturamos el contenedor de la grilla de videos en el HTML
 const firebaseGrid = document.querySelector(".firebase-grid");
 
+// Convierte cualquier enlace de YouTube al formato embed
+function getYoutubeEmbed(url) {
+  try {
+    const u = new URL(url);
+
+    // https://youtu.be/xxxxx
+    if (u.hostname.includes("youtu.be")) {
+      return `https://www.youtube.com/embed/${u.pathname.substring(1)}`;
+    }
+
+    // https://www.youtube.com/watch?v=xxxxx
+    if (u.hostname.includes("youtube.com")) {
+      const id = u.searchParams.get("v");
+      if (id) {
+        return `https://www.youtube.com/embed/${id}`;
+      }
+    }
+
+    return url;
+  } catch (e) {
+    return url;
+  }
+}
+
 if (firebaseGrid) {
   try {
     // Consulta para ordenar los videos de forma cronológica descendente
@@ -51,11 +75,12 @@ if (firebaseGrid) {
         // Evaluamos si es un enlace embebido de YouTube o video directo de Cloudinary
         let mediaHtml = "";
         if (data.type === "youtube") {
-          mediaHtml = `<iframe class="media-card__video" src="${data.url}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%; border:none; display:block;"></iframe>`;
-        } else {
-          mediaHtml = `<video class="media-card__video" src="${data.url}" controls preload="metadata" playsinline></video>`;
-        }
-
+  mediaHtml = `<iframe class="media-card__video"
+      src="${getYoutubeEmbed(data.url)}"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="width:100%; height:100%; border:none; display:block;"></iframe>`;
+}
         // Formateo seguro de marcas de tiempo de Firebase
         let fechaFormateada = "Reciente";
         if (data.createdAt) {
