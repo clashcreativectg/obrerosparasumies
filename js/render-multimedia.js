@@ -74,12 +74,27 @@ if (firebaseGrid) {
 
         // Evaluamos si es un enlace embebido de YouTube o video directo de Cloudinary
         let mediaHtml = "";
-        if (data.type === "youtube") {
-  mediaHtml = `<iframe class="media-card__video"
-      src="${getYoutubeEmbed(data.url)}"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-      style="width:100%; height:100%; border:none; display:block;"></iframe>`;
+       if (data.type === "youtube") {
+
+    mediaHtml = `
+        <iframe
+            class="media-card__video"
+            src="${getYoutubeEmbed(data.url)}"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>`;
+
+} else {
+
+    mediaHtml = `
+        <video
+            class="media-card__video"
+            controls
+            preload="metadata"
+            playsinline>
+            <source src="${data.url}">
+        </video>`;
+
 }
         // Formateo seguro de marcas de tiempo de Firebase
         let fechaFormateada = "Reciente";
