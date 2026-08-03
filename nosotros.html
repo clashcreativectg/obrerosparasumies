@@ -678,11 +678,13 @@
         </div>
       </div>
 
-      <div class="footer__copy">
-        <p>&copy; 2025 ICEA - Obreros para Su Mies. Todos los derechos reservados.</p>
-      </div>
+     <div class="footer__copy"><p>&copy; <span id="currentYear"></span> Proyecto Obreros para Su Mies ICEA. Todos los derechos reservados.</p></div>
     </div>
   </footer>
+
+  <script>
+document.getElementById("currentYear")?.textContent = new Date().getFullYear();
+</script>
 
   <script type="module">
     import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js";
